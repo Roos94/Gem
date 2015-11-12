@@ -21,7 +21,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     private EditText search;
     private ListView list;
     private Intent i;
-    private List<Genstand> emne;
+    private List<Genstand> genstand;
     private Adapter adap;
 
     @Override
@@ -33,7 +33,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
         this.search = (EditText) findViewById(R.id.search);
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
-        this.emne = new ArrayList<Genstand>();
+        this.genstand = new ArrayList<Genstand>();
 
         this.add.setOnClickListener(this);
         this.search.addTextChangedListener(this);
@@ -59,11 +59,11 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
         // Mangler et hent fra en DB eller lign
         for (int i = 0; i <= 10; i++)
             {
-            this.emne.add(i, new Genstand("Titel", i, R.drawable.ddf));
+            this.genstand.add(i, new Genstand("Titel", i, R.drawable.ddf));
         }
         // ^
 
-        this.adap = new Adapter(this, this.emne);
+        this.adap = new Adapter(this, this.genstand);
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
@@ -72,7 +72,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Valgt ID er " + this.emne.get(position).getID(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Valgt ID er " + this.genstand.get(position).getID(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
