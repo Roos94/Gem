@@ -18,27 +18,27 @@ import java.util.List;
  */
 class Adapter extends ArrayAdapter<Genstand> implements Filterable {
     private Context context;
-    private List<Genstand> emne;
-    private Filter emneFilter;
-    private List<Genstand> orgEmne;
+    private List<Genstand> genstand;
+    private Filter genstandFilter;
+    private List<Genstand> orggenstand;
 
-    Adapter(Context c, List<Genstand> emne) {
-        super(c, R.layout.single_row, emne);
+    Adapter(Context c, List<Genstand> genstand) {
+        super(c, R.layout.single_row, genstand);
         this.context = c;
-        this.emne = emne;
-        this.orgEmne = emne;
+        this.genstand = genstand;
+        this.orggenstand = genstand;
     }
 
     // Henter antal
     public int getCount() {
-        return this.emne.size();
+        return this.genstand.size();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
 
-        EmneHolder holder = new EmneHolder();
+        GenstandHolder holder = new GenstandHolder();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -57,10 +57,10 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
         }
         else
         {
-            holder = (EmneHolder) row.getTag();
+            holder = (GenstandHolder) row.getTag();
         }
 
-        Genstand n = this.emne.get(position);
+        Genstand n = this.genstand.get(position);
 
         holder.imgView.setImageResource(n.getImage());
         holder.titleView.setText(n.getTitle());
@@ -69,27 +69,27 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
         return row;
     }
 
-    private static class EmneHolder {
+    private static class GenstandHolder {
         public TextView titleView;
         public TextView idView;
         public ImageView imgView;
     }
 
     public void resetData() {
-        this.emne = this.orgEmne;
+        this.genstand = this.orggenstand;
     }
 
     @Override
     public Filter getFilter() {
-        if (this.emneFilter == null)
+        if (this.genstandFilter == null)
         {
-            this.emneFilter = new EmneFilter();
+            this.genstandFilter = new genstandFilter();
         }
 
-        return emneFilter;
+        return genstandFilter;
     }
 
-    private class EmneFilter extends Filter {
+    private class genstandFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -97,20 +97,20 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
 
             if (constraint == null || constraint.length() == 0) {
 
-                results.values = orgEmne;
-                results.count = orgEmne.size();
+                results.values = orggenstand;
+                results.count = orggenstand.size();
             }
             else {
-                List<Genstand> nEmne = new ArrayList<Genstand>();
+                List<Genstand> nGenstand = new ArrayList<Genstand>();
 
-                for (Genstand n : emne)
+                for (Genstand n : genstand)
                 {
                     if (n.getTitle().toUpperCase().contains(constraint.toString().toUpperCase()) || n.getID().toUpperCase().contains(constraint.toString().toUpperCase()))
-                        nEmne.add(n);
+                        nGenstand.add(n);
                 }
 
-                results.values = nEmne;
-                results.count = nEmne.size();
+                results.values = nGenstand;
+                results.count = nGenstand.size();
 
             }
             return results;
@@ -118,7 +118,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            emne = (List<Genstand>) results.values;
+            genstand = (List<Genstand>) results.values;
             notifyDataSetChanged();
         }
 
