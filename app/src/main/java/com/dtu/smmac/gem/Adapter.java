@@ -29,6 +29,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
         this.orgEmne = emne;
     }
 
+    // Henter antal
     public int getCount() {
         return this.emne.size();
     }
