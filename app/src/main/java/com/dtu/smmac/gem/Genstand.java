@@ -4,7 +4,7 @@ package com.dtu.smmac.gem;
  * Created by Roooooooos on 09/11/15.
  */
 public class Genstand {
-
+// test test test
     private String title;
     private int ID;
     private int image;
