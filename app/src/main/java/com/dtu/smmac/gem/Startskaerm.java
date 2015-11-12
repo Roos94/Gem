@@ -72,7 +72,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Valgt ID er " + this.genstand.get(position).getID(), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
