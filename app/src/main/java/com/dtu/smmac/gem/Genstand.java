@@ -1,7 +1,7 @@
 package com.dtu.smmac.gem;
 
 /**
- * Created by Roos on 09/11/15.
+ * Created by Roooooooos on 09/11/15.
  */
 public class Genstand {
 
