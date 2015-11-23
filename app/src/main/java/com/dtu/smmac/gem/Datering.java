@@ -37,8 +37,8 @@ public class Datering extends Activity {
         // Number Picker Årstal:
 
         num3 = (NumberPicker) findViewById(R.id.numAar);
-        num1.setMaxValue(2100);
-        num1.setMinValue(1900);
+        num3.setMaxValue(2100);
+        num3.setMinValue(1900);
         num3.setWrapSelectorWheel(false);
 
     }
