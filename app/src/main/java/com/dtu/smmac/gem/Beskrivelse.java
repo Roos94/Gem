@@ -2,12 +2,13 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Beskrivelse extends Activity {
+public class Beskrivelse extends Activity implements View.OnClickListener {
 
-    Button lydfil;
+    Button lydfil, b1, b2;
     EditText beskrivelse;
 
     @Override
@@ -17,6 +18,22 @@ public class Beskrivelse extends Activity {
 
         lydfil = (Button) findViewById(R.id.lydfil);
 
+        b1 = (Button) findViewById(R.id.b1);
+
+        b2 = (Button) findViewById(R.id.b2);
+
+        lydfil.setOnClickListener(this);
+
+        b1.setOnClickListener(this);
+
+        b2.setOnClickListener(this);
+
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
