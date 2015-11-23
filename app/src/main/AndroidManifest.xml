@@ -22,9 +22,10 @@
             android:name=".NyReg"
             android:label="@string/title_activity_ny_reg" />
         <activity android:name=".Hovedskaerm" />
-        <activity android:name=".Datering"></activity>
-        <activity android:name=".Skabelon"></activity>
-        <activity android:name=".Beskrivelse"></activity>
+        <activity android:name=".Datering" />
+        <activity android:name=".Skabelon" />
+        <activity android:name=".Beskrivelse" />
+        <activity android:name=".Emnegruppe"></activity>
     </application>
 
 </manifest>

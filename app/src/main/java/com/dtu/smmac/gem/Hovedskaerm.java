@@ -9,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.lang.ref.Reference;
 import java.util.ArrayList;
 
 public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -62,7 +60,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
               //  intent = new Intent(this,Billede.class);
                 break;
             case 1:
-              //  intent = new Intent(this,Emnegruppe.class);
+                intent = new Intent(this,Emnegruppe.class);
                 break;
             case 2:
               //  intent = new Intent(this,Modtagelsesdato.class);
