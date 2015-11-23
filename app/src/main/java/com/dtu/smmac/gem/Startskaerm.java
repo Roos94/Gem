@@ -2,6 +2,7 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,23 +14,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Startskaerm extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener, TextWatcher {
 
     private Button add;
     private EditText search;
     private ListView list;
-    private Intent i;
-    private Intent h;
+    private TextView t;
+    private Intent i, h;
     private Adapter adap;
     public static GenstandList genstand;
     private Genstand gen;
@@ -62,27 +53,23 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
         }
     }
 
-    public void openNew(){
+    public void openNew() {
         startActivity(i);
     }
 
-    public void setList()
-    {
+    public void setList() {
         this.adap = new Adapter(this, this.genstand.getGenstandList());
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
         this.list.setOnItemClickListener(this);
 
-        new AsyncTask(){
+        new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
-                try
-                {
+                try {
                     genstand.setGenstand();
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
@@ -98,7 +85,17 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        gen = this.genstand.getGenstandList().get(position);
+        t = (TextView) view.findViewById(R.id.id);
+
+        for (int j = 0; j < genstand.getGenstandList().size(); j++) {
+            if (genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
+            {
+                gen = genstand.getGenstandList().get(j);
+            }
+        }
+
+        System.out.println(gen.getIDtoString());
+
 
         startActivity(h);
     }

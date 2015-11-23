@@ -41,8 +41,6 @@ public class GenstandList {
         {
             JSONObject obj = json.getJSONObject(i);
 
-            System.out.println("ihead = " + obj.optString("itemheadline", "Titel"));
-
             this.genstand.add(i, new Genstand(obj.optString("itemheadline", "Titel"), obj.optInt("itemid", 0), R.drawable.ddf));
         }
     }
