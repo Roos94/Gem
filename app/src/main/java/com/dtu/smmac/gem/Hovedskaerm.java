@@ -41,5 +41,6 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
     }
 }
