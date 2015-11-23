@@ -21,10 +21,16 @@ public class Genstand {
         return this.title;
     }
 
-    public String getID()
+    public String getIDtoString()
     {
         return Integer.toString(this.ID);
     }
+
+    public int getID()
+    {
+        return this.ID;
+    }
+
 
     public int getImage()
     {

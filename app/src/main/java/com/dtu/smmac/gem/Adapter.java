@@ -63,7 +63,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
 
         holder.imgView.setImageResource(n.getImage());
         holder.titleView.setText(n.getTitle());
-        holder.idView.setText(n.getID());
+        holder.idView.setText(n.getIDtoString());
 
         return row;
     }
@@ -104,7 +104,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
 
                 for (Genstand n : genstand)
                 {
-                    if (n.getTitle().toUpperCase().contains(constraint.toString().toUpperCase()) || n.getID().toUpperCase().contains(constraint.toString().toUpperCase()))
+                    if (n.getTitle().toUpperCase().contains(constraint.toString().toUpperCase()) || n.getIDtoString().toUpperCase().contains(constraint.toString().toUpperCase()))
                         nGenstand.add(n);
                 }
 

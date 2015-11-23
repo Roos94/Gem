@@ -28,42 +28,25 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     private EditText search;
     private ListView list;
     private Intent i;
-    private List<Genstand> genstand;
     private Adapter adap;
+    public static GenstandList genstand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
 
+        genstand = new GenstandList();
+
         this.add = (Button) findViewById(R.id.add);
         this.search = (EditText) findViewById(R.id.search);
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
-        this.genstand = new ArrayList<Genstand>();
 
         this.add.setOnClickListener(this);
         this.search.addTextChangedListener(this);
 
         setList();
-
-        new AsyncTask()
-        {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    setGenstand_bg();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                adap.notifyDataSetChanged();
-            }
-        }.execute();
     }
 
     @Override
@@ -81,11 +64,31 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
 
     public void setList()
     {
-        this.adap = new Adapter(this, this.genstand);
+        this.adap = new Adapter(this, this.genstand.getGenstandList());
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
         this.list.setOnItemClickListener(this);
+
+        new AsyncTask(){
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try
+                {
+                    genstand.setGenstand();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                adap.notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     @Override
@@ -110,33 +113,6 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     @Override
     public void afterTextChanged(Editable s) {
 
-    }
-
-    public static String hentUrl(String url) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
-        StringBuilder sb = new StringBuilder();
-        String linje = br.readLine();
-        while (linje != null) {
-            sb.append(linje + "\n");
-            linje = br.readLine();
-        }
-        return sb.toString();
-    }
-
-    public void setGenstand_bg() throws Exception
-    {
-        String data = hentUrl("http://78.46.187.172:4019/items");
-
-        JSONArray json = new JSONArray(data);
-
-        for (int i = 0; i < json.length(); i++)
-        {
-            JSONObject obj = json.getJSONObject(i);
-
-            System.out.println("ihead = " + obj.optString("itemheadline", "Titel"));
-
-            this.genstand.add(i, new Genstand(obj.optString("itemheadline", "Titel"), obj.optInt("itemid", 0), R.drawable.ddf));
-        }
     }
 
 }
