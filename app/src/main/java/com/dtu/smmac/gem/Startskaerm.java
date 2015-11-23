@@ -94,8 +94,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
             }
         }
 
-        System.out.println(gen.getIDtoString());
-
+        //Genstand skal køres over på h
 
         startActivity(h);
     }

@@ -19,7 +19,6 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     Button b1, b2;
     TextView tv;
     Intent intent;
-    Genstand genstand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,10 +101,5 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
         {
             finish();
         }
-    }
-
-    public void setGenstand(Genstand genstand)
-    {
-        this.genstand = genstand;
     }
 }
