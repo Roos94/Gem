@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -83,9 +85,11 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
                 break;
 
         }
-        startActivity(intent);
+        if(intent != null) {
+            startActivity(intent);
+        }
 
-
+        System.out.println("Intente = " + intent.toString());
     }
 
     @Override

@@ -45,7 +45,7 @@ public class Emnegruppe extends Activity implements View.OnClickListener, Adapte
         b2 = (Button) findViewById(R.id.b2);
 
         tv = (TextView) findViewById(R.id.textView);
-        tv.setText("Emnegruppe");
+
 
         b1.setOnClickListener(this);
 
