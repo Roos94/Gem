@@ -16,7 +16,8 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     ListView liste;
     Button b1, b2;
     TextView tv;
-    Intent intent = null;
+    Intent intent;
+    Genstand genstand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
               //  intent = new Intent(this,Billede.class);
                 break;
             case 1:
-                intent = new Intent(this,Emnegruppe.class);
+                intent = new Intent(this, Emnegruppe.class);
                 break;
             case 2:
               //  intent = new Intent(this,Modtagelsesdato.class);
@@ -69,13 +70,13 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
               //  intent = new Intent(this,Betegnelse.class);
                 break;
             case 4:
-                intent = new Intent(this,Datering.class);
+                intent = new Intent(this, Datering.class);
                 break;
             case 5:
-                intent = new Intent(this,Beskrivelse.class);
+                intent = new Intent(this, Beskrivelse.class);
                 break;
             case 6:
-             //   intent = new Intent(this,Referencer.class);
+                intent = new Intent(this, Referencer.class);
                 break;
             case 7:
              //   intent = new Intent(this,Andet);
@@ -97,5 +98,10 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
         {
             finish();
         }
+    }
+
+    public void setGenstand(Genstand genstand)
+    {
+        this.genstand = genstand;
     }
 }

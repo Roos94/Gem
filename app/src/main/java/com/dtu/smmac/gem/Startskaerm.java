@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,8 +29,10 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     private EditText search;
     private ListView list;
     private Intent i;
+    private Intent h;
     private Adapter adap;
     public static GenstandList genstand;
+    private Genstand gen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
         this.search = (EditText) findViewById(R.id.search);
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
+        this.h = new Intent(this, Hovedskaerm.class);
 
         this.add.setOnClickListener(this);
         this.search.addTextChangedListener(this);
@@ -94,6 +98,9 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        gen = this.genstand.getGenstandList().get(position);
+
+        startActivity(h);
     }
 
     @Override
