@@ -56,7 +56,15 @@ public class Emnegruppe extends Activity implements View.OnClickListener, Adapte
 
     @Override
     public void onClick(View v) {
-
+        if(v == b1)
+        {
+            finish();
+        }
+        else if(v == b2)
+        {
+            // Her skal der gemmes til databasen!
+            finish();
+        }
     }
 
     @Override
