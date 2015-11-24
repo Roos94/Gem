@@ -18,14 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NyReg"
-            android:label="@string/title_activity_ny_reg" />
+        <activity android:name=".NyReg" />
         <activity android:name=".Hovedskaerm" />
         <activity android:name=".Datering" />
         <activity android:name=".Skabelon" />
         <activity android:name=".Beskrivelse" />
-        <activity android:name=".Emnegruppe"></activity>
+        <activity android:name=".Emnegruppe"/>
+        <activity android:name=".Referencer" />
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data

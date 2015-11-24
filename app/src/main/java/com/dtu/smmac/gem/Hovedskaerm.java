@@ -12,22 +12,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    ListView liste;
-    Button b1, b2;
-    TextView tv;
-    Intent intent;
+    private ListView liste;
+    private Button b1, b2;
+    private TextView tv;
+    private Intent intent;
+    private int ID;
+    private Intent lastUsed;
+    private Genstand genstand;
+    private List emne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hovedskaerm);
 
-        liste = (ListView) findViewById(R.id.listView);
+        this.lastUsed = getIntent();
+        this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        ArrayList emne = new ArrayList();
+        setGenstand(this.ID);
+
+        this.liste = (ListView) findViewById(R.id.listView);
+
+        emne = new ArrayList();
 
         emne.add("Billede");
         emne.add("Emnegruppe");
@@ -38,68 +48,82 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
         emne.add("Referencer");
         emne.add("Tilføj Andet");
 
-        liste.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emne));
+        this.liste.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.emne));
 
-        b1 = (Button) findViewById(R.id.b1);
+        this.b1 = (Button) findViewById(R.id.b1);
 
-        b2 = (Button) findViewById(R.id.b2);
+        this.b2 = (Button) findViewById(R.id.b2);
 
-        tv = (TextView) findViewById(R.id.textView);
+        this.tv = (TextView) findViewById(R.id.tv1);
+        this.tv.setText(genstand.getTitle());
 
-        b1.setOnClickListener(this);
+        this.b1.setOnClickListener(this);
 
-        b2.setOnClickListener(this);
+        this.b2.setOnClickListener(this);
 
-        liste.setOnItemClickListener(this);
+        this.liste.setOnItemClickListener(this);
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        System.out.println(position);
+
         switch(position){
             case 0:
               //  intent = new Intent(this,Billede.class);
                 break;
             case 1:
-                intent = new Intent(this, Emnegruppe.class);
+                this.intent = new Intent(this, Emnegruppe.class);
                 break;
             case 2:
-              //  intent = new Intent(this,Modtagelsesdato.class);
+              //  this.intent = new Intent(this,Modtagelsesdato.class);
                 break;
             case 3:
-              //  intent = new Intent(this,Betegnelse.class);
+              //  this.intent = new Intent(this,Betegnelse.class);
                 break;
             case 4:
-                intent = new Intent(this, Datering.class);
+                this.intent = new Intent(this, Datering.class);
                 break;
             case 5:
-                intent = new Intent(this, Beskrivelse.class);
+                this.intent = new Intent(this, Beskrivelse.class);
                 break;
             case 6:
-                intent = new Intent(this, Referencer.class);
+                this.intent = new Intent(this, Referencer.class);
                 break;
             case 7:
-             //   intent = new Intent(this,Andet);
+             //   this.intent = new Intent(this, Andet);
                 break;
 
         }
-        if(intent != null) {
-            startActivity(intent);
+        if(this.intent != null) {
+            startActivity(this.intent);
         }
 
-        System.out.println("Intente = " + intent.toString());
+        this.intent = null;
     }
 
     @Override
     public void onClick(View v) {
-        if(v == b1)
+        if(v == this.b1)
         {
             finish();
         }
-        else if(v == b2)
+        else if(v == this.b2)
         {
             finish();
         }
     }
+
+    public void setGenstand(int ID)
+    {
+        for (int j = 0; j < Startskaerm.genstand.getGenstandList().size(); j++) {
+            if (Startskaerm.genstand.getGenstandList().get(j).getID() == ID)
+            {
+                this.genstand = Startskaerm.genstand.getGenstandList().get(j);
+            }
+        }
+    }
+
 }

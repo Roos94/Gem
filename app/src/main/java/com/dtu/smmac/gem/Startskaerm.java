@@ -85,16 +85,17 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        t = (TextView) view.findViewById(R.id.id);
+        this.t = (TextView) view.findViewById(R.id.id);
 
-        for (int j = 0; j < genstand.getGenstandList().size(); j++) {
-            if (genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
+        for (int j = 0; j < this.genstand.getGenstandList().size(); j++) {
+            if (this.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
             {
-                gen = genstand.getGenstandList().get(j);
+                this.gen = this.genstand.getGenstandList().get(j);
             }
         }
 
         //Genstand skal køres over på h
+        h.putExtra("ID", gen.getID());
 
         startActivity(h);
     }
