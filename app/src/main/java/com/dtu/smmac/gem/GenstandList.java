@@ -1,6 +1,7 @@
 package com.dtu.smmac.gem;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class GenstandList {
 
     private List<Genstand> genstand;
     private int nextID;
+    private String data;
+    private JSONArray json;
+    private JSONObject obj;
 
     public GenstandList()
     {
@@ -29,15 +33,15 @@ public class GenstandList {
 
     public void setGenstand() throws Exception
     {
-        String data = hentUrl("http://78.46.187.172:4019/items");
+        this.data = hentUrl("http://78.46.187.172:4019/items");
 
-        JSONArray json = new JSONArray(data);
+        this.json = new JSONArray(data);
 
-        for (int i = 0; i < json.length(); i++)
+        for (int i = 0; i < this.json.length(); i++)
         {
-            JSONObject obj = json.getJSONObject(i);
+            this.obj = this.json.getJSONObject(i);
 
-            this.genstand.add(i, new Genstand(obj.optString("itemheadline", "Titel"), obj.optInt("itemid", 0), R.drawable.ddf));
+            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf));
         }
     }
 
@@ -63,6 +67,15 @@ public class GenstandList {
         }
 
         return this.nextID;
+    }
+
+    public void addGenstand(String titel) throws JSONException {
+        this.obj = new JSONObject();
+
+        this.obj.put("itemid", getNextID());
+        this.obj.put("itemheadline", titel);
+
+        this.json.put(this.obj);
     }
 
 }
