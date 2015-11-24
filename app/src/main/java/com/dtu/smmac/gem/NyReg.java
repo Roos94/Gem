@@ -26,16 +26,10 @@ public class NyReg extends Activity implements View.OnClickListener {
         this.end = (Button) findViewById(R.id.b1);
         this.on = (Button) findViewById(R.id.b2);
 
-        this.regNo.setText("" + setRegNo());
+        this.regNo.setText("" + Startskaerm.genstand.getNextID());
 
         this.end.setOnClickListener(this);
         this.on.setOnClickListener(this);
-    }
-
-    private int setRegNo()
-    {
-        //Skal være noget hent fra en DB eller lign
-        return 1;
     }
 
     @Override

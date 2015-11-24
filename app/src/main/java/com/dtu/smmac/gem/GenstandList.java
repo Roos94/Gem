@@ -1,17 +1,12 @@
 package com.dtu.smmac.gem;
 
-import android.os.AsyncTask;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,6 +15,7 @@ import java.util.List;
 public class GenstandList {
 
     private List<Genstand> genstand;
+    private int nextID;
 
     public GenstandList()
     {
@@ -54,6 +50,19 @@ public class GenstandList {
             linje = br.readLine();
         }
         return sb.toString();
+    }
+
+    public int getNextID()
+    {
+        this.nextID = 0;
+
+        for (int j = 0; j < this.genstand.size(); j++) {
+            if (this.genstand.get(j).getID() >= this.nextID) {
+                this.nextID = this.genstand.get(j).getID() + 1;
+            }
+        }
+
+        return this.nextID;
     }
 
 }
