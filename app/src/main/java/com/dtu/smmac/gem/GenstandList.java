@@ -75,6 +75,8 @@ public class GenstandList {
         this.obj.put("itemid", getNextID());
         this.obj.put("itemheadline", titel);
 
+        // Det er ikke sådan man gør ..
+
         this.json.put(this.obj);
     }
 
