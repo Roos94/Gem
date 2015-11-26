@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NyReg" />
-        <activity android:name=".Hovedskaerm" />
+        <activity android:name=".Hovedskaerm"
+            android:theme="@style/SK"/>
         <activity android:name=".Datering" />
         <activity android:name=".Skabelon" />
         <activity android:name=".Beskrivelse" />

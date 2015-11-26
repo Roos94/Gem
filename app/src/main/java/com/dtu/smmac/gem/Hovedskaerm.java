@@ -1,8 +1,10 @@
 package com.dtu.smmac.gem;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +15,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener {
 
     private ListView liste;
-    private Button b1, b2;
-    private TextView tv;
     private Intent intent;
     private int ID;
     private Intent lastUsed;
@@ -34,6 +34,8 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         setGenstand(this.ID);
 
+        this.getActionBar().setTitle(genstand.getTitle());
+
         this.liste = (ListView) findViewById(R.id.listView);
 
         emne = new ArrayList();
@@ -49,19 +51,15 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         this.liste.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.emne));
 
-        this.b1 = (Button) findViewById(R.id.beskrivelseb1);
-
-        this.b2 = (Button) findViewById(R.id.dateringb2);
-
-        this.tv = (TextView) findViewById(R.id.overskriftDatering);
-        this.tv.setText(genstand.getTitle());
-
-        this.b1.setOnClickListener(this);
-
-        this.b2.setOnClickListener(this);
-
         this.liste.setOnItemClickListener(this);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -77,7 +75,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
                 this.intent = new Intent(this, Emnegruppe.class);
                 break;
             case 2:
-              //  this.intent = new Intent(this,Modtagelsesdato.class);
+             //   this.intent = new Intent(this, Modtagelsesdato.class);
                 break;
             case 3:
                 this.intent = new Intent(this,Betegnelse.class);
@@ -101,18 +99,6 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
         }
 
         this.intent = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == this.b1)
-        {
-            finish();
-        }
-        else if(v == this.b2)
-        {
-            finish();
-        }
     }
 
     public void setGenstand(int ID)
