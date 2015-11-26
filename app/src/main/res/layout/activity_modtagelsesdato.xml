@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.dtu.smmac.gem.Hovedskaerm"
+    android:background="#ffffff">
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:id="@+id/dateringb1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:id="@+id/dateringb2"
+        android:layout_alignTop="@+id/dateringb1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Modtagelsesdato"
+        android:id="@+id/overskriftDatering"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/dateringb1"
+        android:layout_toLeftOf="@+id/dateringb2"
+        android:layout_toStartOf="@+id/dateringb2"
+        android:layout_alignBottom="@+id/dateringb1"
+        android:gravity="center" />
+
+    <NumberPicker
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpDagMD1"
+        android:background="#97ffffff"
+        android:layout_alignTop="@+id/numpMDMD1"
+        android:layout_alignLeft="@+id/overskriftDatering"
+        android:layout_alignStart="@+id/overskriftDatering"
+        android:layout_marginRight="20dp" />
+
+    <NumberPicker
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpMDMD1"
+        android:background="#97ffffff"
+        android:layout_alignTop="@+id/numpAarMD1"
+        android:layout_toRightOf="@+id/numpDagMD1"
+        android:layout_toEndOf="@+id/numpDagMD1"
+        android:layout_marginRight="20dp" />
+
+    <NumberPicker
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpAarMD1"
+        android:background="#97ffffff"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/numpMDMD1"
+        android:layout_toEndOf="@+id/numpMDMD1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Vælg dato:"
+        android:id="@+id/ModtagelseVaelgDato"
+        android:textSize="40dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_above="@+id/numpDagMD1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp" />
+
+</RelativeLayout>

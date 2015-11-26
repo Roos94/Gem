@@ -21,7 +21,8 @@ public class Datering extends Activity implements View.OnClickListener {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datering);
 
@@ -78,6 +79,15 @@ public class Datering extends Activity implements View.OnClickListener {
         num6.setValue(1957);
     }
 
+    public String getDatoTil()
+    {
+        return num4.getValue() + "-" + num5.getValue() + "-" + num6.getValue();
+    }
+
+    public String getDatoFra()
+    {
+        return num1.getValue() + "-" + num2.getValue() + "-" + num3.getValue();
+    }
 
     @Override
     public void onClick(View v)
@@ -85,13 +95,7 @@ public class Datering extends Activity implements View.OnClickListener {
 
 
     }
-     public String getDatoTil()
-     {
-         return num4.getValue() + "-" + num5.getValue() + "-" + num6.getValue();
-     }
 
-     public String getDatoFra()
-     {
-         return num1.getValue() + "-" + num2.getValue() + "-" + num3.getValue();
-     }
+
+
 }
