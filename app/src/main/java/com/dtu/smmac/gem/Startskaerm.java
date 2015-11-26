@@ -52,6 +52,8 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
         this.search = ( EditText ) v.findViewById(R.id.txt_search);
         this.search.addTextChangedListener(this);
 
+        getActionBar().setDisplayShowTitleEnabled(false);
+
         return super.onCreateOptionsMenu(menu);
     }
 
