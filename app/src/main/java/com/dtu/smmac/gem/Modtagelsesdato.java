@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import java.util.Calendar;
+
 public class Modtagelsesdato extends Activity {
 
     Button b2;
@@ -13,12 +15,23 @@ public class Modtagelsesdato extends Activity {
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
 
+    final Calendar cal = Calendar.getInstance();
+
+    int dag;
+    int md;
+    int aar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modtagelsesdato);
 
+
         // b2 = findViewById(R.id.)
+
+        dag = cal.get(Calendar.DAY_OF_MONTH);
+        md = cal.get(Calendar.MONTH);
+        aar = cal.get(Calendar.YEAR);
 
         // NumberPicker Dag:
 
@@ -26,7 +39,7 @@ public class Modtagelsesdato extends Activity {
         num1.setMaxValue(31);
         num1.setMinValue(1);
         num1.setWrapSelectorWheel(false);
-        num1.setValue(1);
+        num1.setValue(dag);
 
         // NumberPicker Måned:
 
@@ -34,7 +47,7 @@ public class Modtagelsesdato extends Activity {
         num2.setMaxValue(12);
         num2.setMinValue(1);
         num2.setWrapSelectorWheel(false);
-        num2.setValue(1);
+        num2.setValue(md);
 
         // Number Picker Årstal:
 
@@ -42,7 +55,7 @@ public class Modtagelsesdato extends Activity {
         num3.setMaxValue(2100);
         num3.setMinValue(1990);
         num3.setWrapSelectorWheel(false);
-        num3.setValue(2015);
+        num3.setValue(aar);
 
     }
 

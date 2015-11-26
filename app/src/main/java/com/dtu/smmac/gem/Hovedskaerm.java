@@ -75,7 +75,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
                 this.intent = new Intent(this, Emnegruppe.class);
                 break;
             case 2:
-             //   this.intent = new Intent(this, Modtagelsesdato.class);
+                this.intent = new Intent(this, Modtagelsesdato.class);
                 break;
             case 3:
                 this.intent = new Intent(this,Betegnelse.class);
