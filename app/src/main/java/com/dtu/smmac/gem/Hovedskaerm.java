@@ -49,11 +49,11 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         this.liste.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.emne));
 
-        this.b1 = (Button) findViewById(R.id.dateringb1);
+        this.b1 = (Button) findViewById(R.id.beskrivelseb1);
 
-        this.b2 = (Button) findViewById(R.id.dateringb2);
+        this.b2 = (Button) findViewById(R.id.beskrivelseb2);
 
-        this.tv = (TextView) findViewById(R.id.overskriftDatering);
+        this.tv = (TextView) findViewById(R.id.overskriftBeskrivelse);
         this.tv.setText(genstand.getTitle());
 
         this.b1.setOnClickListener(this);
@@ -80,7 +80,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
               //  this.intent = new Intent(this,Modtagelsesdato.class);
                 break;
             case 3:
-              //  this.intent = new Intent(this,Betegnelse.class);
+                this.intent = new Intent(this,Betegnelse.class);
                 break;
             case 4:
                 this.intent = new Intent(this, Datering.class);
