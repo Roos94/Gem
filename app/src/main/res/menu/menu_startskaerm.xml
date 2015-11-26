@@ -11,9 +11,10 @@
 
     <item
         android:id="@+id/add"
-        android:title="+"
-        android:showAsAction="ifRoom|withText"
+        android:title="Add"
+        android:showAsAction="ifRoom"
         android:onClick="openNew"
+        android:icon="@drawable/plus"
         />
 
 </menu>
