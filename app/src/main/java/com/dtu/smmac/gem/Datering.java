@@ -100,6 +100,7 @@ public class Datering extends Activity implements View.OnClickListener {
 
         System.out.println(datoTil);
         System.out.println(datoFra);
+
     }
 
 
