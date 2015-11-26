@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +49,11 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         this.liste.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, this.emne));
 
-        this.b1 = (Button) findViewById(R.id.b1);
+        this.b1 = (Button) findViewById(R.id.dateringb1);
 
-        this.b2 = (Button) findViewById(R.id.b2);
+        this.b2 = (Button) findViewById(R.id.dateringb2);
 
-        this.tv = (TextView) findViewById(R.id.tv1);
+        this.tv = (TextView) findViewById(R.id.overskriftDatering);
         this.tv.setText(genstand.getTitle());
 
         this.b1.setOnClickListener(this);

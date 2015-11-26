@@ -1,7 +1,6 @@
 package com.dtu.smmac.gem;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +21,8 @@ public class NyReg extends Activity implements View.OnClickListener {
 
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
-        this.end = (Button) findViewById(R.id.b1);
-        this.on = (Button) findViewById(R.id.b2);
+        this.end = (Button) findViewById(R.id.dateringb1);
+        this.on = (Button) findViewById(R.id.dateringb2);
 
         this.regNo.setText("" + Startskaerm.genstand.getNextID());
 
@@ -34,10 +33,10 @@ public class NyReg extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.b1:
+            case R.id.dateringb1:
                 finish();
                 break;
-            case R.id.b2:
+            case R.id.dateringb2:
 
                 break;
         }

@@ -40,9 +40,9 @@ public class Emnegruppe extends Activity implements View.OnClickListener, Adapte
 
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
-        b1 = (Button) findViewById(R.id.b1);
+        b1 = (Button) findViewById(R.id.dateringb1);
 
-        b2 = (Button) findViewById(R.id.b2);
+        b2 = (Button) findViewById(R.id.dateringb2);
 
         tv = (TextView) findViewById(R.id.textView);
 

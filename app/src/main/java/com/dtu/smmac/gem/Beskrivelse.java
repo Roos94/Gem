@@ -18,9 +18,9 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         lydfil = (Button) findViewById(R.id.lydfil);
 
-        b1 = (Button) findViewById(R.id.b1);
+        b1 = (Button) findViewById(R.id.dateringb1);
 
-        b2 = (Button) findViewById(R.id.b2);
+        b2 = (Button) findViewById(R.id.dateringb2);
 
         lydfil.setOnClickListener(this);
 

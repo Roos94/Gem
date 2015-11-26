@@ -7,14 +7,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dtu.smmac.gem.Hovedskaerm">
+    tools:context="com.dtu.smmac.gem.Hovedskaerm"
+    android:background="#ffffff">
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="X"
-        android:id="@+id/b1"
+        android:id="@+id/dateringb1"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -24,8 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=">"
-        android:id="@+id/b2"
-        android:layout_alignTop="@+id/b1"
+        android:id="@+id/dateringb2"
+        android:layout_alignTop="@+id/dateringb1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -33,40 +34,99 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Titel"
-        android:id="@+id/tv1"
+        android:text="Datering"
+        android:id="@+id/overskriftDatering"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/b1"
-        android:layout_toLeftOf="@+id/b2"
-        android:layout_toStartOf="@+id/b2"
-        android:layout_alignBottom="@+id/b1"
-        android:gravity="center"/>
+        android:layout_toRightOf="@+id/dateringb1"
+        android:layout_toLeftOf="@+id/dateringb2"
+        android:layout_toStartOf="@+id/dateringb2"
+        android:layout_alignBottom="@+id/dateringb1"
+        android:gravity="center" />
 
     <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/numDag"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="59dp"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true" />
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpDagD1"
+        android:background="#97ffffff"
+        android:layout_below="@+id/overskriftDatering"
+        android:layout_toLeftOf="@+id/numpMDD1"
+        android:layout_toStartOf="@+id/numpMDD1"
+        android:layout_marginTop="82dp" />
 
     <NumberPicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/numMD"
-        android:layout_alignTop="@+id/numDag"
-        android:layout_toRightOf="@+id/numDag"
-        android:layout_toEndOf="@+id/numDag"
-        android:layout_marginRight="10dp" />
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpMDD1"
+        android:layout_alignTop="@+id/numpDagD1"
+        android:layout_toLeftOf="@+id/numpAarD1"
+        android:layout_toStartOf="@+id/numpAarD1"
+        android:layout_marginLeft="20dp"
+        android:background="#97ffffff" />
 
     <NumberPicker
         android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpAarD1"
+        android:layout_alignTop="@+id/numpMDD1"
+        android:layout_toLeftOf="@+id/dateringb2"
+        android:layout_toStartOf="@+id/dateringb2"
+        android:layout_marginLeft="20dp"
+        android:background="#97ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/numAar"
-        android:layout_alignTop="@+id/numMD"
-        android:layout_toRightOf="@+id/numMD"
-        android:layout_toEndOf="@+id/numMD" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fra:"
+        android:id="@+id/fraDatering"
+        android:layout_alignLeft="@+id/numpDagD1"
+        android:layout_alignStart="@+id/numpDagD1"
+        android:layout_below="@+id/dateringb2"
+        android:layout_toStartOf="@+id/numpAarD1"
+        android:textSize="40dp"
+        android:layout_above="@+id/numpMDD1"
+        android:layout_alignRight="@+id/numpMDD1"
+        android:layout_alignEnd="@+id/numpMDD1"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <NumberPicker
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpDagD2"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/numpDagD1"
+        android:layout_alignStart="@+id/numpDagD1"
+        android:layout_marginTop="20dp" />
+
+    <NumberPicker
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpMDD2"
+        android:layout_alignTop="@+id/numpDagD2"
+        android:layout_alignLeft="@+id/numpMDD1"
+        android:layout_alignStart="@+id/numpMDD1" />
+
+    <NumberPicker
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/numpAarD2"
+        android:layout_alignTop="@+id/numpMDD2"
+        android:layout_alignLeft="@+id/numpAarD1"
+        android:layout_alignStart="@+id/numpAarD1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Til:"
+        android:id="@+id/tilDatering"
+        android:layout_above="@+id/numpDagD2"
+        android:layout_alignLeft="@+id/numpDagD2"
+        android:layout_alignStart="@+id/numpDagD2"
+        android:layout_alignRight="@+id/numpMDD2"
+        android:layout_alignEnd="@+id/numpMDD2"
+        android:textSize="40dp"
+        android:gravity="center_vertical|center_horizontal" />
 
 </RelativeLayout>
