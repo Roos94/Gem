@@ -10,9 +10,7 @@ import android.widget.NumberPicker;
 
 public class Datering extends Activity implements View.OnClickListener {
 
-    Button b1, b2;
-
-    // declare var:
+    private Button b1, b2;
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
@@ -20,16 +18,6 @@ public class Datering extends Activity implements View.OnClickListener {
     private NumberPicker num4 = null;
     private NumberPicker num5 = null;
     private NumberPicker num6 = null;
-
-    private String datoTil;
-    private String datoFra;
-
-    private int fraDag;
-    private int fraMD;
-    private int fraAar;
-    private int tilDag;
-    private int tilMD;
-    private int tilAar;
 
 
     @Override
@@ -47,6 +35,7 @@ public class Datering extends Activity implements View.OnClickListener {
         num1.setMaxValue(31);
         num1.setMinValue(1);
         num1.setWrapSelectorWheel(false);
+        num1.setValue(1);
 
         // NumberPicker (fra) Måned:
 
@@ -54,6 +43,7 @@ public class Datering extends Activity implements View.OnClickListener {
         num2.setMaxValue(12);
         num2.setMinValue(1);
         num2.setWrapSelectorWheel(false);
+        num2.setValue(1);
 
         // Number Picker (fra) Årstal:
 
@@ -61,6 +51,7 @@ public class Datering extends Activity implements View.OnClickListener {
         num3.setMaxValue(2100);
         num3.setMinValue(1900);
         num3.setWrapSelectorWheel(false);
+        num3.setValue(1957);
 
         // NumberPicker (til) Dag:
 
@@ -68,6 +59,7 @@ public class Datering extends Activity implements View.OnClickListener {
         num4.setMaxValue(31);
         num4.setMinValue(1);
         num4.setWrapSelectorWheel(false);
+        num4.setValue(1);
 
         // NumberPicker (til) Måned:
 
@@ -75,6 +67,7 @@ public class Datering extends Activity implements View.OnClickListener {
         num5.setMaxValue(12);
         num5.setMinValue(1);
         num5.setWrapSelectorWheel(false);
+        num5.setValue(1);
 
         // Number Picker (til) Årstal:
 
@@ -82,26 +75,23 @@ public class Datering extends Activity implements View.OnClickListener {
         num6.setMaxValue(2100);
         num6.setMinValue(1900);
         num6.setWrapSelectorWheel(false);
+        num6.setValue(1957);
     }
 
 
     @Override
     public void onClick(View v)
     {
-        fraDag = num1.getValue();
-        fraMD = num2.getValue();
-        fraAar = num3.getValue();
-        tilDag = num4.getValue();
-        tilMD = num5.getValue();
-        tilAar = num6.getValue();
 
-        datoFra = fraDag + "-" + fraMD + "-" + fraAar;
-        datoTil = tilDag + "-" + tilMD + "-" + tilAar;
-
-        System.out.println(datoTil);
-        System.out.println(datoFra);
 
     }
+     public String getDatoTil()
+     {
+         return num4.getValue() + "-" + num5.getValue() + "-" + num6.getValue();
+     }
 
-
+     public String getDatoFra()
+     {
+         return num1.getValue() + "-" + num2.getValue() + "-" + num3.getValue();
+     }
 }
