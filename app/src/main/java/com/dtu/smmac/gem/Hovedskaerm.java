@@ -51,9 +51,9 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         this.b1 = (Button) findViewById(R.id.beskrivelseb1);
 
-        //this.b2 = (Button) findViewById(R.id.beskrivelseb2);
+        this.b2 = (Button) findViewById(R.id.dateringb2);
 
-        //this.tv = (TextView) findViewById(R.id.overskriftBeskrivelse);
+        this.tv = (TextView) findViewById(R.id.overskriftDatering);
         this.tv.setText(genstand.getTitle());
 
         this.b1.setOnClickListener(this);
