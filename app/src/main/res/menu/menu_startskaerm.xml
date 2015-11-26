@@ -1,5 +1,19 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".Startskaerm">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" android:showAsAction="never" />
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/search_item"
+        android:title="Search"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:actionLayout="@layout/search_layout"
+        android:icon="@drawable/search"
+        />
+
+    <item
+        android:id="@+id/add"
+        android:title="+"
+        android:showAsAction="ifRoom|withText"
+        android:onClick="openNew"
+        />
+
 </menu>

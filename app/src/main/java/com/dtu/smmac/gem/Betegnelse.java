@@ -20,7 +20,7 @@ public class Betegnelse extends Activity implements View.OnClickListener {
 
         b1 = (Button) findViewById(R.id.beskrivelseb1);
 
-        b2 = (Button) findViewById(R.id.beskrivelseb2);
+        //b2 = (Button) findViewById(R.id.beskrivelseb2);
 
         et = (EditText) findViewById(R.id.betegnelseET);
 

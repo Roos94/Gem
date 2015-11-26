@@ -7,16 +7,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Startskaerm extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener, TextWatcher {
+public class Startskaerm extends Activity implements AdapterView.OnItemClickListener, TextWatcher {
 
-    private Button add;
     private EditText search;
     private ListView list;
     private TextView t;
@@ -32,28 +35,27 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
 
         genstand = new GenstandList();
 
-        this.add = (Button) findViewById(R.id.add);
-        this.search = (EditText) findViewById(R.id.search);
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
         this.h = new Intent(this, Hovedskaerm.class);
-
-        this.add.setOnClickListener(this);
-        this.search.addTextChangedListener(this);
 
         setList();
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.add:
-                openNew();
-                break;
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_startskaerm, menu);
+
+        View v = (View) menu.findItem(R.id.search_item).getActionView();
+
+        this.search = ( EditText ) v.findViewById(R.id.txt_search);
+        this.search.addTextChangedListener(this);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
-    public void openNew() {
+    public void openNew(MenuItem item) {
         startActivity(i);
     }
 
@@ -118,5 +120,6 @@ public class Startskaerm extends Activity implements View.OnClickListener, Adapt
     public void afterTextChanged(Editable s) {
 
     }
+
 
 }

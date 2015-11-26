@@ -5,30 +5,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Startskaerm">
 
-    <EditText
-        android:layout_width="285dp"
-        android:layout_height="45dp"
-        android:id="@+id/search"
-        android:layout_alignParentTop="true"
-        android:hint="Søg"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/add"
-        android:backgroundTint="#010101" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:text="+"
-        android:id="@+id/add"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/list"
-        android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"
         android:choiceMode="singleChoice"
         android:textFilterEnabled="false"
