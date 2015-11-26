@@ -107,6 +107,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
             if (Startskaerm.genstand.getGenstandList().get(j).getID() == ID)
             {
                 this.genstand = Startskaerm.genstand.getGenstandList().get(j);
+                return;
             }
         }
     }
