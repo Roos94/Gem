@@ -49,7 +49,7 @@ public class Splash extends Activity {
         this.timer = new Thread() {
             public void run() {
                 try {
-                    sleep(2500);
+                    sleep(2000);
 
                     startActivity(i);
 

@@ -21,7 +21,8 @@
             android:name=".Startskaerm"
             android:label="@string/app_name"
             android:theme="@style/SK"/>
-        <activity android:name=".NyReg" />
+        <activity android:name=".NyReg"
+            android:theme="@style/SK"/>
         <activity
             android:name=".Hovedskaerm"
             android:theme="@style/SK" />
