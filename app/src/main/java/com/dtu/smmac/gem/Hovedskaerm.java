@@ -103,10 +103,10 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
     public void setGenstand(int ID)
     {
-        for (int j = 0; j < Startskaerm.genstand.getGenstandList().size(); j++) {
-            if (Startskaerm.genstand.getGenstandList().get(j).getID() == ID)
+        for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
+            if (Splash.genstand.getGenstandList().get(j).getID() == ID)
             {
-                this.genstand = Startskaerm.genstand.getGenstandList().get(j);
+                this.genstand = Splash.genstand.getGenstandList().get(j);
                 return;
             }
         }

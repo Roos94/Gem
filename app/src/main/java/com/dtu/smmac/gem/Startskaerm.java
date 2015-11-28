@@ -25,15 +25,13 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     private TextView t;
     private Intent i, h;
     private Adapter adap;
-    public static GenstandList genstand;
     private Genstand gen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
-
-        genstand = new GenstandList();
+        this.getActionBar().setTitle("");
 
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
@@ -52,8 +50,6 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
         this.search = ( EditText ) v.findViewById(R.id.txt_search);
         this.search.addTextChangedListener(this);
 
-        getActionBar().setDisplayShowTitleEnabled(false);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,28 +58,11 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     }
 
     public void setList() {
-        this.adap = new Adapter(this, this.genstand.getGenstandList());
+        this.adap = new Adapter(this, Splash.genstand.getGenstandList());
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
         this.list.setOnItemClickListener(this);
-
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    genstand.setGenstand();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                adap.notifyDataSetChanged();
-            }
-        }.execute();
     }
 
     @Override
@@ -91,10 +70,10 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
 
         this.t = (TextView) view.findViewById(R.id.id);
 
-        for (int j = 0; j < this.genstand.getGenstandList().size(); j++) {
-            if (this.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
+        for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
+            if (Splash.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
             {
-                this.gen = this.genstand.getGenstandList().get(j);
+                this.gen = Splash.genstand.getGenstandList().get(j);
             }
         }
 

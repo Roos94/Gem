@@ -24,7 +24,7 @@ public class NyReg extends Activity implements View.OnClickListener {
         this.end = (Button) findViewById(R.id.dateringb1);
         this.on = (Button) findViewById(R.id.dateringb2);
 
-        this.regNo.setText("" + Startskaerm.genstand.getNextID());
+        this.regNo.setText("" + Splash.genstand.getNextID());
 
         this.end.setOnClickListener(this);
         this.on.setOnClickListener(this);

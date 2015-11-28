@@ -12,7 +12,7 @@
     <item
         android:id="@+id/add"
         android:title="Add"
-        android:showAsAction="ifRoom"
+        android:showAsAction="ifRoom|withText"
         android:onClick="openNew"
         android:icon="@drawable/plus"
         />
