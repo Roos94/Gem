@@ -64,6 +64,8 @@ public class NyReg extends Activity {
         Startskaerm.adap.notifyDataSetChanged();
 
         startActivity(i);
+
+        finish();
     }
 
 }
