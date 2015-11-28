@@ -4,6 +4,7 @@
     <item
         android:id="@+id/done"
         android:title="Done"
+        android:onClick="done"
         android:showAsAction="ifRoom"
         />
 

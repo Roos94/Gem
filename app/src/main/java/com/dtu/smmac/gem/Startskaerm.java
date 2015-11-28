@@ -24,7 +24,7 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     private ListView list;
     private TextView t;
     private Intent i, h;
-    private Adapter adap;
+    public static Adapter adap;
     private Genstand gen;
 
     @Override

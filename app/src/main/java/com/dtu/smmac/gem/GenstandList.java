@@ -1,11 +1,17 @@
 package com.dtu.smmac.gem;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +26,8 @@ public class GenstandList {
     private String data;
     private JSONArray json;
     private JSONObject obj;
+    private final String API = "http://78.46.187.172:4019";
+    private String genTitle;
 
     public GenstandList()
     {
@@ -33,6 +41,8 @@ public class GenstandList {
 
     public void setGenstand() throws Exception
     {
+        this.genstand.clear();
+
         this.data = hentUrl("http://78.46.187.172:4019/items");
 
         this.json = new JSONArray(data);
@@ -69,15 +79,51 @@ public class GenstandList {
         return this.nextID;
     }
 
-    public void addGenstand(String titel) throws JSONException {
-        this.obj = new JSONObject();
+    public void addGenstand() throws JSONException {
+        String requestUrl = this.API + "/items?itemheadline=" + this.genTitle;
 
-        this.obj.put("itemid", getNextID());
-        this.obj.put("itemheadline", titel);
+        InputStream is = null;
+        String response = "";
 
-        // Det er ikke sådan man gør ..
+        try {
+            URL url = new URL(requestUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
 
-        this.json.put(this.obj);
+            conn.connect();
+            int responseCode = conn.getResponseCode();
+            is = conn.getInputStream();
+
+            response = readIt(is, 2000);
+        }
+        catch (Exception e){
+            response = e.getMessage();
+        }
+        finally {
+            if(is != null){
+                try {
+                    is.close();
+                    setGenTitle(null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public String readIt(InputStream stream, int len) throws IOException {
+        Reader reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
+    }
+
+    public void setGenTitle(String title)
+    {
+        this.genTitle = title;
     }
 
 }
