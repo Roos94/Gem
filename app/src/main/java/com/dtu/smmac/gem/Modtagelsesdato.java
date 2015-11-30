@@ -30,7 +30,7 @@ public class Modtagelsesdato extends Activity {
         // b2 = findViewById(R.id.)
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
-        md = cal.get(Calendar.MONTH);
+        md = cal.get(Calendar.MONTH) + 1;
         aar = cal.get(Calendar.YEAR);
 
         // NumberPicker Dag:

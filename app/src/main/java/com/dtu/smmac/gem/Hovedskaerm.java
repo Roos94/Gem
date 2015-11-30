@@ -70,7 +70,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         switch(position){
             case 0:
-                intent = new Intent(this,Billede.class);
+                intent = new Intent(this, Billede.class);
                 break;
             case 1:
                 this.intent = new Intent(this, Emnegruppe.class);
