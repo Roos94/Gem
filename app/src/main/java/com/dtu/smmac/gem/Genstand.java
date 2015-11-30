@@ -8,12 +8,14 @@ public class Genstand {
     private String title;
     private int ID;
     private int image;
+    private String beskrivelse;
 
-    public Genstand(String title, int ID, int image)
+    public Genstand(String title, int ID, int image, String beskrivelse)
     {
         this.title = title;
         this.ID = ID;
         this.image = image;
+        this.beskrivelse = beskrivelse;
     }
 
     public String getTitle()
@@ -31,10 +33,14 @@ public class Genstand {
         return this.ID;
     }
 
-
     public int getImage()
     {
         return this.image;
+    }
+
+    public String getBeskrivelse()
+    {
+        return this.beskrivelse;
     }
 
 }

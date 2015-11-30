@@ -51,7 +51,7 @@ public class GenstandList {
         {
             this.obj = this.json.getJSONObject(i);
 
-            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf));
+            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
         }
     }
 
