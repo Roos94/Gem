@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 public class NyReg extends Activity {
 
+    //Skal oprette en ny reg når activiteten starter, skal skrive titel til den oprettede reg
+    //Så der kommer flow i regNo - Hvis to personer opretter på samme tid
+    //Hvis der bliver klikket på back, så skal den slette den igen
+
     private EditText title;
     private TextView regNo;
     private Intent i;
