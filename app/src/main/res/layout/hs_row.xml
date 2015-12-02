@@ -20,7 +20,8 @@
         android:id="@+id/bes"
         android:textColor="#010101"
         android:layout_below="@+id/title"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:textStyle="italic" />
 
     <ImageView
         android:layout_width="45dp"

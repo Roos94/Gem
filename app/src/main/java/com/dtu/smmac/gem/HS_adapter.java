@@ -57,7 +57,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         if (position == 0) {
             holder.imgView.setImageResource(genstand.getImage());
             holder.titleView.setText("Billede");
-            holder.besView.setText("Anders er stor og fed");
+            holder.besView.setText("Antal billeder: ");
         }
         else if (position == 1) {
             //holder.imgView.setImageResource();
@@ -77,7 +77,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 4) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Datering");
-            holder.besView.setText("");
+            holder.besView.setText("Fra: " + "-" + " Til: " + "-");
         }
         else if (position == 5) {
             //holder.imgView.setImageResource();
@@ -87,7 +87,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 6) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Referencer");
-            holder.besView.setText("");
+            holder.besView.setText("Donator: " + "-" + " Producent: " + "-");
         }
 
         return row;
