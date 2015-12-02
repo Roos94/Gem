@@ -26,7 +26,7 @@ public class Datering extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datering);
 
-        this.getActionBar().setTitle("Datering");
+        this.getActionBar().setTitle("    " + "Datering");
 
         // NumberPicker (fra) Dag:
 

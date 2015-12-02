@@ -12,7 +12,7 @@ public class Referencer extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_referencer);
 
-        this.getActionBar().setTitle("Referencer");
+        this.getActionBar().setTitle("    " + "Referencer");
     }
 
     @Override

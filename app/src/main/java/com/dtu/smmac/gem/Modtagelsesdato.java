@@ -26,7 +26,7 @@ public class Modtagelsesdato extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modtagelsesdato);
 
-        this.getActionBar().setTitle("Modtagelsesdato");
+        this.getActionBar().setTitle("    " + "Modtagelsesdato");
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;

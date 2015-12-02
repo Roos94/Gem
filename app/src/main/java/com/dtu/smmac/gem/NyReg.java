@@ -27,7 +27,7 @@ public class NyReg extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ny_reg);
 
-        this.getActionBar().setTitle("Ny registrering");
+        this.getActionBar().setTitle("    " + "Ny registrering");
 
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);

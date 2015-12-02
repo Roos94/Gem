@@ -18,7 +18,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beskrivelse);
 
-        this.getActionBar().setTitle("Beskrivelse");
+        this.getActionBar().setTitle("    " + "Beskrivelse");
 
         lydfil = (Button) findViewById(R.id.lydfil);
 
