@@ -72,7 +72,7 @@ public class Modtagelsesdato extends Activity {
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 
 }
