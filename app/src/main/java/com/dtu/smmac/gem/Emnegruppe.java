@@ -3,6 +3,8 @@ package com.dtu.smmac.gem;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,11 +15,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Emnegruppe extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener {
 
     ListView lv;
-    Button b1, b2;
-    TextView tv;
     Intent intent;
 
     @Override
@@ -40,31 +40,19 @@ public class Emnegruppe extends Activity implements View.OnClickListener, Adapte
 
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
-        b1 = (Button) findViewById(R.id.dateringb1);
-
-        b2 = (Button) findViewById(R.id.dateringb2);
-
-        tv = (TextView) findViewById(R.id.textView);
-
-
-        b1.setOnClickListener(this);
-
-        b2.setOnClickListener(this);
-
         lv.setOnItemClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
-        if(v == b1)
-        {
-            finish();
-        }
-        else if(v == b2)
-        {
-            // Her skal der gemmes til databasen!
-            finish();
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
+
     }
 
     @Override

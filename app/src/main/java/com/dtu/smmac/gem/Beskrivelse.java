@@ -2,13 +2,15 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class Beskrivelse extends Activity implements View.OnClickListener {
 
-    Button lydfil, b1, b2;
+    Button lydfil;
     EditText beskrivelse;
 
     @Override
@@ -18,17 +20,21 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         lydfil = (Button) findViewById(R.id.lydfil);
 
-        b1 = (Button) findViewById(R.id.dateringb1);
-
-        b2 = (Button) findViewById(R.id.dateringb2);
-
         lydfil.setOnClickListener(this);
 
-        b1.setOnClickListener(this);
-
-        b2.setOnClickListener(this);
-
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
 
     }
 

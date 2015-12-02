@@ -2,15 +2,15 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Betegnelse extends Activity implements View.OnClickListener {
+public class Betegnelse extends Activity {
 
-    private Button b1, b2;
-    private TextView tv;
     private EditText et;
 
     @Override
@@ -18,31 +18,18 @@ public class Betegnelse extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_betegnelse);
 
-        b1 = (Button) findViewById(R.id.beskrivelseb1);
-
-        b2 = (Button) findViewById(R.id.dateringb2);
-
         et = (EditText) findViewById(R.id.betegnelseET);
-
-        tv = (TextView) findViewById(R.id.betegnelseTV);
-
-        b1.setOnClickListener(this);
-        b2.setOnClickListener(this);
-        et.setOnClickListener(this);
-        tv.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
-        if(v == b1)
-        {
-            finish();
-        }
-        else if(v == b2)
-        {
-            // Send til database!
-            finish();
-        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
+
     }
 }

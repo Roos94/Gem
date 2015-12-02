@@ -9,39 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dtu.smmac.gem.Betegnelse">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
-        android:id="@+id/betegnelseb1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">"
-        android:id="@+id/betegnelseb2"
-        android:layout_alignTop="@+id/beskrivelseb1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Betegnelse"
-        android:id="@+id/overskriftBetegnelse"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/beskrivelseb1"
-        android:gravity="center"
-        android:layout_toLeftOf="@+id/betegnelseb2"
-        android:layout_toRightOf="@+id/betegnelseb1"
-        android:layout_toEndOf="@+id/betegnelseb1" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +28,6 @@
         android:id="@+id/betegnelseTV"
         android:layout_marginTop="47dp"
         android:gravity="center"
-        android:layout_below="@+id/betegnelseb1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"

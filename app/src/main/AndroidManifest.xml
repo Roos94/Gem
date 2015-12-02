@@ -26,18 +26,23 @@
         <activity
             android:name=".Hovedskaerm"
             android:theme="@style/SK" />
-        <activity android:name=".Datering" />
-        <activity android:name=".Skabelon" />
-        <activity android:name=".Beskrivelse" />
-        <activity android:name=".Emnegruppe" />
-        <activity android:name=".Referencer" />
+        <activity android:name=".Datering"
+            android:theme="@style/SK"/>
+        <activity android:name=".Beskrivelse"
+            android:theme="@style/SK"/>
+        <activity android:name=".Emnegruppe"
+            android:theme="@style/SK"/>
+        <activity android:name=".Referencer"
+            android:theme="@style/SK"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Betegnelse" />
-        <activity android:name=".Modtagelsesdato" />
+        <activity android:name=".Betegnelse"
+            android:theme="@style/SK"/>
+        <activity android:name=".Modtagelsesdato"
+            android:theme="@style/SK"/>
         <activity android:name=".Billede"></activity>
     </application>
 

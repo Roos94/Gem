@@ -2,14 +2,14 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
 import java.util.Calendar;
 
 public class Modtagelsesdato extends Activity {
-
-    Button b2;
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
@@ -25,9 +25,6 @@ public class Modtagelsesdato extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modtagelsesdato);
-
-
-        // b2 = findViewById(R.id.)
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;
@@ -62,6 +59,18 @@ public class Modtagelsesdato extends Activity {
     public String getDato()
     {
         return num1.getValue() + "-" + num2.getValue() + "-" + num3.getValue();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
+
     }
 
 }

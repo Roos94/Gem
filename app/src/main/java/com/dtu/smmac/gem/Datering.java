@@ -2,15 +2,15 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
 
 
-public class Datering extends Activity implements View.OnClickListener {
-
-    private Button b1, b2;
+public class Datering extends Activity {
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
@@ -25,10 +25,6 @@ public class Datering extends Activity implements View.OnClickListener {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datering);
-
-        b2 = (Button) findViewById(R.id.dateringb2);
-        b2.setOnClickListener(this);
-        b2.setText(">");
 
         // NumberPicker (fra) Dag:
 
@@ -90,9 +86,14 @@ public class Datering extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
 
     }
 
