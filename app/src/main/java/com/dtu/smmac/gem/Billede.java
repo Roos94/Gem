@@ -13,14 +13,14 @@ public class Billede extends Activity implements View.OnClickListener {
 
     private ImageView iv;
     private Button b;
-    private int REQUEST_CODE =1;
+    private int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billede);
 
-        b = (Button) findViewById(R.id.button_billede);
+        b = (Button) findViewById(R.id.bbillede);
         iv = (ImageView) findViewById(R.id.iv_billede);
 
         b.setOnClickListener(this);
