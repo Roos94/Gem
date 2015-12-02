@@ -18,6 +18,7 @@ public class Billede extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_billede);
 
         b = (Button) findViewById(R.id.button_billede);
         iv = (ImageView) findViewById(R.id.iv_billede);
