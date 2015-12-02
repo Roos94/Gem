@@ -48,7 +48,7 @@ public class Datering extends Activity {
 
         num3 = (NumberPicker) findViewById(R.id.numpAarD1);
         num3.setMaxValue(2100);
-        num3.setMinValue(1900);
+        num3.setMinValue(1940);
         num3.setWrapSelectorWheel(false);
         num3.setValue(1957);
 
@@ -72,9 +72,9 @@ public class Datering extends Activity {
 
         num6 = (NumberPicker) findViewById(R.id.numpAarD2);
         num6.setMaxValue(2100);
-        num6.setMinValue(1900);
+        num6.setMinValue(1940);
         num6.setWrapSelectorWheel(false);
-        num6.setValue(1957);
+        num6.setValue(1990);
     }
 
     public String getDatoTil()
