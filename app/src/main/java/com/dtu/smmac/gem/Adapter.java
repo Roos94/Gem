@@ -22,7 +22,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
     private Filter genstandFilter;
     private List<Genstand> orggenstand;
 
-    Adapter(Context c, List<Genstand> genstand) {
+    public Adapter(Context c, List<Genstand> genstand) {
         super(c, R.layout.single_row, genstand);
         this.context = c;
         this.genstand = genstand;
