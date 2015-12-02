@@ -25,6 +25,8 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emnegruppe);
 
+        this.getActionBar().setTitle("Emnegruppe");
+
         lv = (ListView) findViewById(R.id.lv);
 
         ArrayList emnegruppe = new ArrayList();

@@ -18,6 +18,8 @@ public class Betegnelse extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_betegnelse);
 
+        this.getActionBar().setTitle("Betegnelse");
+
         et = (EditText) findViewById(R.id.betegnelseET);
     }
 
