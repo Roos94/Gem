@@ -8,50 +8,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dtu.smmac.gem.Hovedskaerm"
-    android:background="#ffffff">
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
-        android:id="@+id/dateringb1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">"
-        android:id="@+id/dateringb2"
-        android:layout_alignTop="@+id/dateringb1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Datering"
-        android:id="@+id/overskriftDatering"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/dateringb1"
-        android:layout_toLeftOf="@+id/dateringb2"
-        android:layout_toStartOf="@+id/dateringb2"
-        android:layout_alignBottom="@+id/dateringb1"
-        android:gravity="center" />
+    android:background="#ffffff"
+    android:gravity="center">
 
     <NumberPicker
         android:layout_width="50dp"
         android:layout_height="100dp"
         android:id="@+id/numpDagD1"
         android:background="#97ffffff"
-        android:layout_below="@+id/overskriftDatering"
+        android:layout_above="@+id/tilDatering"
         android:layout_toLeftOf="@+id/numpMDD1"
         android:layout_toStartOf="@+id/numpMDD1"
-        android:layout_marginTop="82dp" />
+        android:layout_marginTop="20dp" />
 
     <NumberPicker
         android:layout_width="50dp"
@@ -68,8 +36,6 @@
         android:layout_height="100dp"
         android:id="@+id/numpAarD1"
         android:layout_alignTop="@+id/numpMDD1"
-        android:layout_toLeftOf="@+id/dateringb2"
-        android:layout_toStartOf="@+id/dateringb2"
         android:layout_marginLeft="20dp"
         android:background="#97ffffff" />
 
@@ -79,15 +45,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fra:"
         android:id="@+id/fraDatering"
+        android:textSize="40dp"
+        android:gravity="left"
+        android:layout_above="@+id/numpDagD1"
         android:layout_alignLeft="@+id/numpDagD1"
         android:layout_alignStart="@+id/numpDagD1"
-        android:layout_below="@+id/dateringb2"
-        android:layout_toStartOf="@+id/numpAarD1"
-        android:textSize="40dp"
-        android:layout_above="@+id/numpMDD1"
-        android:layout_alignRight="@+id/numpMDD1"
-        android:layout_alignEnd="@+id/numpMDD1"
-        android:gravity="center_vertical|center_horizontal" />
+        android:layout_toLeftOf="@+id/numpMDD2"
+        android:layout_toStartOf="@+id/numpMDD2" />
 
     <NumberPicker
         android:layout_width="50dp"
@@ -127,6 +91,7 @@
         android:layout_alignRight="@+id/numpMDD2"
         android:layout_alignEnd="@+id/numpMDD2"
         android:textSize="40dp"
-        android:gravity="center_vertical|center_horizontal" />
+        android:gravity="left"
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>
