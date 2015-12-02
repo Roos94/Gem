@@ -22,7 +22,7 @@ public class Billede extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billede);
 
-        this.getActionBar().setTitle("    " + "Taillede");
+        this.getActionBar().setTitle("    " + "Tag billede");
 
         b = (Button) findViewById(R.id.bbillede);
         iv = (ImageView) findViewById(R.id.iv_billede);

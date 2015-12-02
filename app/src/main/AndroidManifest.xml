@@ -12,7 +12,8 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name=".Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,32 +23,42 @@
         <activity
             android:name=".Startskaerm"
             android:label="@string/app_name"
-            android:theme="@style/SK" />
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".NyReg"
-            android:theme="@style/SK" />
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Hovedskaerm"
-            android:theme="@style/SK" />
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Datering"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Beskrivelse"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Emnegruppe"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Referencer"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Betegnelse"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Modtagelsesdato"
-            android:theme="@style/SK"/>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Billede"
-            android:theme="@style/SK"></activity>
+            android:theme="@style/SK"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
