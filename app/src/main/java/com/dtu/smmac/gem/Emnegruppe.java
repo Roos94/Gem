@@ -54,7 +54,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 
     @Override

@@ -104,7 +104,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 
 }

@@ -39,7 +39,7 @@ public class Billede extends Activity implements View.OnClickListener {
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 
     @Override

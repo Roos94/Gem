@@ -24,6 +24,6 @@ public class Referencer extends Activity {
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 }

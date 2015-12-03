@@ -32,6 +32,6 @@ public class Betegnelse extends Activity {
 
     public void done(MenuItem item)
     {
-
+        finish();
     }
 }
