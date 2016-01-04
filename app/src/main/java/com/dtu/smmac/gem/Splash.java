@@ -29,7 +29,7 @@ public class Splash extends Activity {
         this.img.setImageResource(R.drawable.logo);
 
         this.titel = (TextView) findViewById(R.id.textSplah);
-        this.titel.setText("GEM");
+        this.titel.setText(R.string.app_name);
 
         this.lille = (TextView) findViewById(R.id.lilleSplash);
         this.lille.setText("Made by: SMMAC");
