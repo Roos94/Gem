@@ -38,7 +38,7 @@ public class Splash extends Activity {
 
         setRunable();
 
-        this.timer = new Thread(r);
+        this.timer = new Thread(this.r);
 
         new AsyncTask() {
             @Override
