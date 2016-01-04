@@ -23,7 +23,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
     private List<Genstand> orggenstand;
 
     public Adapter(Context c, List<Genstand> genstand) {
-        super(c, R.layout.single_row, genstand);
+        super(c, R.layout.row_single, genstand);
         this.context = c;
         this.genstand = genstand;
         this.orggenstand = genstand;
@@ -42,7 +42,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            row = inflater.inflate(R.layout.single_row, null);
+            row = inflater.inflate(R.layout.row_single, null);
 
             ImageView img = (ImageView) row.findViewById(R.id.image);
             TextView title = (TextView) row.findViewById(R.id.title);

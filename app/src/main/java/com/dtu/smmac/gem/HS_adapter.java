@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 /**
  * Created by Roos on 02/12/15.
  */
@@ -19,7 +17,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
     private Context context;
 
     public HS_adapter(Context c, Genstand genstand) {
-        super(c, R.layout.hs_row);
+        super(c, R.layout.row_hs);
         this.genstand = genstand;
         this.context = c;
     }
@@ -37,7 +35,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            row = inflater.inflate(R.layout.hs_row, null);
+            row = inflater.inflate(R.layout.row_hs, null);
 
             ImageView img = (ImageView) row.findViewById(R.id.image);
             TextView title = (TextView) row.findViewById(R.id.title);
