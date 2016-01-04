@@ -2,10 +2,12 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener {
+public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener{
 
     ListView lv;
     Intent intent;
@@ -44,6 +46,10 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
         lv.setOnItemClickListener(this);
+
+        // lv.performItemClick(lv.getAdapter().getView(2 , null, null), 2, 2);
+
+        lv.getAdapter().getView(2, null, null).performClick();
 
     }
 

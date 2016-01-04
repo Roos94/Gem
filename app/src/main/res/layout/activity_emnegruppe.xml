@@ -16,6 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:listSelector="#969593"
+        android:choiceMode="singleChoice"
         />
 
 </RelativeLayout>

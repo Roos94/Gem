@@ -45,14 +45,13 @@ public class Splash extends Activity {
             protected Object doInBackground(Object[] params) {
                 try {
                     genstand.setGenstand();
+                    timer.start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
             }
         }.execute();
-
-        this.timer.start();
     }
 
     public void setTimer() {
