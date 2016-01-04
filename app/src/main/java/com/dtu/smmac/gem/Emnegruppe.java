@@ -19,6 +19,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
     ListView lv;
     Intent intent;
+    private String emne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
         lv.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -52,13 +54,13 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void done(MenuItem item)
-    {
+    public void done(MenuItem item) {
+        System.out.println(emne);
         finish();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // view.setSelected(true);
+        emne = lv.getItemAtPosition(position).toString();
     }
 }
