@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ public class Splash extends Activity {
     private TextView titel, lille;
     private Intent i;
     private Thread timer;
+    private Runnable r, l1, l2, l3, l4, l5;
     public static GenstandList genstand;
 
     @Override
@@ -34,6 +36,10 @@ public class Splash extends Activity {
 
         this.genstand = new GenstandList();
 
+        setRunable();
+
+        this.timer = new Thread(r);
+
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
@@ -46,22 +52,69 @@ public class Splash extends Activity {
             }
         }.execute();
 
-        this.timer = new Thread() {
-            public void run() {
-                try {
-                    sleep(2000);
-
-                    startActivity(i);
-
-                    finish();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
         this.timer.start();
     }
 
+    public void setTimer() {
+        SystemClock.sleep(1000);
+
+        runOnUiThread(this.l1);
+        SystemClock.sleep(400);
+
+        runOnUiThread(this.l2);
+        SystemClock.sleep(400);
+
+        runOnUiThread(this.l3);
+        SystemClock.sleep(400);
+
+        runOnUiThread(this.l4);
+        SystemClock.sleep(400);
+
+        runOnUiThread(this.l5);
+        SystemClock.sleep(400);
+
+        startActivity(i);
+
+        finish();
+    }
+
+    public void setRunable()
+    {
+        this.r = new Runnable() {
+            public void run() {
+                setTimer();
+            }
+        };
+
+        this.l1 = new Runnable() {
+            public void run() {
+                img.setImageResource(R.drawable.logo1);
+            }
+        };
+
+        this.l2 = new Runnable() {
+            public void run() {
+                img.setImageResource(R.drawable.logo2);
+            }
+        };
+
+        this.l3 = new Runnable() {
+            public void run() {
+                img.setImageResource(R.drawable.logo3);
+            }
+        };
+
+        this.l4 = new Runnable() {
+            public void run() {
+                img.setImageResource(R.drawable.logo4);
+            }
+        };
+
+        this.l5 = new Runnable() {
+            public void run() {
+                img.setImageResource(R.drawable.logo5);
+            }
+        };
+    }
 
 }
