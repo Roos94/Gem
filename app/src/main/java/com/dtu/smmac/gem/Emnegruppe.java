@@ -59,6 +59,6 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Valgt emnegruppe: " + lv.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+        // view.setSelected(true);
     }
 }
