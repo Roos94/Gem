@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -22,6 +24,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
     ListView lv;
     Intent intent;
     private String emne;
+    private EditText emnet;
 
 
     @Override
@@ -30,6 +33,8 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         setContentView(R.layout.activity_emnegruppe);
 
         this.getActionBar().setTitle("    " + "Emnegruppe");
+
+        this.emnet = (EditText) findViewById(R.id.editText2);
 
         lv = (ListView) findViewById(R.id.lv);
 
@@ -47,18 +52,6 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
         lv.setOnItemClickListener(this);
-
-        //lv.performItemClick(
-        //        lv.getAdapter().getView(1, null, null),
-        //        1,
-        //        lv.getAdapter().getItemId(1));
-
-        // lv.setSelection(4);
-
-        // System.out.println(lv.getSelectedItemPosition());
-
-        // lv.performClick();
-
     }
 
     @Override
@@ -76,6 +69,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         emne = lv.getItemAtPosition(position).toString();
+        emnet.setText("Valgt emne: " + emne);
     }
 
 
