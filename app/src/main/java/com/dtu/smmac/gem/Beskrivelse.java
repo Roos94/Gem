@@ -10,8 +10,8 @@ import android.widget.EditText;
 
 public class Beskrivelse extends Activity implements View.OnClickListener {
 
-    Button lydfil;
-    EditText beskrivelse;
+    private Button lydfil;
+    private EditText beskrivelse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

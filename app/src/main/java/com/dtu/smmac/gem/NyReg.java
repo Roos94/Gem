@@ -58,18 +58,20 @@ public class NyReg extends Activity {
                 try {
                     Splash.genstand.addGenstand();
                     Splash.genstand.setGenstandList();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
             }
+
+            @Override
+            protected void onPostExecute(Object resultat)
+            {
+                Startskaerm.adap.notifyDataSetChanged();
+            }
         }.execute();
 
-        Startskaerm.adap.notifyDataSetChanged();
-
         startActivity(i);
-
         finish();
     }
 
