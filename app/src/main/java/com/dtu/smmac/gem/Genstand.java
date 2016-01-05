@@ -59,4 +59,15 @@ public class Genstand {
         return this.beskrivelse;
     }
 
+    public String getModtaget() { return this.modtaget; }
+
+    public String getDateringFra() {return this.dateringFra;}
+
+    public String getDateringTil() {return this.dateringTil;}
+
+    public String getDonator() {return this.donator;}
+
+    public String getProducer() {return this.producer;}
+
+    public String getPostCode() {return this.postCode;}
 }
