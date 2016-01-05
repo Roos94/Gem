@@ -1,6 +1,9 @@
 package com.dtu.smmac.gem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -34,6 +37,19 @@ public class Splash extends Activity {
         this.lille = (TextView) findViewById(R.id.lilleSplash);
         this.lille.setText("Made by: SMMAC");
 
+        if(isNetworkAvailable() == true) {
+            setInfo();
+        }
+        else
+        {
+            this.titel.setText("Der er ingen internetforbindelse, og du kan derfor ikke benytte denne applikation lige nu.");
+        }
+
+
+    }
+
+    public void setInfo()
+    {
         this.genstand = new GenstandList();
 
         setRunable();
@@ -114,6 +130,13 @@ public class Splash extends Activity {
                 img.setImageResource(R.drawable.logo5);
             }
         };
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
