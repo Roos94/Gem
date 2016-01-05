@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+
 public class Betegnelse extends Activity {
 
     private EditText et;
@@ -18,6 +19,9 @@ public class Betegnelse extends Activity {
         this.getActionBar().setTitle("    " + "Betegnelse");
 
         et = (EditText) findViewById(R.id.betegnelseET);
+
+
+
     }
 
     @Override
@@ -25,6 +29,7 @@ public class Betegnelse extends Activity {
         getMenuInflater().inflate(R.menu.menu_top_bar, menu);
 
         return super.onCreateOptionsMenu(menu);
+
     }
 
     public void done(MenuItem item)
