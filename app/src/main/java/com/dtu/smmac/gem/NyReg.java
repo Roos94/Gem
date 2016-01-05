@@ -58,6 +58,7 @@ public class NyReg extends Activity {
                 try {
                     Splash.genstand.addGenstand();
                     Splash.genstand.setGenstandList();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
