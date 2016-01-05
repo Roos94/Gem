@@ -2,6 +2,7 @@ package com.dtu.smmac.gem;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,13 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.util.ArrayList;
 
-public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener{
+public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener {
 
     ListView lv;
     Intent intent;
     private String emne;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +48,16 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
         lv.setOnItemClickListener(this);
 
-        // lv.performItemClick(lv.getAdapter().getView(2 , null, null), 2, 2);
+        //lv.performItemClick(
+        //        lv.getAdapter().getView(1, null, null),
+        //        1,
+        //        lv.getAdapter().getItemId(1));
 
-        lv.getAdapter().getView(2, null, null).performClick();
+        // lv.setSelection(4);
+
+        // System.out.println(lv.getSelectedItemPosition());
+
+        // lv.performClick();
 
     }
 
@@ -64,4 +77,6 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         emne = lv.getItemAtPosition(position).toString();
     }
+
+
 }

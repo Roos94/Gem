@@ -53,22 +53,22 @@ public class GenstandList {
         this.data = getUrl(this.API + this.userID);
         this.json = new JSONArray(data);
 
-        System.out.println("BOOOOOOM: " + this.json.length());
+        //Mangler stadig 100%
 
-        for (int i = 0; i < this.json.length(); i++) {
+        //for (int i = 0; i < this.json.length(); i++) {
 
-            this.data = getUrl(this.API + "/" + i + this.userID);
+        //    this.data = getUrl(this.API + "/" + i + this.userID);
 
-            this.data = this.data.substring(1, this.data.length() - 1);
+        //    this.data = this.data.substring(1, this.data.length() - 1);
 
-        }
-
-        //for (int i = 0; i < this.json.length(); i++)
-        //{
-        //    this.obj = this.json.getJSONObject(i);
-
-        //    this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
         //}
+
+        for (int i = 0; i < this.json.length(); i++)
+        {
+            this.obj = this.json.getJSONObject(i);
+
+            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
+        }
     }
 
     public String getUrl(String url) throws IOException {
