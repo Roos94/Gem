@@ -26,7 +26,7 @@ public class GenstandList {
     private String data;
     private JSONArray json;
     private JSONObject obj;
-    private final String API = "http://78.46.187.172:4019";
+    private final String API = "http://msondrup.dk/api/v1/items?userID=56837dedd2d76438906140"; //"http://78.46.187.172:4019";
     private String genTitle;
 
     public GenstandList()
@@ -43,7 +43,7 @@ public class GenstandList {
     {
         this.genstand.clear();
 
-        this.data = hentUrl("http://78.46.187.172:4019/items");
+        this.data = hentUrl(this.API);
 
         this.json = new JSONArray(data);
 

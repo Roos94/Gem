@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.NumberPicker;
 
 
@@ -89,7 +87,7 @@ public class Datering extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
