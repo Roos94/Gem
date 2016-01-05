@@ -1,6 +1,7 @@
 package com.dtu.smmac.gem;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -13,6 +14,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +29,16 @@ public class GenstandList {
     private String data;
     private JSONArray json;
     private JSONObject obj;
-    private final String API = "http://msondrup.dk/api/v1/items?userID=56837dedd2d76438906140"; //"http://78.46.187.172:4019";
+    private final String API = "http://msondrup.dk/api/v1/items"; //http://78.46.187.172:4019";
+    private final String userID = "?userID=56837dedd2d76438906140";
     private String genTitle;
+    private DateFormat formatter;
 
     public GenstandList()
     {
         this.genstand = new ArrayList<Genstand>();
+
+        this.formatter = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public List<Genstand> getGenstandList()
@@ -43,19 +50,28 @@ public class GenstandList {
     {
         this.genstand.clear();
 
-        this.data = hentUrl(this.API);
-
+        this.data = getUrl(this.API + this.userID);
         this.json = new JSONArray(data);
 
-        for (int i = 0; i < this.json.length(); i++)
-        {
-            this.obj = this.json.getJSONObject(i);
+        System.out.println("BOOOOOOM: " + this.json.length());
 
-            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
+        for (int i = 0; i < this.json.length(); i++) {
+
+            this.data = getUrl(this.API + "/" + i + this.userID);
+
+            this.data = this.data.substring(1, this.data.length() - 1);
+
         }
+
+        //for (int i = 0; i < this.json.length(); i++)
+        //{
+        //    this.obj = this.json.getJSONObject(i);
+
+        //    this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
+        //}
     }
 
-    public String hentUrl(String url) throws IOException {
+    public String getUrl(String url) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
         StringBuilder sb = new StringBuilder();
         String linje = br.readLine();
