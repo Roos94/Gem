@@ -28,17 +28,14 @@ public class GenstandList {
     private int nextID;
     private String data;
     private JSONArray json;
-    private JSONObject obj;
+    private JSONObject obj, fobj;
     private final String API = "http://msondrup.dk/api/v1/items"; //http://78.46.187.172:4019";
     private final String userID = "?userID=56837dedd2d76438906140";
     private String genTitle;
-    private DateFormat formatter;
 
     public GenstandList()
     {
         this.genstand = new ArrayList<Genstand>();
-
-        this.formatter = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public List<Genstand> getGenstandList()
@@ -46,28 +43,44 @@ public class GenstandList {
         return genstand;
     }
 
-    public void setGenstand() throws Exception
+    public void setGenstandList() throws Exception
     {
         this.genstand.clear();
 
         this.data = getUrl(this.API + this.userID);
         this.json = new JSONArray(data);
 
-        //Mangler stadig 100%
+        for (int i = 0; i < this.json.length(); i++) {
+            this.fobj = this.json.getJSONObject(i);
 
-        //for (int i = 0; i < this.json.length(); i++) {
+            setGenstand(i, this.fobj.optInt("itemid", 0));
+        }
+    }
 
-        //    this.data = getUrl(this.API + "/" + i + this.userID);
+    public void setGenstand(int listID, int ID)
+    {
+        try {
+            this.data = getUrl(this.API + "/" + ID + this.userID);
+            this.obj = new JSONObject(this.data);
 
-        //    this.data = this.data.substring(1, this.data.length() - 1);
+            System.out.println(this.data);
 
-        //}
-
-        for (int i = 0; i < this.json.length(); i++)
-        {
-            this.obj = this.json.getJSONObject(i);
-
-            this.genstand.add(i, new Genstand(this.obj.optString("itemheadline", "Titel"), this.obj.optInt("itemid", 0), R.drawable.ddf, this.obj.optString("itemdescription", "")));
+            this.genstand.add(listID, new Genstand(
+                    this.obj.optInt("itemid", 0),
+                    this.obj.optString("itemheadline", "Titel"),
+                    this.obj.optString("itemdescription", ""),
+                    this.obj.optString("itemreceived", ""),
+                    this.obj.optString("datingfrom", ""),
+                    this.obj.optString("datingto", ""),
+                    this.obj.optString("donator", ""),
+                    this.obj.optString("producer", ""),
+                    this.obj.optString("postnummer", ""),
+                    R.drawable.ddf
+            ));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

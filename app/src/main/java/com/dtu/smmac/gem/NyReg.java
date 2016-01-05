@@ -57,7 +57,7 @@ public class NyReg extends Activity {
             protected Object doInBackground(Object[] params) {
                 try {
                     Splash.genstand.addGenstand();
-                    Splash.genstand.setGenstand();
+                    Splash.genstand.setGenstandList();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
