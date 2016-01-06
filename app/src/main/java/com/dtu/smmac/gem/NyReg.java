@@ -84,8 +84,8 @@ public class NyReg extends Activity {
             protected void onPostExecute(Object resultat)
             {
                 Startskaerm.adap.notifyDataSetChanged();
-                i.putExtra("ID", id);
 
+                i.putExtra("ID", id);
                 startActivity(i);
                 finish();
             }
