@@ -30,8 +30,6 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         setGenstand(this.ID);
 
-        System.out.println(Splash.genstand.getGenstandList().get(49).getTitle());
-
         this.getActionBar().setTitle("    " + Splash.genstand.getGenstandList().get(this.genstandID).getTitle());
 
         this.liste = (ListView) findViewById(R.id.listView);

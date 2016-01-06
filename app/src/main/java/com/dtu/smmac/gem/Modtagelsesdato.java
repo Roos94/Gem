@@ -1,6 +1,8 @@
 package com.dtu.smmac.gem;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +18,15 @@ public class Modtagelsesdato extends Activity {
 
     final Calendar cal = Calendar.getInstance();
 
-    int dag;
-    int md;
-    int aar;
+    private int dag;
+    private int md;
+    private int aar;
+
+    private int ID;
+    private Intent lastUsed;
+    private int genstandID;
+
+    private String modtaget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,22 @@ public class Modtagelsesdato extends Activity {
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;
         aar = cal.get(Calendar.YEAR);
+
+        //Trækker fra HS
+        this.lastUsed = getIntent();
+        this.ID = this.lastUsed.getIntExtra("ID", 0);
+
+        setGenstand(this.ID);
+
+        this.modtaget = Splash.genstand.getGenstandList().get(this.genstandID).getModtaget();
+
+        if (this.modtaget != null || !this.modtaget.isEmpty()) {
+            String mod[] = this.modtaget.split("-");
+
+            this.aar = Integer.parseInt(mod[0]);
+            this.md = Integer.parseInt(mod[1]);
+            this.dag = Integer.parseInt(mod[2]);
+        }
 
         // NumberPicker Dag:
 
@@ -54,12 +78,11 @@ public class Modtagelsesdato extends Activity {
         num3.setMinValue(1990);
         num3.setWrapSelectorWheel(false);
         num3.setValue(aar);
-
     }
 
     public String getDato()
     {
-        return num1.getValue() + "-" + num2.getValue() + "-" + num3.getValue();
+        return num3.getValue() + "-" + num2.getValue() + "-" + num1.getValue();
     }
 
     @Override
@@ -71,7 +94,36 @@ public class Modtagelsesdato extends Activity {
 
     public void done(MenuItem item)
     {
-        finish();
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.setModtaget(ID, getDato());
+                    Splash.genstand.setGenstandList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object resultat)
+            {
+                Startskaerm.adap.notifyDataSetChanged();
+                Hovedskaerm.adap.notifyDataSetChanged(); //Opdaterer ikke hovedskærmen endnu !?
+                finish();
+            }
+        }.execute();
+    }
+
+    public void setGenstand(int ID)
+    {
+        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
+            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+            {
+                return;
+            }
+        }
     }
 
 }
