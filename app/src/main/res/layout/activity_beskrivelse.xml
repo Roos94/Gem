@@ -9,25 +9,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dtu.smmac.gem.Beskrivelse">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Angiv Beskrivelse"
-        android:id="@+id/tv"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/beskrivelse"
         android:layout_below="@+id/tv"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="60dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:elegantTextHeight="true"
@@ -35,15 +27,15 @@
         android:scrollbars="vertical"
         android:scrollX="0px"
         android:scrollY="5px"
-        android:background="#F1F1F1"
-        />
+        android:background="#DEDEDE"
+        android:gravity="left|top" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Optag lydfil"
         android:id="@+id/lydfil"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
