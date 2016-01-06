@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class Beskrivelse extends Activity implements View.OnClickListener {
 
-    private Button lydfil;
+    private ImageButton record;
     private EditText beskrivelse;
+    private int nr; // Bruges til at holde styr på hvilket billede der vises
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +21,13 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         this.getActionBar().setTitle("    " + "Beskrivelse");
 
-        lydfil = (Button) findViewById(R.id.lydfil);
-
-        lydfil.setOnClickListener(this);
+        record = (ImageButton) findViewById(R.id.Record);
+        record.setOnClickListener(this);
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
+        record.setImageResource(R.drawable.mic);
+        nr = 1;
     }
 
     @Override
@@ -43,5 +45,20 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        // Skifter mellem de to billeder (mic og stop)
+        if(nr == 1)
+        {
+            record.setImageResource(R.drawable.rcircle);
+            this.nr = 2;
+            // Starter lydoptagelse
+        }
+        else
+        {
+            record.setImageResource(R.drawable.mic);
+            this.nr = 1;
+            // Stopper lydoptagelsen
+        }
+
     }
+
 }
