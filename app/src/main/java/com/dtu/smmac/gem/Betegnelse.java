@@ -20,6 +20,7 @@ public class Betegnelse extends Activity {
 
         et = (EditText) findViewById(R.id.betegnelseET);
 
+        et.setText(""); // indsættes teksten fra databasen
 
 
     }
@@ -34,6 +35,7 @@ public class Betegnelse extends Activity {
 
     public void done(MenuItem item)
     {
+        System.out.println(et.getText()); // skal sendes til databasen
         finish();
     }
 }

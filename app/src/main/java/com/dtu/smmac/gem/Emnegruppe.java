@@ -52,6 +52,8 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, emnegruppe));
 
         lv.setOnItemClickListener(this);
+
+        emne = ""; // Hentes fra databasen
     }
 
     @Override
@@ -62,7 +64,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
     }
 
     public void done(MenuItem item) {
-        System.out.println(emne);
+        System.out.println(emne); // skal sendes til databasen
         finish();
     }
 
