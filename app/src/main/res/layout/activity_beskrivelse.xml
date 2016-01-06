@@ -7,12 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="com.dtu.smmac.gem.Beskrivelse">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <EditText
+
+        <EditText
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/beskrivelse"
@@ -30,13 +32,23 @@
         android:background="#DEDEDE"
         android:hint="Angiv beskrivelse"
         android:gravity="left|top" />
+
     </LinearLayout>
 
     <ImageButton
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:id="@+id/Record" />
+        android:id="@+id/Record"
+        android:layout_alignParentLeft="true"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:id="@+id/Play"
+        android:layout_alignParentRight="true"
+        />
 
 </RelativeLayout>

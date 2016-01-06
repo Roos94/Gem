@@ -1,6 +1,7 @@
 package com.dtu.smmac.gem;
 
 import android.app.Activity;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,9 +11,12 @@ import android.widget.ImageButton;
 
 public class Beskrivelse extends Activity implements View.OnClickListener {
 
-    private ImageButton record;
+    // Warning hvis der allerede er lavet en recording
+
+    private ImageButton record, play;
     private EditText beskrivelse;
-    private int nr; // Bruges til at holde styr på hvilket billede der vises
+    private int rec, pl; // Bruges til at holde styr på hvilket billede der vises
+    private MediaRecorder recorder = new MediaRecorder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +27,18 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         record = (ImageButton) findViewById(R.id.Record);
         record.setOnClickListener(this);
+        record.setImageResource(R.drawable.mic);
+        rec = 1;
+
+        play = (ImageButton) findViewById(R.id.Play);
+        play.setOnClickListener(this);
+        play.setImageResource(R.drawable.play);
+        pl = 1;
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
         beskrivelse.setText("Hej"); // Skal hentes den gemte tekst fra databasen
-
-        record.setImageResource(R.drawable.mic);
-        nr = 1;
+        beskrivelse.setSelection(beskrivelse.getText().length()); //Sætter cursor ved slutningen af teksten
     }
 
     @Override
@@ -48,18 +57,37 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        // Skifter mellem de to billeder (mic og stop)
-        if(nr == 1)
+        if(v == record)  // hvis der enten skal optages eller stoppe en optagelse
         {
-            record.setImageResource(R.drawable.rcircle);
-            this.nr = 2;
-            // Starter lydoptagelse
+            // Skifter mellem de to billeder (mic og stop)
+            if (rec == 1) {
+                record.setImageResource(R.drawable.rcircle);
+                this.rec = 2;
+                // Starter lydoptagelse
+            }
+
+            else
+            {
+                record.setImageResource(R.drawable.mic);
+                this.rec = 1;
+                // Stopper lydoptagelsen
+            }
         }
-        else
+
+        else if(v == play) // hvis lydfilen skal afspilles eller stoppes
         {
-            record.setImageResource(R.drawable.mic);
-            this.nr = 1;
-            // Stopper lydoptagelsen
+            // Skifter mellem de to billeder (mic og stop)
+            if (this.pl == 1) {
+                play.setImageResource(R.drawable.rcircle);
+                this.pl = 2;
+                // Starter afspilningen
+            }
+
+            else {
+                play.setImageResource(R.drawable.play);
+                this.pl = 1;
+                // Stopper afspilningen
+            }
         }
 
     }
