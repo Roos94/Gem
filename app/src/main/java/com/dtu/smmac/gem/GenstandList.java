@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -40,7 +41,10 @@ public class GenstandList {
     private final String API = "http://msondrup.dk/api/v1/items"; //http://78.46.187.172:4019";
     private final String userID = "?userID=56837dedd2d76438906140";
     private URL url;
-    private HttpURLConnection urlConnection;
+    private int dag;
+    private int md;
+    private int aar;
+    private final Calendar cal = Calendar.getInstance();
 
     public GenstandList()
     {
@@ -120,11 +124,15 @@ public class GenstandList {
     public void addGenstand() throws IOException {
         this.obj = new JSONObject();
 
+        dag = cal.get(Calendar.DAY_OF_MONTH);
+        md = cal.get(Calendar.MONTH) + 1;
+        aar = cal.get(Calendar.YEAR);
+
         try {
             //this.obj.put("itemid", "" + Splash.genstand.getNextID());
             this.obj.put("itemheadline", "");
             this.obj.put("itemdescription", "");
-            this.obj.put("itemreceived", "");
+            this.obj.put("itemreceived", aar + "-" + md + "-" + dag);
             this.obj.put("itemdatingfrom", "");
             this.obj.put("itemdatingto", "");
             this.obj.put("donator", "");
@@ -181,6 +189,7 @@ public class GenstandList {
 
     }
 
+    // Virker ikke??
     public void deleteGenstand(int ID) throws IOException
     {
         this.url = new URL(this.API + "/" + ID + this.userID);
@@ -191,7 +200,7 @@ public class GenstandList {
         conn.setRequestMethod("DELETE");
         conn.setDoInput(true);
 
-        conn.connect();
+
     }
 
 }

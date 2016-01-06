@@ -36,7 +36,7 @@ public class NyReg extends Activity {
 
         this.regNo.setText("" + id);
 
-        this.i = new Intent(this, Billede.class);
+        this.i = new Intent(this, Hovedskaerm.class);
 
         new AsyncTask() {
             @Override
@@ -84,11 +84,12 @@ public class NyReg extends Activity {
             protected void onPostExecute(Object resultat)
             {
                 Startskaerm.adap.notifyDataSetChanged();
+                i.putExtra("ID", id);
+
+                startActivity(i);
+                finish();
             }
         }.execute();
-
-        startActivity(i);
-        finish();
     }
 
     @Override
