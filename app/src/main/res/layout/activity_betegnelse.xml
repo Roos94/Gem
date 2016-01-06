@@ -27,6 +27,7 @@
         android:scrollX="0px"
         android:scrollY="5px"
         android:background="#DEDEDE"
+        android:hint="Angiv betegnelse"
         android:gravity="left|top" />
     </LinearLayout>
 
