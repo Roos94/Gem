@@ -26,6 +26,8 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
+        beskrivelse.setText("Hej"); // Skal hentes den gemte tekst fra databasen
+
         record.setImageResource(R.drawable.mic);
         nr = 1;
     }
@@ -39,6 +41,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     public void done(MenuItem item)
     {
+        System.out.print(beskrivelse.getText()); // skal gemmes i databasen
         finish();
     }
 
