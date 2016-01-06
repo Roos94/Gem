@@ -1,19 +1,27 @@
 package com.dtu.smmac.gem;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.SystemClock;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +39,8 @@ public class GenstandList {
     private JSONObject obj, fobj;
     private final String API = "http://msondrup.dk/api/v1/items"; //http://78.46.187.172:4019";
     private final String userID = "?userID=56837dedd2d76438906140";
-    private String genTitle;
+    private URL url;
+    private HttpURLConnection urlConnection;
 
     public GenstandList()
     {
@@ -108,51 +117,81 @@ public class GenstandList {
         return this.nextID;
     }
 
-    public void addGenstand() throws JSONException {
-        String requestUrl = this.API + "/items?itemheadline=" + this.genTitle;
-
-        InputStream is = null;
-        String response = "";
+    public void addGenstand() throws IOException {
+        this.obj = new JSONObject();
 
         try {
-            URL url = new URL(requestUrl);
+            //this.obj.put("itemid", "" + Splash.genstand.getNextID());
+            this.obj.put("itemheadline", "");
+            this.obj.put("itemdescription", "");
+            this.obj.put("itemreceived", "");
+            this.obj.put("itemdatingfrom", "");
+            this.obj.put("itemdatingto", "");
+            this.obj.put("donator", "");
+            this.obj.put("producer", "");
+            this.obj.put("postalCode", "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.url = new URL(this.API + this.userID);
+
+        postGenstand(this.obj, this.url);
+    }
+
+    public void setTitel(int ID, String title) throws IOException
+    {
+        this.obj = new JSONObject();
+
+        try {
+            this.obj.put("itemheadline", title);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        postGenstand(this.obj, this.url);
+    }
+
+    public void postGenstand(JSONObject ob, URL url) throws IOException {
+        InputStream is = null;
+
+        try
+        {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoInput(true);
 
-            conn.connect();
-            int responseCode = conn.getResponseCode();
+            String requestBody = ob.toString();
+            byte[] outputBytes = requestBody.getBytes();
+            OutputStream os = conn.getOutputStream();
+            os.write(outputBytes);
+            os.close();
+
             is = conn.getInputStream();
 
-            response = readIt(is, 2000);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            response = e.getMessage();
-        }
-        finally {
-            if(is != null){
-                try {
-                    is.close();
-                    setGenTitle(null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+
     }
 
-    public String readIt(InputStream stream, int len) throws IOException {
-        Reader reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
-
-    public void setGenTitle(String title)
+    public void deleteGenstand(int ID) throws IOException
     {
-        this.genTitle = title;
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000);
+        conn.setConnectTimeout(15000);
+        conn.setRequestMethod("DELETE");
+        conn.setDoInput(true);
+
+        conn.connect();
     }
 
 }

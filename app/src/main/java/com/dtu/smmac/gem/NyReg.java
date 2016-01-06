@@ -19,6 +19,8 @@ public class NyReg extends Activity {
     private EditText title;
     private TextView regNo;
     private Intent i;
+    private int id;
+    private String titel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,23 @@ public class NyReg extends Activity {
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.regNo.setText("" + Splash.genstand.getNextID());
+        this.id = Splash.genstand.getNextID();
+
+        this.regNo.setText("" + id);
 
         this.i = new Intent(this, Billede.class);
+
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.addGenstand();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
     }
 
     @Override
@@ -44,19 +60,19 @@ public class NyReg extends Activity {
 
     public void done(MenuItem item)
     {
-        if (title.getText().toString() == null || title.getText().toString().isEmpty())
+        if (this.title.getText().toString() == null || this.title.getText().toString().isEmpty())
         {
             Toast.makeText(this, "Der er ikke angivet nogen titel!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Splash.genstand.setGenTitle(title.getText().toString());
+        this.titel = this.title.getText().toString();
 
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.genstand.addGenstand();
+                    Splash.genstand.setTitel(id, titel);
                     Splash.genstand.setGenstandList();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -73,6 +89,27 @@ public class NyReg extends Activity {
 
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.deleteGenstand(id);
+                    }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
+
+        finish();
+
+        return;
     }
 
 }
