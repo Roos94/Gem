@@ -21,7 +21,7 @@ public class Betegnelse extends Activity {
         et = (EditText) findViewById(R.id.betegnelseET);
 
         et.setText(""); // indsættes teksten fra databasen
-
+        et.setSelection(et.getText().length()); //Sætter cursor ved slutningen af teksten
 
     }
 

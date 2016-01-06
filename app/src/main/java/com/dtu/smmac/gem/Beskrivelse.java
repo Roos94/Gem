@@ -38,6 +38,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
         beskrivelse.setText("Hej"); // Skal hentes den gemte tekst fra databasen
+        beskrivelse.setSelection(beskrivelse.getText().length()); //Sætter cursor ved slutningen af teksten
     }
 
     @Override
@@ -76,15 +77,13 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         else if(v == play) // hvis lydfilen skal afspilles eller stoppes
         {
             // Skifter mellem de to billeder (mic og stop)
-            if (this.pl == 1)
-            {
+            if (this.pl == 1) {
                 play.setImageResource(R.drawable.rcircle);
                 this.pl = 2;
                 // Starter afspilningen
             }
 
-            else
-            {
+            else {
                 play.setImageResource(R.drawable.play);
                 this.pl = 1;
                 // Stopper afspilningen
