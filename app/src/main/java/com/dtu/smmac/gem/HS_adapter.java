@@ -75,7 +75,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 4) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Datering");
-            holder.besView.setText("Fra: " + this.genstand.getDateringFra() + " Til: " + this.genstand.getDateringTil());
+            holder.besView.setText("Fra: " + this.genstand.getDateringFra() + "\n" + "Til: " + this.genstand.getDateringTil());
         }
         else if (position == 5) {
             //holder.imgView.setImageResource();
@@ -93,7 +93,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 6) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Referencer");
-            holder.besView.setText("Donator: " + this.genstand.getDonator() + " Producent: " + this.genstand.getProducer());
+            holder.besView.setText("Donator: " + this.genstand.getDonator() + "\n" + "Producent: " + this.genstand.getProducer());
         }
 
         return row;

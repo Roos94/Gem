@@ -18,9 +18,16 @@ public class Genstand {
     private String producer;
     private String postCode;
 
-    public Genstand(int itemId, String itemHeadline, String itemDescription, String itemRecieved,
-                    String itemDatingFrom, String itemDatingTo, String donator, String producer,
-                    String postalCode, int image)
+    public Genstand(int itemId,
+                    String itemHeadline,
+                    String itemDescription,
+                    String itemRecieved,
+                    String itemDatingFrom,
+                    String itemDatingTo,
+                    String donator,
+                    String producer,
+                    String postalCode,
+                    int image)
     {
         this.ID = itemId;
         this.title = itemHeadline;
