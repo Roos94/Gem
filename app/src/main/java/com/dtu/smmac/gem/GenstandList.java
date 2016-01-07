@@ -81,7 +81,7 @@ public class GenstandList {
 
             if (this.obj.optString("itemheadline").isEmpty())
             {
-                System.out.println(this.obj.optInt("itemid"));
+                System.out.println("Sletter item med ID: " + this.obj.optInt("itemid"));
                 deleteGenstand(this.obj.optInt("itemid"));
                 return 0;
             }
