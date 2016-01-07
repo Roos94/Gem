@@ -80,7 +80,15 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 5) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Beskrivelse");
-            holder.besView.setText(this.genstand.getBeskrivelse());
+
+            String bes = this.genstand.getBeskrivelse();
+
+            if (bes.length() > 97)
+            {
+                bes = bes.substring(0,97) + "...";
+            }
+
+            holder.besView.setText(bes);
         }
         else if (position == 6) {
             //holder.imgView.setImageResource();

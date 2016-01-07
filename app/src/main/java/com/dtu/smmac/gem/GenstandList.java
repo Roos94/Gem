@@ -38,8 +38,8 @@ public class GenstandList {
     private String data;
     private JSONArray json;
     private JSONObject obj, fobj;
-    private final String API = "http://msondrup.dk/api/v1/items"; //http://78.46.187.172:4019";
-    private final String userID = "?userID=56837dedd2d76438906140";
+    private final String API = "http://msondrup.dk/api/v1/items"; //"http://78.46.187.172:4019";
+    private final String userID = "?userID=56837dedd2d76438906140"; //""
     private URL url;
     private int dag;
     private int md;
