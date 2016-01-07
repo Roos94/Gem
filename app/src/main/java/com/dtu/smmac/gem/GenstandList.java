@@ -208,6 +208,22 @@ public class GenstandList {
         postGenstand(this.obj, this.url);
     }
 
+    public void setRef(int ID, String donator, String producent) throws IOException
+    {
+        this.obj = new JSONObject();
+
+        try {
+            this.obj.put("donator", donator);
+            this.obj.put("producer", producent);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        postGenstand(this.obj, this.url);
+    }
+
     public void postGenstand(JSONObject ob, URL url) throws IOException {
         InputStream is = null;
 
