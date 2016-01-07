@@ -99,10 +99,13 @@ public class GenstandList {
 
             System.out.println(this.data);
 
+            //Gør at den ikke viser de items, der ikke har nogen titel?
             if (this.obj.optString("itemheadline").isEmpty())
             {
                 System.out.println("Sletter item med ID: " + this.obj.optInt("itemid"));
-                deleteGenstand(this.obj.optInt("itemid"));
+
+                //Det er et spørgsmål, om den skal slette de items, der ikke har nogen titel?
+                //deleteGenstand(this.obj.optInt("itemid"));
                 return 0;
             }
             else
