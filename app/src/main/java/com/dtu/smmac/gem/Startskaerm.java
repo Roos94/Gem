@@ -27,11 +27,16 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     public static Adapter adap;
     private Genstand gen;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startskaerm);
+
         this.getActionBar().setTitle("");
+
+        this.done = true;
 
         this.list = (ListView) findViewById(R.id.list);
         this.i = new Intent(this, NyReg.class);
@@ -67,20 +72,24 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(this.done == true)
+        {
+            this.done = false;
 
-        this.t = (TextView) view.findViewById(R.id.id);
+            this.t = (TextView) view.findViewById(R.id.id);
 
-        for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
-            if (Splash.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
-            {
-                this.gen = Splash.genstand.getGenstandList().get(j);
+            for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
+                if (Splash.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
+                {
+                    this.gen = Splash.genstand.getGenstandList().get(j);
+                }
             }
+
+            //Genstand skal køres over på h
+            h.putExtra("ID", gen.getID());
+
+            startActivity(h);
         }
-
-        //Genstand skal køres over på h
-        h.putExtra("ID", gen.getID());
-
-        startActivity(h);
     }
 
     @Override
