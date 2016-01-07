@@ -48,7 +48,7 @@ public class Modtagelsesdato extends Activity {
 
         this.modtaget = Splash.genstand.getGenstandList().get(this.genstandID).getModtaget();
 
-        if (this.modtaget.length() == 10)// != "null" || !this.modtaget.isEmpty())
+        if (this.modtaget.length() == 10)
         {
             String mod[] = this.modtaget.split("-");
 
