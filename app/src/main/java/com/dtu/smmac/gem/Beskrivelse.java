@@ -107,10 +107,6 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
             // Skifter mellem de to billeder (mic og stop)
             if (rec == 1) {
                 record.setImageResource(R.drawable.rcircle);
-                play = (ImageButton) findViewById(R.id.Play);
-                play.setOnClickListener(this);
-                play.setImageResource(R.drawable.play);
-                pl = 1;
 
                 try {
                     beginRecording();
@@ -125,6 +121,10 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
             else
             {
                 record.setImageResource(R.drawable.mic);
+                play = (ImageButton) findViewById(R.id.Play);
+                play.setOnClickListener(this);
+                play.setImageResource(R.drawable.play);
+                pl = 1;
 
                 try {
                     stopRecording();
@@ -149,8 +149,13 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
                     e.printStackTrace();
                 }
 
-                this.pl = 2;
-                // Starter afspilningen
+                if (player.getDuration() < player.getCurrentPosition())
+                {
+                    System.out.println("1");
+                    play.setImageResource(R.drawable.play);
+                    this.pl = 1;
+                }
+
             }
 
             else {
