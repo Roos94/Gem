@@ -59,7 +59,12 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     }
 
     public void openNew(MenuItem item) {
-        startActivity(i);
+        if(done == true)
+        {
+            this.done = false;
+            startActivity(i);
+            this.done = true;
+        }
     }
 
     public void setList() {
@@ -89,6 +94,8 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
             h.putExtra("ID", gen.getID());
 
             startActivity(h);
+
+            this.done = true;
         }
     }
 
