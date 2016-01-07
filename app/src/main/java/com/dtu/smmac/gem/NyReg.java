@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +19,8 @@ public class NyReg extends Activity {
     private EditText title;
     private TextView regNo;
     private Intent i;
+    private int id;
+    private String titel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,46 +32,85 @@ public class NyReg extends Activity {
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.regNo.setText("" + Splash.genstand.getNextID());
+        this.id = Splash.genstand.getNextID();
 
-        this.i = new Intent(this, Billede.class);
-    }
+        this.regNo.setText("" + id);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_topbar, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public void done(MenuItem item)
-    {
-        if (title.getText().toString() == null || title.getText().toString().isEmpty())
-        {
-            Toast.makeText(this, "Der er ikke angivet nogen titel!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        Splash.genstand.setGenTitle(title.getText().toString());
+        this.i = new Intent(this, Hovedskaerm.class);
 
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
                     Splash.genstand.addGenstand();
-                    Splash.genstand.setGenstand();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
             }
         }.execute();
+    }
 
-        Startskaerm.adap.notifyDataSetChanged();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
 
-        startActivity(i);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void done(MenuItem item)
+    {
+        if (this.title.getText().toString() == null || this.title.getText().toString().isEmpty())
+        {
+            Toast.makeText(this, "Der er ikke angivet nogen titel!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        this.titel = this.title.getText().toString();
+
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.setTitel(id, titel);
+                    Splash.genstand.setGenstandList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object resultat)
+            {
+                Startskaerm.adap.notifyDataSetChanged();
+
+                i.putExtra("ID", id);
+                startActivity(i);
+                finish();
+            }
+        }.execute();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.deleteGenstand(id);
+                    }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
 
         finish();
+
+        return;
     }
 
 }

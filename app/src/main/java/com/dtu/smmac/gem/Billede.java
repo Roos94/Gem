@@ -32,7 +32,7 @@ public class Billede extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }

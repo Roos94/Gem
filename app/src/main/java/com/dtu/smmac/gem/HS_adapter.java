@@ -55,7 +55,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         if (position == 0) {
             holder.imgView.setImageResource(genstand.getImage());
             holder.titleView.setText("Billede");
-            holder.besView.setText("Antal billeder: ");
+            holder.besView.setText("Antal billeder: 1");
         }
         else if (position == 1) {
             //holder.imgView.setImageResource();
@@ -65,7 +65,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 2) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Modtagelsesdato");
-            holder.besView.setText("");
+            holder.besView.setText(this.genstand.getModtaget());
         }
         else if (position == 3) {
             //holder.imgView.setImageResource();
@@ -75,17 +75,17 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 4) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Datering");
-            holder.besView.setText("Fra: " + "-" + " Til: " + "-");
+            holder.besView.setText("Fra: " + this.genstand.getDateringFra() + " Til: " + this.genstand.getDateringTil());
         }
         else if (position == 5) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Beskrivelse");
-            holder.besView.setText("");
+            holder.besView.setText(this.genstand.getBeskrivelse());
         }
         else if (position == 6) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Referencer");
-            holder.besView.setText("Donator: " + "-" + " Producent: " + "-");
+            holder.besView.setText("Donator: " + this.genstand.getDonator() + " Producent: " + this.genstand.getProducer());
         }
 
         return row;

@@ -17,8 +17,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     private Intent intent;
     private int ID;
     private Intent lastUsed;
-    private Genstand genstand;
-    private List emne;
+    private int genstandID;
     public static HS_adapter adap;
 
     @Override
@@ -31,7 +30,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         setGenstand(this.ID);
 
-        this.getActionBar().setTitle("    " + genstand.getTitle());
+        this.getActionBar().setTitle("    " + Splash.genstand.getGenstandList().get(this.genstandID).getTitle());
 
         this.liste = (ListView) findViewById(R.id.listView);
 
@@ -39,7 +38,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     }
 
     public void setList() {
-        this.adap = new HS_adapter(this, genstand);
+        this.adap = new HS_adapter(this, Splash.genstand.getGenstandList().get(this.genstandID));
         this.liste.setAdapter(adap);
 
         this.liste.setOnItemClickListener(this);
@@ -47,7 +46,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_topbar, menu);
+        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -85,7 +84,9 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         }
         if(this.intent != null) {
+            this.intent.putExtra("ID", this.ID);
             startActivity(this.intent);
+            finish();
         }
 
         this.intent = null;
@@ -93,10 +94,9 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
     public void setGenstand(int ID)
     {
-        for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
-            if (Splash.genstand.getGenstandList().get(j).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
+            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
             {
-                this.genstand = Splash.genstand.getGenstandList().get(j);
                 return;
             }
         }
