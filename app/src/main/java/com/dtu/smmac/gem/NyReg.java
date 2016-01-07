@@ -19,8 +19,10 @@ public class NyReg extends Activity {
     private EditText title;
     private TextView regNo;
     private Intent i;
-    private int id;
+    private int ID;
     private String titel;
+
+    private boolean done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +31,14 @@ public class NyReg extends Activity {
 
         this.getActionBar().setTitle("    " + "Ny registrering");
 
+        this.done = true;
+
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.id = Splash.genstand.getNextID();
+        this.ID = Splash.genstand.getNextID();
 
-        this.regNo.setText("" + id);
+        this.regNo.setText("" + ID);
 
         this.i = new Intent(this, Hovedskaerm.class);
 
@@ -66,31 +70,36 @@ public class NyReg extends Activity {
             return;
         }
 
-        this.titel = this.title.getText().toString();
+        if(this.done == true)
+        {
+            this.done = false;
+            this.titel = this.title.getText().toString();
 
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setTitel(id, titel);
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.genstand.setTitel(ID, titel);
+                        Splash.genstand.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
                 }
-                return null;
-            }
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
+                @Override
+                protected void onPostExecute(Object resultat)
+                {
+                    Startskaerm.adap.notifyDataSetChanged();
 
-                i.putExtra("ID", id);
-                startActivity(i);
-                finish();
-            }
-        }.execute();
+                    i.putExtra("ID", ID);
+                    startActivity(i);
+                    finish();
+                }
+            }.execute();
+        }
     }
+
 
     @Override
     public void onBackPressed()
@@ -99,7 +108,7 @@ public class NyReg extends Activity {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.genstand.deleteGenstand(id);
+                    Splash.genstand.deleteGenstand(ID);
                     }
                 catch (Exception e) {
                     e.printStackTrace();
