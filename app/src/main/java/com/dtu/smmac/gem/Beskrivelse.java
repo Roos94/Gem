@@ -49,7 +49,8 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         record.setOnClickListener(this);
         record.setImageResource(R.drawable.mic);
         rec = 1;
-
+/*
+*/
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
@@ -151,20 +152,13 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
             // Skifter mellem de to billeder (mic og stop)
             if (this.pl == 1) {
                 play.setImageResource(R.drawable.stop);
+                this.pl = 2;
 
                 try {
                     playRecording();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
-                if (player.getDuration() < player.getCurrentPosition())
-                {
-                    System.out.println("1");
-                    play.setImageResource(R.drawable.play);
-                    this.pl = 1;
-                }
-
             }
 
             else {
@@ -197,6 +191,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         recorder.setOutputFile(OUTPUT_FILE);
         recorder.prepare();
         recorder.start();
+
     }
 
     private void stopRecording() {
@@ -211,6 +206,15 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         player.setDataSource(OUTPUT_FILE);
         player.prepare();
         player.start();
+
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                play.setImageResource(R.drawable.play);
+                pl = 1;
+            }
+        });
+
     }
 
     private void stopPlayback() {
