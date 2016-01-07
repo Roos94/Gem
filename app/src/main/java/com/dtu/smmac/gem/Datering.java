@@ -69,7 +69,7 @@ public class Datering extends Activity {
         this.fra = Splash.genstand.getGenstandList().get(this.genstandID).getDateringFra();
         this.til = Splash.genstand.getGenstandList().get(this.genstandID).getDateringTil();
 
-        if (this.fra.length() == 10)
+        if (this.fra.length() == 10 && !this.fra.equals("0000-00-00"))
         {
             String f[] = this.fra.split("-");
 
@@ -78,7 +78,7 @@ public class Datering extends Activity {
             this.fdag = Integer.parseInt(f[2]);
         }
 
-        if (this.til.length() == 10)
+        if (this.til.length() == 10  && !this.til.equals("0000-00-00"))
         {
             String t[] = this.til.split("-");
 
