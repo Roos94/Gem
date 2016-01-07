@@ -15,7 +15,6 @@ public class Modtagelsesdato extends Activity {
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
-    private Intent h;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -23,6 +22,7 @@ public class Modtagelsesdato extends Activity {
     private int md;
     private int aar;
 
+    private Intent h;
     private int ID;
     private Intent lastUsed;
     private int genstandID;
@@ -48,7 +48,8 @@ public class Modtagelsesdato extends Activity {
 
         this.modtaget = Splash.genstand.getGenstandList().get(this.genstandID).getModtaget();
 
-        if (this.modtaget != "null" || !this.modtaget.isEmpty()) {
+        if (this.modtaget.length() == 10)// != "null" || !this.modtaget.isEmpty())
+        {
             String mod[] = this.modtaget.split("-");
 
             this.aar = Integer.parseInt(mod[0]);
