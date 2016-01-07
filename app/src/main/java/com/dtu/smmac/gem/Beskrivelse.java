@@ -53,11 +53,10 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
-        beskrivelse.setSelection(beskrivelse.getText().length()); //Sætter cursor ved slutningen af teksten
-
-
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
 
+        //Sætter HS
+        this.h = new Intent(this, Hovedskaerm.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -68,6 +67,9 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         this.bes = Splash.genstand.getGenstandList().get(this.genstandID).getBeskrivelse();
 
         this.beskrivelse.setText(this.bes);
+
+        //Sætter cursor ved slutningen af teksten
+        this.beskrivelse.setSelection(this.beskrivelse.getText().length());
     }
 
     @Override
