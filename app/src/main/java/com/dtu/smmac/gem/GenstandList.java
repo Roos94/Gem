@@ -63,38 +63,51 @@ public class GenstandList {
         this.data = getUrl(this.API + this.userID);
         this.json = new JSONArray(data);
 
+        int j = 0;
         for (int i = 0; i < this.json.length(); i++) {
             this.fobj = this.json.getJSONObject(i);
-
-            setGenstand(i, this.fobj.optInt("itemid", 0));
+            j = j + setGenstand(j, this.fobj.optInt("itemid"));
         }
     }
 
-    public void setGenstand(int listID, int ID)
+    public int setGenstand(int listID, int ID) throws JSONException
     {
-        try {
+        try
+        {
             this.data = getUrl(this.API + "/" + ID + this.userID);
             this.obj = new JSONObject(this.data);
 
             System.out.println(this.data);
 
-            this.genstand.add(listID, new Genstand(
-                    this.obj.optInt("itemid", 0),
-                    this.obj.optString("itemheadline", "Titel"),
-                    this.obj.optString("itemdescription", ""),
-                    this.obj.optString("itemreceived", ""),
-                    this.obj.optString("itemdatingfrom", ""),
-                    this.obj.optString("itemdatingto", ""),
-                    this.obj.optString("donator", ""),
-                    this.obj.optString("producer", ""),
-                    this.obj.optString("postnummer", ""),
+            if (this.obj.optString("itemheadline").isEmpty())
+            {
+                System.out.println(this.obj.optInt("itemid"));
+                deleteGenstand(this.obj.optInt("itemid"));
+                return 0;
+            }
+            else
+            {
+                this.genstand.add(listID, new Genstand(
+                    this.obj.optInt("itemid"),
+                    this.obj.optString("itemheadline"),
+                    this.obj.optString("itemdescription"),
+                    this.obj.optString("itemreceived"),
+                    this.obj.optString("itemdatingfrom"),
+                    this.obj.optString("itemdatingto"),
+                    this.obj.optString("donator"),
+                    this.obj.optString("producer"),
+                    this.obj.optString("postnummer"),
                     R.drawable.ddf
-            ));
+                ));
+                return 1;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        return 1;
     }
 
     public String getUrl(String url) throws IOException {
