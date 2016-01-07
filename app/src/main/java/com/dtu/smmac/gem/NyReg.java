@@ -36,10 +36,6 @@ public class NyReg extends Activity {
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.ID = Splash.genstand.getNextID();
-
-        this.regNo.setText("" + ID);
-
         this.i = new Intent(this, Hovedskaerm.class);
 
         new AsyncTask() {
@@ -47,10 +43,16 @@ public class NyReg extends Activity {
             protected Object doInBackground(Object[] params) {
                 try {
                     Splash.genstand.addGenstand();
+                    ID = Splash.genstand.getNextID();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object resultat) {
+                setRegNo(ID);
             }
         }.execute();
     }
@@ -120,6 +122,11 @@ public class NyReg extends Activity {
         finish();
 
         return;
+    }
+
+    public void setRegNo(int no)
+    {
+        this.regNo.setText("" + no);
     }
 
 }

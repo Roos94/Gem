@@ -70,6 +70,26 @@ public class GenstandList {
         }
     }
 
+    public int getNextID() throws Exception
+    {
+        this.nextID = 0;
+
+        this.data = getUrl(this.API + this.userID);
+        this.json = new JSONArray(data);
+
+        for (int i = 0; i < this.json.length(); i++) {
+            this.fobj = this.json.getJSONObject(i);
+
+            System.out.println(this.fobj.optInt("itemid"));
+
+            if (this.fobj.optInt("itemid") >= this.nextID) {
+                this.nextID = this.fobj.optInt("itemid");
+            }
+        }
+
+        return this.nextID;
+    }
+
     public int setGenstand(int listID, int ID) throws JSONException
     {
         try
@@ -119,19 +139,6 @@ public class GenstandList {
             linje = br.readLine();
         }
         return sb.toString();
-    }
-
-    public int getNextID()
-    {
-        this.nextID = 0;
-
-        for (int j = 0; j < this.genstand.size(); j++) {
-            if (this.genstand.get(j).getID() >= this.nextID) {
-                this.nextID = this.genstand.get(j).getID() + 1;
-            }
-        }
-
-        return this.nextID;
     }
 
     public void addGenstand() throws IOException {
@@ -264,16 +271,25 @@ public class GenstandList {
 
     }
 
-    // Virker ikke??
     public void deleteGenstand(int ID) throws IOException
     {
         this.url = new URL(this.API + "/" + ID + this.userID);
 
+        InputStream is = null;
+
+        try
+        {
         HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
         conn.setReadTimeout(10000);
         conn.setConnectTimeout(15000);
         conn.setRequestMethod("DELETE");
         conn.setDoInput(true);
+
+        is = conn.getInputStream();
+
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
     }
 
 }
