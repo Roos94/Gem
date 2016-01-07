@@ -44,15 +44,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fra:"
+        android:text="Fra dato:"
+        android:textStyle="italic"
         android:id="@+id/fraDatering"
-        android:textSize="35dp"
+        android:textSize="24dp"
         android:gravity="left"
         android:layout_above="@+id/numpDagD1"
         android:layout_alignLeft="@+id/numpDagD1"
         android:layout_alignStart="@+id/numpDagD1"
-        android:layout_toLeftOf="@+id/numpMDD2"
-        android:layout_toStartOf="@+id/numpMDD2" />
+        android:layout_marginTop="10dp"/>
 
     <NumberPicker
         android:layout_width="50dp"
@@ -84,15 +84,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Til:"
+        android:text="Til dato:"
+        android:textStyle="italic"
         android:id="@+id/tilDatering"
         android:layout_above="@+id/numpDagD2"
         android:layout_alignLeft="@+id/numpDagD2"
         android:layout_alignStart="@+id/numpDagD2"
         android:layout_alignRight="@+id/numpMDD2"
         android:layout_alignEnd="@+id/numpMDD2"
-        android:textSize="35dp"
+        android:textSize="24dp"
         android:gravity="left"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="50dp" />
 
 </RelativeLayout>
