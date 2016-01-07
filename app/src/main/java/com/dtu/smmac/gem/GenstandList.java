@@ -256,13 +256,11 @@ public class GenstandList {
     {
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
         conn.setReadTimeout(10000);
         conn.setConnectTimeout(15000);
         conn.setRequestMethod("DELETE");
         conn.setDoInput(true);
-
-
     }
 
 }
