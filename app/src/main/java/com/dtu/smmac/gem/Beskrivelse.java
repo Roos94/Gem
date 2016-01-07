@@ -34,12 +34,16 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     private String bes;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beskrivelse);
 
         this.getActionBar().setTitle("    " + "Beskrivelse");
+
+        this.done = true;
 
         record = (ImageButton) findViewById(R.id.Record);
         record.setOnClickListener(this);
@@ -76,27 +80,32 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     public void done(MenuItem item)
     {
-        this.bes = beskrivelse.getText().toString();
+        if(this.done == true)
+        {
+            this.done = false;
 
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setBeskrivelse(ID, bes);
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            this.bes = beskrivelse.getText().toString();
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.genstand.setBeskrivelse(ID, bes);
+                        Splash.genstand.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
                 }
-                return null;
-            }
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
-                startHS();
-            }
-        }.execute();
+                @Override
+                protected void onPostExecute(Object resultat)
+                {
+                    Startskaerm.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
+        }
     }
 
     @Override

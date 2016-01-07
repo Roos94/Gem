@@ -36,6 +36,8 @@ public class Datering extends Activity {
     private String fra;
     private String til;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +45,8 @@ public class Datering extends Activity {
         setContentView(R.layout.activity_datering);
 
         this.getActionBar().setTitle("    " + "Datering");
+
+        this.done = true;
 
         //Sætter default dag, måned, år
         this.faar = 1957;
@@ -151,25 +155,28 @@ public class Datering extends Activity {
 
     public void done(MenuItem item)
     {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setDatering(ID, getDatoFra(), getDatoTil());
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
+        if (this.done == true) {
+            this.done = false;
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
-                startHS();
-            }
-        }.execute();
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.genstand.setDatering(ID, getDatoFra(), getDatoTil());
+                        Splash.genstand.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object resultat) {
+                    Startskaerm.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
+        }
     }
 
     public void setGenstand(int ID)

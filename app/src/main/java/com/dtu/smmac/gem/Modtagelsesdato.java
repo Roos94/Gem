@@ -29,12 +29,16 @@ public class Modtagelsesdato extends Activity {
 
     private String modtaget;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modtagelsesdato);
 
         this.getActionBar().setTitle("    " + "Modtagelsesdato");
+
+        this.done = true;
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;
@@ -99,25 +103,28 @@ public class Modtagelsesdato extends Activity {
 
     public void done(MenuItem item)
     {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setModtaget(ID, getDato());
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
+        if(this.done == true) {
+            this.done = false;
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
-                startHS();
-            }
-        }.execute();
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.genstand.setModtaget(ID, getDato());
+                        Splash.genstand.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object resultat) {
+                    Startskaerm.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
+        }
     }
 
     public void setGenstand(int ID)

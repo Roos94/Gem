@@ -21,12 +21,16 @@ public class Referencer extends Activity {
     private String donator;
     private String producent;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_referencer);
 
         this.getActionBar().setTitle("    " + "Referencer");
+
+        this.done = true;
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -58,28 +62,31 @@ public class Referencer extends Activity {
 
     public void done(MenuItem item)
     {
-        this.donator = this.don.getText().toString();
-        this.producent = this.pro.getText().toString();
+        if(this.done == true) {
+            this.done = false;
 
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setRef(ID, donator, producent);
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            this.donator = this.don.getText().toString();
+            this.producent = this.pro.getText().toString();
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.genstand.setRef(ID, donator, producent);
+                        Splash.genstand.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
                 }
-                return null;
-            }
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
-                startHS();
-            }
-        }.execute();
+                @Override
+                protected void onPostExecute(Object resultat) {
+                    Startskaerm.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
+        }
     }
 
     public void setGenstand(int ID)
