@@ -1,8 +1,10 @@
 package com.dtu.smmac.gem;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
@@ -25,6 +27,13 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
     private MediaPlayer player;
     private String OUTPUT_FILE;
 
+    private Intent h;
+    private int ID;
+    private Intent lastUsed;
+    private int genstandID;
+
+    private String bes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +53,21 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
-        beskrivelse.setText("Hej"); // Skal hentes den gemte tekst fra databasen
         beskrivelse.setSelection(beskrivelse.getText().length()); //Sætter cursor ved slutningen af teksten
 
 
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
 
+
+        //Trækker fra HS
+        this.lastUsed = getIntent();
+        this.ID = this.lastUsed.getIntExtra("ID", 0);
+
+        setGenstand(this.ID);
+
+        this.bes = Splash.genstand.getGenstandList().get(this.genstandID).getBeskrivelse();
+
+        this.beskrivelse.setText(this.bes);
     }
 
     @Override
@@ -61,8 +79,27 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     public void done(MenuItem item)
     {
-        System.out.print(beskrivelse.getText()); // skal gemmes i databasen
-        finish();
+        this.bes = beskrivelse.getText().toString();
+
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    Splash.genstand.setBeskrivelse(ID, bes);
+                    Splash.genstand.setGenstandList();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object resultat)
+            {
+                Startskaerm.adap.notifyDataSetChanged();
+                startHS();
+            }
+        }.execute();
     }
 
     @Override
@@ -181,6 +218,32 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void setGenstand(int ID)
+    {
+        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
+            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+            {
+                return;
+            }
+        }
+    }
+
+    public void startHS()
+    {
+        //Genstand skal køres over på h
+        h.putExtra("ID", this.ID);
+
+        startActivity(h);
+
+        finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        startHS();
     }
 
 }

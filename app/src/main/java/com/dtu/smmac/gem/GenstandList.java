@@ -177,6 +177,21 @@ public class GenstandList {
         postGenstand(this.obj, this.url);
     }
 
+    public void setBeskrivelse(int ID, String beskrivelse) throws IOException
+    {
+        this.obj = new JSONObject();
+
+        try {
+            this.obj.put("itemdescription", beskrivelse);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        postGenstand(this.obj, this.url);
+    }
+
     public void postGenstand(JSONObject ob, URL url) throws IOException {
         InputStream is = null;
 

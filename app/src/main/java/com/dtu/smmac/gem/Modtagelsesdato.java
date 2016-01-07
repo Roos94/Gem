@@ -116,7 +116,6 @@ public class Modtagelsesdato extends Activity {
             {
                 Startskaerm.adap.notifyDataSetChanged();
                 startHS();
-                finish();
             }
         }.execute();
     }
@@ -137,13 +136,14 @@ public class Modtagelsesdato extends Activity {
         h.putExtra("ID", this.ID);
 
         startActivity(h);
+
+        finish();
     }
 
     @Override
     public void onBackPressed()
     {
         startHS();
-        finish();
     }
 
 }
