@@ -15,6 +15,7 @@ public class Modtagelsesdato extends Activity {
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
+    private Intent h;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -54,6 +55,9 @@ public class Modtagelsesdato extends Activity {
             this.md = Integer.parseInt(mod[1]);
             this.dag = Integer.parseInt(mod[2]);
         }
+
+        //Sætter HS
+        this.h = new Intent(this, Hovedskaerm.class);
 
         // NumberPicker Dag:
 
@@ -110,7 +114,7 @@ public class Modtagelsesdato extends Activity {
             protected void onPostExecute(Object resultat)
             {
                 Startskaerm.adap.notifyDataSetChanged();
-                Hovedskaerm.adap.notifyDataSetChanged(); //Opdaterer ikke hovedskærmen endnu !?
+                startHS();
                 finish();
             }
         }.execute();
@@ -124,6 +128,21 @@ public class Modtagelsesdato extends Activity {
                 return;
             }
         }
+    }
+
+    public void startHS()
+    {
+        //Genstand skal køres over på h
+        h.putExtra("ID", this.ID);
+
+        startActivity(h);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        startHS();
+        finish();
     }
 
 }

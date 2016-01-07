@@ -86,6 +86,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
         if(this.intent != null) {
             this.intent.putExtra("ID", this.ID);
             startActivity(this.intent);
+            finish();
         }
 
         this.intent = null;
