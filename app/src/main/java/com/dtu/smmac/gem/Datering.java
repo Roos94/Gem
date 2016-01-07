@@ -17,8 +17,6 @@ public class Datering extends Activity {
     private NumberPicker num4 = null;
     private NumberPicker num5 = null;
     private NumberPicker num6 = null;
-    private TextView fra, til;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,12 +25,6 @@ public class Datering extends Activity {
         setContentView(R.layout.activity_datering);
 
         this.getActionBar().setTitle("    " + "Datering");
-
-        fra = (TextView) findViewById(R.id.fraDatering);
-        til = (TextView) findViewById(R.id.tilDatering);
-
-        fra.setPaintFlags(fra.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        til.setPaintFlags(til.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // NumberPicker (fra) Dag:
 
