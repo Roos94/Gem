@@ -2,6 +2,7 @@ package com.dtu.smmac.gem;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +22,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
@@ -102,7 +105,7 @@ public class GenstandList {
             //Gør at den ikke viser de items, der ikke har nogen titel?
             if (this.obj.optString("itemheadline").isEmpty())
             {
-                System.out.println("Sletter item med ID: " + this.obj.optInt("itemid"));
+                System.out.println("Viser ikke item med ID: " + this.obj.optInt("itemid"));
 
                 //Det er et spørgsmål, om den skal slette de items, der ikke har nogen titel?
                 //deleteGenstand(this.obj.optInt("itemid"));
@@ -327,6 +330,53 @@ public class GenstandList {
         } catch (Exception e) {
         e.printStackTrace();
         }
+    }
+
+    public void postFile(Context c, int ID, Uri filePath, String ext)
+    {
+        InputStream is;
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+        ByteArrayOutputStream byteBuffer = null;
+
+        try{
+            is = c.getContentResolver().openInputStream(filePath);
+
+            byteBuffer = new ByteArrayOutputStream();
+
+            int len = 0;
+            while ((len = is.read(buffer)) != -1) {
+                byteBuffer.write(buffer, 0, len);
+            }
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            URL url = new URL(this.API + "/" + ID + this.userID);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            if(ext.equals("jpg")){
+                conn.setRequestProperty("Content-Type", "image/jpg");
+            } else if(ext.equals("mp4")){
+                conn.setRequestProperty("Content-Type", "audio/mp4");
+            }
+            conn.setDoInput(true);
+
+            OutputStream os = conn.getOutputStream();
+            os.write(byteBuffer.toByteArray());
+            os.close();
+            System.out.println(conn.getResponseCode());
+
+        } catch(MalformedURLException | ProtocolException e){
+            e.printStackTrace();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
     }
 
 }
