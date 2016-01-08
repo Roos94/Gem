@@ -111,16 +111,18 @@ public class GenstandList {
             else
             {
                 this.genstand.add(listID, new Genstand(
-                    this.obj.optInt("itemid"),
-                    this.obj.optString("itemheadline"),
-                    this.obj.optString("itemdescription"),
-                    this.obj.optString("itemreceived"),
-                    this.obj.optString("itemdatingfrom"),
-                    this.obj.optString("itemdatingto"),
-                    this.obj.optString("donator"),
-                    this.obj.optString("producer"),
-                    this.obj.optString("postnummer"),
-                    R.drawable.ddf
+                        this.obj.optInt("itemid"),
+                        this.obj.optString("itemheadline"),
+                        this.obj.optString("itemdescription"),
+                        this.obj.optString("itemreceived"),
+                        this.obj.optString("itemdatingfrom"),
+                        this.obj.optString("itemdatingto"),
+                        this.obj.optString("donator"),
+                        this.obj.optString("producer"),
+                        this.obj.optString("postnummer"),
+                        this.obj.optString("emnegruppe"),
+                        this.obj.optString("betegnelse"),
+                        R.drawable.ddf
                 ));
                 return 1;
             }
@@ -161,6 +163,8 @@ public class GenstandList {
             this.obj.put("donator", "");
             this.obj.put("producer", "");
             this.obj.put("postalCode", "");
+            this.obj.put("emnegruppe", "");
+            this.obj.put("betegnelse", "");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -222,6 +226,21 @@ public class GenstandList {
 
         try {
             this.obj.put("itemdescription", beskrivelse);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        postGenstand(this.obj, this.url);
+    }
+
+    public void setBetegnelse(int ID, String betegnelse) throws IOException
+    {
+        this.obj = new JSONObject();
+
+        try {
+            this.obj.put("betegnelse", betegnelse);
         } catch (JSONException e) {
             e.printStackTrace();
         }

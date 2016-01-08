@@ -17,6 +17,8 @@ public class Genstand {
     private String donator;
     private String producer;
     private String postCode;
+    private String emnegruppe;
+    private String betegnelse;
 
     public Genstand(int itemId,
                     String itemHeadline,
@@ -27,6 +29,8 @@ public class Genstand {
                     String donator,
                     String producer,
                     String postalCode,
+                    String emnegruppe,
+                    String betegnelse,
                     int image)
     {
         this.ID = itemId;
@@ -38,6 +42,8 @@ public class Genstand {
         this.donator = donator;
         this.producer = producer;
         this.postCode = postalCode;
+        this.emnegruppe = emnegruppe;
+        this.betegnelse = betegnelse;
         this.image = image;
     }
 
@@ -77,4 +83,8 @@ public class Genstand {
     public String getProducer() {return this.producer;}
 
     public String getPostCode() {return this.postCode;}
+
+    public String getEmnegruppe() {return this.emnegruppe;}
+
+    public String getBetegnelse() {return this.betegnelse;}
 }
