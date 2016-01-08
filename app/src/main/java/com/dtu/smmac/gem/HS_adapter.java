@@ -70,7 +70,15 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 3) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Betegnelse");
-            holder.besView.setText("");
+
+            String bet = this.genstand.getBetegnelse();
+
+            if (bet.length() > 97)
+            {
+                bet = bet.substring(0,97) + "...";
+            }
+
+            holder.besView.setText(bet);
         }
         else if (position == 4) {
             //holder.imgView.setImageResource();
