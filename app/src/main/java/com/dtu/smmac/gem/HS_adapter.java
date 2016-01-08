@@ -60,7 +60,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         else if (position == 1) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Emnegruppe");
-            holder.besView.setText("");
+            holder.besView.setText(this.genstand.getEmnegruppe());
         }
         else if (position == 2) {
             //holder.imgView.setImageResource();
