@@ -52,6 +52,7 @@
         android:layout_marginBottom="57dp"
         android:layout_alignLeft="@+id/numpDagMD1"
         android:layout_alignStart="@+id/numpDagMD1"
-        android:textSize="40dp" />
+        android:textSize="24dp"
+        android:textStyle="italic" />
 
 </RelativeLayout>
