@@ -14,9 +14,12 @@ import com.dtu.smmac.gem.R;
 
 public class NewItem extends Activity {
 
-    //Skal oprette en ny reg når activiteten starter, skal skrive titel til den oprettede reg
-    //Så der kommer flow i regNo - Hvis to personer opretter på samme tid
-    //Hvis der bliver klikket på back, så skal den slette den igen
+    /*
+    Skal oprette en ny reg når activiteten starter, skal skrive titel til den oprettede reg
+    Så der kommer flow i regNo - Hvis to personer opretter på samme tid
+    Hvis der bliver klikket på back, så skal den slette den igen
+                                                                                    ^ Roos
+     */
 
     private EditText title;
     private TextView regNo;
@@ -38,7 +41,7 @@ public class NewItem extends Activity {
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.i = new Intent(this, ItemView.class);
+        this.i = new Intent(this, Camera.class);
 
         new AsyncTask() {
             @Override
