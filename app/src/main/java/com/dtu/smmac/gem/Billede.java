@@ -17,6 +17,13 @@ public class Billede extends Activity implements View.OnClickListener {
     private Button b;
     private int REQUEST_CODE = 1;
 
+    private Intent h;
+    private int ID;
+    private Intent lastUsed;
+    private int genstandID;
+
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +31,21 @@ public class Billede extends Activity implements View.OnClickListener {
 
         this.getActionBar().setTitle("    " + "Tag billede");
 
+        this.done = true;
+
         b = (Button) findViewById(R.id.bbillede);
         iv = (ImageView) findViewById(R.id.iv_billede);
 
         b.setOnClickListener(this);
+
+        //Sætter HS
+        this.h = new Intent(this, Hovedskaerm.class);
+
+        //Trækker fra HS
+        this.lastUsed = getIntent();
+        this.ID = this.lastUsed.getIntExtra("ID", 0);
+
+        setGenstand(this.ID);
     }
 
     @Override
@@ -39,7 +57,11 @@ public class Billede extends Activity implements View.OnClickListener {
 
     public void done(MenuItem item)
     {
-        finish();
+        if(this.done == true) {
+            this.done = false;
+
+            startHS();
+        }
     }
 
     @Override
@@ -69,5 +91,31 @@ public class Billede extends Activity implements View.OnClickListener {
 
             }
         }
+    }
+
+    public void setGenstand(int ID)
+    {
+        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
+            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+            {
+                return;
+            }
+        }
+    }
+
+    public void startHS()
+    {
+        //Genstand skal køres over på h
+        h.putExtra("ID", this.ID);
+
+        startActivity(h);
+
+        finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        startHS();
     }
 }
