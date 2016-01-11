@@ -27,7 +27,7 @@ public class Term extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_betegnelse);
+        setContentView(R.layout.activity_term);
 
         this.getActionBar().setTitle("    " + "Betegnelse");
 

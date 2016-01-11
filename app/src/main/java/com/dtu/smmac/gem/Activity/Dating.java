@@ -42,7 +42,7 @@ public class Dating extends Activity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datering);
+        setContentView(R.layout.activity_dating);
 
         this.getActionBar().setTitle("    " + "Datering");
 

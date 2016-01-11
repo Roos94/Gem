@@ -32,7 +32,7 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emnegruppe);
+        setContentView(R.layout.activity_subject);
 
         this.getActionBar().setTitle("    " + "Emnegruppe");
 

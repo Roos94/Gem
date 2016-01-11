@@ -27,7 +27,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
     private List<Item> orggenstand;
 
     public Main_adapter(Context c, List<Item> item) {
-        super(c, R.layout.row_single, item);
+        super(c, R.layout.row_main, item);
         this.context = c;
         this.item = item;
         this.orggenstand = item;
@@ -46,7 +46,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            row = inflater.inflate(R.layout.row_single, null);
+            row = inflater.inflate(R.layout.row_main, null);
 
             ImageView img = (ImageView) row.findViewById(R.id.image);
             TextView title = (TextView) row.findViewById(R.id.title);

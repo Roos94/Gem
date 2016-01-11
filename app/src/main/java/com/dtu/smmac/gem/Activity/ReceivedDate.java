@@ -36,7 +36,7 @@ public class ReceivedDate extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modtagelsesdato);
+        setContentView(R.layout.activity_receiveddate);
 
         this.getActionBar().setTitle("    " + "Modtagelsesdato");
 

@@ -43,7 +43,7 @@ public class Description extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_beskrivelse);
+        setContentView(R.layout.activity_description);
 
         this.getActionBar().setTitle("    " + "Beskrivelse");
 
@@ -96,11 +96,14 @@ public class Description extends Activity implements View.OnClickListener {
 
             this.bes = beskrivelse.getText().toString();
 
+            //final File file = new File(OUTPUT_FILE.getBytes().toString());
+
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setBeskrivelse(ID, bes);
+                        //Splash.DB.postFile(this, ID, Uri.fromFile(file), "mp4");
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();

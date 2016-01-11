@@ -20,7 +20,7 @@ public class ItemView_adapter extends ArrayAdapter<Item> {
     private Context context;
 
     public ItemView_adapter(Context c, Item item) {
-        super(c, R.layout.row_hs);
+        super(c, R.layout.row_itemview);
         this.item = item;
         this.context = c;
     }
@@ -38,7 +38,7 @@ public class ItemView_adapter extends ArrayAdapter<Item> {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            row = inflater.inflate(R.layout.row_hs, null);
+            row = inflater.inflate(R.layout.row_itemview, null);
 
             ImageView img = (ImageView) row.findViewById(R.id.image);
             TextView title = (TextView) row.findViewById(R.id.title);

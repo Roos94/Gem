@@ -28,7 +28,7 @@ public class References extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_referencer);
+        setContentView(R.layout.activity_references);
 
         this.getActionBar().setTitle("    " + "Referencer");
 

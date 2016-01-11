@@ -24,7 +24,7 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hovedskaerm);
+        setContentView(R.layout.activity_itemview);
 
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);

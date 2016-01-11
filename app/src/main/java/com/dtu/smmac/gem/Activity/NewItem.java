@@ -29,7 +29,7 @@ public class NewItem extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ny_reg);
+        setContentView(R.layout.activity_newitem);
 
         this.getActionBar().setTitle("    " + "Ny registrering");
 
