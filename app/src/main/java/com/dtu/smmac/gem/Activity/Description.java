@@ -1,6 +1,8 @@
 package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -51,8 +53,13 @@ public class Description extends Activity implements View.OnClickListener {
         record.setOnClickListener(this);
         record.setImageResource(R.drawable.mic);
         rec = 1;
-/*
-*/
+
+        play = (ImageButton) findViewById(R.id.Play);
+        play.setOnClickListener(this);
+        play.setImageResource(R.drawable.play);
+        pl = 1;
+        play.setVisibility(View.INVISIBLE);
+
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
@@ -116,39 +123,13 @@ public class Description extends Activity implements View.OnClickListener {
 
         if(v == record)  // hvis der enten skal optages eller stoppe en optagelse
         {
-            // Skifter mellem de to billeder (mic og stop)
-            if (rec == 1) {
-                record.setImageResource(R.drawable.rcircle);
-
-                try {
-                    beginRecording();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                this.rec = 2;
-                // Starter lydoptagelse
+            if (play.getVisibility() == View.VISIBLE && rec == 1) {
+                showAlert();
             }
-
-            else
-            {
-                record.setImageResource(R.drawable.mic);
-                play = (ImageButton) findViewById(R.id.Play);
-                play.setOnClickListener(this);
-                play.setImageResource(R.drawable.play);
-                pl = 1;
-
-                try {
-                    stopRecording();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                this.rec = 1;
-                // Stopper lydoptagelsen
+            else {
+                recording();
             }
         }
-
         else if(v == play) // hvis lydfilen skal afspilles eller stoppes
         {
             // Skifter mellem de to billeder (mic og stop)
@@ -265,6 +246,61 @@ public class Description extends Activity implements View.OnClickListener {
     public void onBackPressed()
     {
         startHS();
+    }
+
+    public void recording()
+    {
+        // Skifter mellem de to billeder (mic og stop)
+        if (rec == 1) {
+            record.setImageResource(R.drawable.rcircle);
+
+            try {
+                beginRecording();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            this.rec = 2;
+            // Starter lydoptagelse
+        }
+
+        else
+        {
+            record.setImageResource(R.drawable.mic);
+            play.setVisibility(View.VISIBLE);
+            try {
+                stopRecording();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            this.rec = 1;
+            // Stopper lydoptagelsen
+        }
+    }
+
+    public void showAlert()
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Ja button clicked
+                        recording();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //Nej button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Der eksisterer allerede en lydfil. Er du sikker på, at du vil optage en ny?")
+                .setPositiveButton("Ja", dialogClickListener)
+                .setNegativeButton("Nej", dialogClickListener).show();
     }
 
 }
