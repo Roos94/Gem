@@ -15,7 +15,7 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash"
+        <activity android:name=".Activity.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,28 +24,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Startskaerm"
+            android:name=".Activity.Main"
             android:label="@string/app_name"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".NyReg"
+            android:name=".Activity.NewItem"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Hovedskaerm"
+            android:name=".Activity.ItemView"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Datering"
+        <activity android:name=".Activity.Dating"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Beskrivelse"
+        <activity android:name=".Activity.Description"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Emnegruppe"
+        <activity android:name=".Activity.Subject"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Referencer"
+        <activity android:name=".Activity.References"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
 
@@ -53,13 +53,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Betegnelse"
+        <activity android:name=".Activity.Term"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Modtagelsesdato"
+        <activity android:name=".Activity.ReceivedDate"
             android:theme="@style/SK"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Billede"
+        <activity android:name=".Activity.Camera"
             android:theme="@style/SK"
             android:screenOrientation="portrait"></activity>
     </application>

@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class Billede extends Activity implements View.OnClickListener {
+import com.dtu.smmac.gem.R;
+
+public class Camera extends Activity implements View.OnClickListener {
 
     private ImageView iv;
     private Button b;
@@ -39,13 +41,13 @@ public class Billede extends Activity implements View.OnClickListener {
         b.setOnClickListener(this);
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        setGenstand(this.ID);
+        setItem(this.ID);
     }
 
     @Override
@@ -93,10 +95,10 @@ public class Billede extends Activity implements View.OnClickListener {
         }
     }
 
-    public void setGenstand(int ID)
+    public void setItem(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -105,7 +107,7 @@ public class Billede extends Activity implements View.OnClickListener {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

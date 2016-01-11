@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NyReg extends Activity {
+import com.dtu.smmac.gem.R;
+
+public class NewItem extends Activity {
 
     //Skal oprette en ny reg når activiteten starter, skal skrive titel til den oprettede reg
     //Så der kommer flow i regNo - Hvis to personer opretter på samme tid
@@ -36,14 +38,14 @@ public class NyReg extends Activity {
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
 
-        this.i = new Intent(this, Hovedskaerm.class);
+        this.i = new Intent(this, ItemView.class);
 
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.genstand.addGenstand();
-                    ID = Splash.genstand.getNextID();
+                    Splash.DB.addGenstand();
+                    ID = Splash.DB.getNextID();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -81,8 +83,8 @@ public class NyReg extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setTitel(ID, titel);
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setTitel(ID, titel);
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -92,7 +94,7 @@ public class NyReg extends Activity {
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
 
                     i.putExtra("ID", ID);
                     startActivity(i);
@@ -110,7 +112,7 @@ public class NyReg extends Activity {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.genstand.deleteGenstand(ID);
+                    Splash.DB.deleteGenstand(ID);
                     }
                 catch (Exception e) {
                     e.printStackTrace();

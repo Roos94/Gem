@@ -1,17 +1,17 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.NumberPicker;
-import android.widget.TextView;
+
+import com.dtu.smmac.gem.R;
 
 
-public class Datering extends Activity {
+public class Dating extends Activity {
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
@@ -58,7 +58,7 @@ public class Datering extends Activity {
         this.tdag = 1;
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -66,8 +66,8 @@ public class Datering extends Activity {
 
         setGenstand(this.ID);
 
-        this.fra = Splash.genstand.getGenstandList().get(this.genstandID).getDateringFra();
-        this.til = Splash.genstand.getGenstandList().get(this.genstandID).getDateringTil();
+        this.fra = Splash.DB.getGenstandList().get(this.genstandID).getDateringFra();
+        this.til = Splash.DB.getGenstandList().get(this.genstandID).getDateringTil();
 
         if (this.fra.length() == 10 && !this.fra.equals("0000-00-00"))
         {
@@ -162,8 +162,8 @@ public class Datering extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setDatering(ID, getDatoFra(), getDatoTil());
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setDatering(ID, getDatoFra(), getDatoTil());
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -172,7 +172,7 @@ public class Datering extends Activity {
 
                 @Override
                 protected void onPostExecute(Object resultat) {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -181,8 +181,8 @@ public class Datering extends Activity {
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -191,7 +191,7 @@ public class Datering extends Activity {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

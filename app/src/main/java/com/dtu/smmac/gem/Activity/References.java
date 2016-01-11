@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-public class Referencer extends Activity {
+import com.dtu.smmac.gem.R;
+
+public class References extends Activity {
 
     private EditText don;
     private EditText pro;
@@ -38,11 +40,11 @@ public class Referencer extends Activity {
 
         setGenstand(this.ID);
 
-        this.donator = Splash.genstand.getGenstandList().get(this.genstandID).getDonator();
-        this.producent = Splash.genstand.getGenstandList().get(this.genstandID).getProducer();
+        this.donator = Splash.DB.getGenstandList().get(this.genstandID).getDonator();
+        this.producent = Splash.DB.getGenstandList().get(this.genstandID).getProducer();
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         // Sætter edit text
         this.don = (EditText) findViewById(R.id.et1);
@@ -72,8 +74,8 @@ public class Referencer extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setRef(ID, donator, producent);
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setRef(ID, donator, producent);
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -82,7 +84,7 @@ public class Referencer extends Activity {
 
                 @Override
                 protected void onPostExecute(Object resultat) {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -91,8 +93,8 @@ public class Referencer extends Activity {
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -101,7 +103,7 @@ public class Referencer extends Activity {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

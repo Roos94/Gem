@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,27 +10,31 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dtu.smmac.gem.Items.Item;
+import com.dtu.smmac.gem.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Roos on 05/11/15.
+ * Created by Roos on 11/01/16.
  */
-class Adapter extends ArrayAdapter<Genstand> implements Filterable {
-    private Context context;
-    private List<Genstand> genstand;
-    private Filter genstandFilter;
-    private List<Genstand> orggenstand;
+public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
-    public Adapter(Context c, List<Genstand> genstand) {
-        super(c, R.layout.row_single, genstand);
+    private Context context;
+    private List<Item> item;
+    private Filter genstandFilter;
+    private List<Item> orggenstand;
+
+    public Main_adapter(Context c, List<Item> item) {
+        super(c, R.layout.row_single, item);
         this.context = c;
-        this.genstand = genstand;
-        this.orggenstand = genstand;
+        this.item = item;
+        this.orggenstand = item;
     }
 
     public int getCount() {
-        return this.genstand.size();
+        return this.item.size();
     }
 
     @Override
@@ -59,7 +63,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
             holder = (GenstandHolder) row.getTag();
         }
 
-        Genstand n = this.genstand.get(position);
+        Item n = this.item.get(position);
 
         holder.imgView.setImageResource(n.getImage());
         holder.titleView.setText(n.getTitle());
@@ -75,7 +79,7 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
     }
 
     public void resetData() {
-        this.genstand = this.orggenstand;
+        this.item = this.orggenstand;
     }
 
     @Override
@@ -100,16 +104,16 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
                 results.count = orggenstand.size();
             }
             else {
-                List<Genstand> nGenstand = new ArrayList<Genstand>();
+                List<Item> nItem = new ArrayList<Item>();
 
-                for (Genstand n : genstand)
+                for (Item n : item)
                 {
                     if (n.getTitle().toUpperCase().contains(constraint.toString().toUpperCase()) || n.getIDtoString().toUpperCase().contains(constraint.toString().toUpperCase()))
-                        nGenstand.add(n);
+                        nItem.add(n);
                 }
 
-                results.values = nGenstand;
-                results.count = nGenstand.size();
+                results.values = nItem;
+                results.count = nItem.size();
 
             }
             return results;
@@ -117,11 +121,9 @@ class Adapter extends ArrayAdapter<Genstand> implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            genstand = (List<Genstand>) results.values;
+            item = (List<Item>) results.values;
             notifyDataSetChanged();
         }
 
     }
-
 }
-

@@ -1,27 +1,22 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.dtu.smmac.gem.R;
 
 import java.util.ArrayList;
 
-public class Emnegruppe extends Activity implements AdapterView.OnItemClickListener {
+public class Subject extends Activity implements AdapterView.OnItemClickListener {
 
     private ListView lv;
     private String emne;
@@ -66,7 +61,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
         this.lv.setOnItemClickListener(this);
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -74,7 +69,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
         setGenstand(this.ID);
 
-        this.emne = Splash.genstand.getGenstandList().get(this.genstandID).getEmnegruppe();
+        this.emne = Splash.DB.getGenstandList().get(this.genstandID).getEmnegruppe();
 
         this.emnet.setText("Valgt emne: " + this.emne);
     }
@@ -95,8 +90,8 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setEmnegruppe(ID, emne);
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setEmnegruppe(ID, emne);
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -106,7 +101,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -121,8 +116,8 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -131,7 +126,7 @@ public class Emnegruppe extends Activity implements AdapterView.OnItemClickListe
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

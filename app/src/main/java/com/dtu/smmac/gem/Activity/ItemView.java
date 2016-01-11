@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,16 +9,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.List;
+import com.dtu.smmac.gem.Adapter.ItemView_adapter;
+import com.dtu.smmac.gem.R;
 
-public class Hovedskaerm extends Activity implements AdapterView.OnItemClickListener {
+public class ItemView extends Activity implements AdapterView.OnItemClickListener {
 
     private ListView liste;
     private Intent intent;
     private int ID;
     private Intent lastUsed;
     private int genstandID;
-    public static HS_adapter adap;
+    public static ItemView_adapter adap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         setGenstand(this.ID);
 
-        this.getActionBar().setTitle("    " + Splash.genstand.getGenstandList().get(this.genstandID).getTitle());
+        this.getActionBar().setTitle("    " + Splash.DB.getGenstandList().get(this.genstandID).getTitle());
 
         this.liste = (ListView) findViewById(R.id.listView);
 
@@ -38,7 +39,7 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
     }
 
     public void setList() {
-        this.adap = new HS_adapter(this, Splash.genstand.getGenstandList().get(this.genstandID));
+        this.adap = new ItemView_adapter(this, Splash.DB.getGenstandList().get(this.genstandID));
         this.liste.setAdapter(adap);
 
         this.liste.setOnItemClickListener(this);
@@ -58,25 +59,25 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
         switch(position){
             case 0:
-                this.intent = new Intent(this, Billede.class);
+                this.intent = new Intent(this, Camera.class);
                 break;
             case 1:
-                this.intent = new Intent(this, Emnegruppe.class);
+                this.intent = new Intent(this, Subject.class);
                 break;
             case 2:
-                this.intent = new Intent(this, Modtagelsesdato.class);
+                this.intent = new Intent(this, ReceivedDate.class);
                 break;
             case 3:
-                this.intent = new Intent(this,Betegnelse.class);
+                this.intent = new Intent(this,Term.class);
                 break;
             case 4:
-                this.intent = new Intent(this, Datering.class);
+                this.intent = new Intent(this, Dating.class);
                 break;
             case 5:
-                this.intent = new Intent(this, Beskrivelse.class);
+                this.intent = new Intent(this, Description.class);
                 break;
             case 6:
-                this.intent = new Intent(this, Referencer.class);
+                this.intent = new Intent(this, References.class);
                 break;
             case 7:
              //   this.intent = new Intent(this, Andet);
@@ -94,8 +95,8 @@ public class Hovedskaerm extends Activity implements AdapterView.OnItemClickList
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }

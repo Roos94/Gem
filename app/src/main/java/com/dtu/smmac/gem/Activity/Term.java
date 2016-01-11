@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.dtu.smmac.gem.R;
 
-public class Betegnelse extends Activity {
+
+public class Term extends Activity {
 
     private EditText et;
 
@@ -34,7 +36,7 @@ public class Betegnelse extends Activity {
         this.et = (EditText) findViewById(R.id.betegnelseET);
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -42,7 +44,7 @@ public class Betegnelse extends Activity {
 
         setGenstand(this.ID);
 
-        this.bet = Splash.genstand.getGenstandList().get(this.genstandID).getBetegnelse();
+        this.bet = Splash.DB.getGenstandList().get(this.genstandID).getBetegnelse();
 
         this.et.setText(this.bet);
 
@@ -71,8 +73,8 @@ public class Betegnelse extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setBetegnelse(ID, bet);
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setBetegnelse(ID, bet);
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -82,7 +84,7 @@ public class Betegnelse extends Activity {
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -91,8 +93,8 @@ public class Betegnelse extends Activity {
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -101,7 +103,7 @@ public class Betegnelse extends Activity {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

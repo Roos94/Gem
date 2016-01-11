@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,10 +13,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.dtu.smmac.gem.R;
+
 import java.io.File;
 import java.io.IOException;
 
-public class Beskrivelse extends Activity implements View.OnClickListener {
+public class Description extends Activity implements View.OnClickListener {
 
     // Warning hvis der allerede er lavet en recording
 
@@ -56,7 +58,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -64,7 +66,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
         setGenstand(this.ID);
 
-        this.bes = Splash.genstand.getGenstandList().get(this.genstandID).getBeskrivelse();
+        this.bes = Splash.DB.getGenstandList().get(this.genstandID).getBeskrivelse();
 
         this.beskrivelse.setText(this.bes);
 
@@ -91,8 +93,8 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setBeskrivelse(ID, bes);
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setBeskrivelse(ID, bes);
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -102,7 +104,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -241,8 +243,8 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -251,7 +253,7 @@ public class Beskrivelse extends Activity implements View.OnClickListener {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

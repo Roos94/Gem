@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.NumberPicker;
 
+import com.dtu.smmac.gem.R;
+
 import java.util.Calendar;
 
-public class Modtagelsesdato extends Activity {
+public class ReceivedDate extends Activity {
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
@@ -50,7 +52,7 @@ public class Modtagelsesdato extends Activity {
 
         setGenstand(this.ID);
 
-        this.modtaget = Splash.genstand.getGenstandList().get(this.genstandID).getModtaget();
+        this.modtaget = Splash.DB.getGenstandList().get(this.genstandID).getModtaget();
 
         if (this.modtaget.length() == 10)
         {
@@ -62,7 +64,7 @@ public class Modtagelsesdato extends Activity {
         }
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         // NumberPicker Dag:
 
@@ -110,8 +112,8 @@ public class Modtagelsesdato extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.genstand.setModtaget(ID, getDato());
-                        Splash.genstand.setGenstandList();
+                        Splash.DB.setModtaget(ID, getDato());
+                        Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -120,7 +122,7 @@ public class Modtagelsesdato extends Activity {
 
                 @Override
                 protected void onPostExecute(Object resultat) {
-                    Startskaerm.adap.notifyDataSetChanged();
+                    Main.adap.notifyDataSetChanged();
                     startHS();
                 }
             }.execute();
@@ -129,8 +131,8 @@ public class Modtagelsesdato extends Activity {
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -139,7 +141,7 @@ public class Modtagelsesdato extends Activity {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);

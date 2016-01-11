@@ -1,32 +1,24 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Items;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
-import android.os.SystemClock;
-import android.widget.Toast;
+
+import com.dtu.smmac.gem.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,9 +26,9 @@ import java.util.List;
 /**
  * Created by Roos on 23/11/15.
  */
-public class GenstandList {
+public class DAO {
 
-    private List<Genstand> genstand;
+    private List<Item> item;
     private int nextID;
     private String data;
     private JSONArray json;
@@ -49,19 +41,19 @@ public class GenstandList {
     private int aar;
     private final Calendar cal = Calendar.getInstance();
 
-    public GenstandList()
+    public DAO()
     {
-        this.genstand = new ArrayList<Genstand>();
+        this.item = new ArrayList<Item>();
     }
 
-    public List<Genstand> getGenstandList()
+    public List<Item> getGenstandList()
     {
-        return genstand;
+        return item;
     }
 
     public void setGenstandList() throws Exception
     {
-        this.genstand.clear();
+        this.item.clear();
 
         this.data = getUrl(this.API + this.userID);
         this.json = new JSONArray(data);
@@ -113,7 +105,7 @@ public class GenstandList {
             }
             else
             {
-                this.genstand.add(listID, new Genstand(
+                this.item.add(listID, new Item(
                         this.obj.optInt("itemid"),
                         this.obj.optString("itemheadline"),
                         this.obj.optString("itemdescription"),
@@ -157,7 +149,7 @@ public class GenstandList {
         aar = cal.get(Calendar.YEAR);
 
         try {
-            //this.obj.put("itemid", "" + Splash.genstand.getNextID());
+            //this.obj.put("itemid", "" + Splash.item.getNextID());
             this.obj.put("itemheadline", "");
             this.obj.put("itemdescription", "");
             this.obj.put("itemreceived", aar + "-" + md + "-" + dag);
