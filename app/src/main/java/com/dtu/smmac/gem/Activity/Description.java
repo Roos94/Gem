@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -67,7 +68,7 @@ public class Description extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
-        OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gpp";
+        OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gp";
 
         //Sætter HS
         this.h = new Intent(this, ItemView.class);
@@ -103,14 +104,12 @@ public class Description extends Activity implements View.OnClickListener {
 
             this.bes = beskrivelse.getText().toString();
 
-            //final File file = new File(OUTPUT_FILE.getBytes().toString());
-
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setBeskrivelse(ID, bes);
-                        //Splash.DB.postFile(this, ID, Uri.fromFile(file), "mp4");
+                        Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "3gp");
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();

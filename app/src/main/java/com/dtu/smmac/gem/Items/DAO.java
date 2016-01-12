@@ -353,8 +353,8 @@ public class DAO {
             conn.setRequestMethod("POST");
             if(ext.equals("jpg")){
                 conn.setRequestProperty("Content-Type", "image/jpg");
-            } else if(ext.equals("mp4")){
-                conn.setRequestProperty("Content-Type", "audio/mp4");
+            } else if(ext.equals("3gp")){
+                conn.setRequestProperty("Content-Type", "audio/3gp");
             }
             conn.setDoInput(true);
 
