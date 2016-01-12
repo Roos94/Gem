@@ -121,7 +121,6 @@ public class Description extends Activity implements View.OnClickListener {
                 protected void onPostExecute(Object resultat)
                 {
                     Main.adap.notifyDataSetChanged();
-                    //finish();
                     startHS();
                 }
             }.execute();
