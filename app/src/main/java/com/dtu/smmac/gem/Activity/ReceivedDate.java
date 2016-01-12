@@ -45,7 +45,7 @@ public class ReceivedDate extends Activity {
 
         this.done = true;
 
-        this.progress = (ProgressBar) findViewById(R.id.proRD);
+        //this.progress = (ProgressBar) findViewById(R.id.proRD);
         this.progress.setVisibility(View.INVISIBLE);
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
