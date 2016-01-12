@@ -3,6 +3,8 @@ package com.dtu.smmac.gem.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -14,11 +16,14 @@ import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
+import java.io.File;
+
 public class Camera extends Activity implements View.OnClickListener {
 
     private ImageView iv;
     private Button b;
     private int REQUEST_CODE = 1;
+    private Bitmap bit;
     private ProgressBar progress;
 
     private Intent h;
@@ -69,7 +74,25 @@ public class Camera extends Activity implements View.OnClickListener {
 
             this.done = false;
 
-            startHS();
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        //Splash.DB.postFile(Camera.this, ID, Uri.fromFile(bit), "jpg");
+                        Splash.DB.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object resultat)
+                {
+                    Main.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
         }
     }
 
@@ -92,9 +115,9 @@ public class Camera extends Activity implements View.OnClickListener {
 
                 bundle = data.getExtras();
 
-                Bitmap bit;
-
                 bit = (Bitmap) bundle.get("data");
+
+                System.out.println(bit);
 
                 iv.setImageBitmap(bit);
 
