@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class NewItem extends Activity {
     private Intent i;
     private int ID;
     private String titel;
+    private ProgressBar progress;
 
     private boolean done;
 
@@ -37,6 +40,9 @@ public class NewItem extends Activity {
         this.getActionBar().setTitle("    " + "Ny registrering");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.pronew);
+        this.progress.setVisibility(View.INVISIBLE);
 
         this.title = (EditText) findViewById(R.id.createTitle);
         this.regNo = (TextView) findViewById(R.id.regNr);
@@ -79,6 +85,8 @@ public class NewItem extends Activity {
 
         if(this.done == true)
         {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
             this.titel = this.title.getText().toString();
 
@@ -111,22 +119,23 @@ public class NewItem extends Activity {
     @Override
     public void onBackPressed()
     {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.DB.deleteGenstand(ID);
+        if (this.done == true) {
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.DB.deleteGenstand(ID);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                catch (Exception e) {
-                    e.printStackTrace();
+                    return null;
                 }
-                return null;
-            }
-        }.execute();
+            }.execute();
 
-        finish();
+            finish();
 
-        return;
+        }
     }
 
     public void setRegNo(int no)

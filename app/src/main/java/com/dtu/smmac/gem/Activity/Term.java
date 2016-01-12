@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -19,6 +21,7 @@ public class Term extends Activity {
     private int ID;
     private Intent lastUsed;
     private int genstandID;
+    private ProgressBar progress;
 
     private String bet;
 
@@ -32,6 +35,9 @@ public class Term extends Activity {
         this.getActionBar().setTitle("    " + "Betegnelse");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proET);
+        this.progress.setVisibility(View.INVISIBLE);
 
         this.et = (EditText) findViewById(R.id.betegnelseET);
 
@@ -65,6 +71,8 @@ public class Term extends Activity {
     {
         if(this.done == true)
         {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             this.bet = this.et.getText().toString();
@@ -114,6 +122,8 @@ public class Term extends Activity {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 }

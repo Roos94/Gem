@@ -43,4 +43,12 @@
         android:id="@+id/et2"
         android:layout_below="@+id/tv3"
         android:layout_marginTop="32dp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/proRef"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -17,6 +19,7 @@ public class ReceivedDate extends Activity {
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
+    private ProgressBar progress;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -42,6 +45,9 @@ public class ReceivedDate extends Activity {
 
         this.done = true;
 
+        this.progress = (ProgressBar) findViewById(R.id.proRD);
+        this.progress.setVisibility(View.INVISIBLE);
+
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;
         aar = cal.get(Calendar.YEAR);
@@ -54,7 +60,7 @@ public class ReceivedDate extends Activity {
 
         this.modtaget = Splash.DB.getGenstandList().get(this.genstandID).getModtaget();
 
-        if (this.modtaget.length() == 10)
+        if (this.modtaget.length() == 10 && !this.modtaget.equals("0000-00-00"))
         {
             String mod[] = this.modtaget.split("-");
 
@@ -106,6 +112,8 @@ public class ReceivedDate extends Activity {
     public void done(MenuItem item)
     {
         if(this.done == true) {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             new AsyncTask() {
@@ -152,7 +160,9 @@ public class ReceivedDate extends Activity {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 
 }

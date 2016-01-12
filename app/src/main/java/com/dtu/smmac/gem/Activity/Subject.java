@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dtu.smmac.gem.R;
@@ -21,6 +22,7 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
     private ListView lv;
     private String emne;
     private TextView emnet;
+    private ProgressBar progress;
 
     private Intent h;
     private int ID;
@@ -38,9 +40,12 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
 
         this.done = true;
 
+        this.progress = (ProgressBar) findViewById(R.id.prosub);
+        this.progress.setVisibility(View.INVISIBLE);
+
         this.emnet = (TextView) findViewById(R.id.editText2);
 
-        lv = (ListView) findViewById(R.id.lv);
+        this.lv = (ListView) findViewById(R.id.lv);
 
         ArrayList emnegruppe = new ArrayList();
 
@@ -84,6 +89,8 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
     public void done(MenuItem item) {
         if(this.done == true)
         {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             new AsyncTask() {
@@ -126,18 +133,20 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
 
     public void startHS()
     {
-        //Item skal køres over på h
-        h.putExtra("ID", this.ID);
+            //Item skal køres over på h
+            h.putExtra("ID", this.ID);
 
-        startActivity(h);
+            startActivity(h);
 
-        finish();
+            finish();
     }
 
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 
 

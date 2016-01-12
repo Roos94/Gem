@@ -18,9 +18,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Angiv titel:"
         android:id="@+id/textView"
+        android:textStyle="italic"
+        android:layout_below="@+id/pronew"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textStyle="italic" />
+        android:layout_marginTop="39dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,5 +45,13 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/pronew"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

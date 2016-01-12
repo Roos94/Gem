@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -14,6 +16,7 @@ public class References extends Activity {
 
     private EditText don;
     private EditText pro;
+    private ProgressBar progress;
 
     private Intent h;
     private int ID;
@@ -33,6 +36,9 @@ public class References extends Activity {
         this.getActionBar().setTitle("    " + "Referencer");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proRef);
+        this.progress.setVisibility(View.INVISIBLE);
 
         //Trækker fra HS
         this.lastUsed = getIntent();
@@ -65,6 +71,8 @@ public class References extends Activity {
     public void done(MenuItem item)
     {
         if(this.done == true) {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             this.donator = this.don.getText().toString();
@@ -114,6 +122,8 @@ public class References extends Activity {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 }
