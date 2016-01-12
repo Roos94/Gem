@@ -68,7 +68,7 @@ public class Description extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
-        OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audiorecorder.3gp";
+        OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audio.MPEG4";
 
         //Sætter HS
         this.h = new Intent(this, ItemView.class);
@@ -109,7 +109,7 @@ public class Description extends Activity implements View.OnClickListener {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setBeskrivelse(ID, bes);
-                        Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "3gp");
+                        Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "MPEG4");
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -178,7 +178,7 @@ public class Description extends Activity implements View.OnClickListener {
 
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
         recorder.setOutputFile(OUTPUT_FILE);
         recorder.prepare();
