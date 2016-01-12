@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/createTitle"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView"/>
+        android:layout_below="@+id/textView"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_width="wrap_content"
