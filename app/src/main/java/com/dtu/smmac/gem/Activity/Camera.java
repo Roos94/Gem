@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -18,6 +19,7 @@ public class Camera extends Activity implements View.OnClickListener {
     private ImageView iv;
     private Button b;
     private int REQUEST_CODE = 1;
+    private ProgressBar progress;
 
     private Intent h;
     private int ID;
@@ -34,6 +36,9 @@ public class Camera extends Activity implements View.OnClickListener {
         this.getActionBar().setTitle("    " + "Tag billede");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proCA);
+        this.progress.setVisibility(View.INVISIBLE);
 
         b = (Button) findViewById(R.id.bbillede);
         iv = (ImageView) findViewById(R.id.iv_billede);
@@ -60,6 +65,8 @@ public class Camera extends Activity implements View.OnClickListener {
     public void done(MenuItem item)
     {
         if(this.done == true) {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             startHS();
@@ -118,6 +125,8 @@ public class Camera extends Activity implements View.OnClickListener {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 }

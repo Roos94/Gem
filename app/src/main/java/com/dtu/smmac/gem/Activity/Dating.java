@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -19,6 +21,7 @@ public class Dating extends Activity {
     private NumberPicker num4 = null;
     private NumberPicker num5 = null;
     private NumberPicker num6 = null;
+    private ProgressBar progress;
 
     private int fdag;
     private int fmd;
@@ -47,6 +50,9 @@ public class Dating extends Activity {
         this.getActionBar().setTitle("    " + "Datering");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proD);
+        this.progress.setVisibility(View.INVISIBLE);
 
         //Sætter default dag, måned, år
         this.faar = 1957;
@@ -156,6 +162,8 @@ public class Dating extends Activity {
     public void done(MenuItem item)
     {
         if (this.done == true) {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             new AsyncTask() {
@@ -202,7 +210,9 @@ public class Dating extends Activity {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 
 }

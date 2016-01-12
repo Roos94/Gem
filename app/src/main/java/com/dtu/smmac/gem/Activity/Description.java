@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
 
@@ -30,6 +31,7 @@ public class Description extends Activity implements View.OnClickListener {
     private MediaRecorder recorder;
     private MediaPlayer player;
     private String OUTPUT_FILE;
+    private ProgressBar progress;
 
     private Intent h;
     private int ID;
@@ -48,6 +50,9 @@ public class Description extends Activity implements View.OnClickListener {
         this.getActionBar().setTitle("    " + "Beskrivelse");
 
         this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proDE);
+        this.progress.setVisibility(View.INVISIBLE);
 
         record = (ImageButton) findViewById(R.id.Record);
         record.setOnClickListener(this);
@@ -92,6 +97,8 @@ public class Description extends Activity implements View.OnClickListener {
     {
         if(this.done == true)
         {
+            this.progress.setVisibility(View.VISIBLE);
+
             this.done = false;
 
             this.bes = beskrivelse.getText().toString();
@@ -248,7 +255,9 @@ public class Description extends Activity implements View.OnClickListener {
     @Override
     public void onBackPressed()
     {
-        startHS();
+        if (this.done == true) {
+            startHS();
+        }
     }
 
     public void recording()

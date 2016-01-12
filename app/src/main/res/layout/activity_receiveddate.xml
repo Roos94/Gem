@@ -59,8 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:id="@+id/progressBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/proRD"
+        android:layout_above="@+id/numpMDMD1"
+        android:layout_toLeftOf="@+id/numpAarMD1"
+        android:layout_toStartOf="@+id/numpAarMD1" />
 
 </RelativeLayout>
