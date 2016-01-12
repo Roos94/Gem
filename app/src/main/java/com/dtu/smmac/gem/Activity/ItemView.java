@@ -54,9 +54,6 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        System.out.println(position);
-
         switch(position){
             case 0:
                 this.intent = new Intent(this, Camera.class);
