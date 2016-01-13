@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,17 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dtu.smmac.gem.Items.Item;
+import com.dtu.smmac.gem.R;
+
 /**
  * Created by Roos on 02/12/15.
  */
-public class HS_adapter extends ArrayAdapter<Genstand> {
+public class ItemView_adapter extends ArrayAdapter<Item> {
 
-    private Genstand genstand;
+    private Item item;
     private Context context;
 
-    public HS_adapter(Context c, Genstand genstand) {
-        super(c, R.layout.row_hs);
-        this.genstand = genstand;
+    public ItemView_adapter(Context c, Item item) {
+        super(c, R.layout.row_itemview);
+        this.item = item;
         this.context = c;
     }
 
@@ -35,7 +38,7 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            row = inflater.inflate(R.layout.row_hs, null);
+            row = inflater.inflate(R.layout.row_itemview, null);
 
             ImageView img = (ImageView) row.findViewById(R.id.image);
             TextView title = (TextView) row.findViewById(R.id.title);
@@ -53,39 +56,55 @@ public class HS_adapter extends ArrayAdapter<Genstand> {
         }
 
         if (position == 0) {
-            holder.imgView.setImageResource(genstand.getImage());
+            holder.imgView.setImageResource(item.getImage());
             holder.titleView.setText("Billede");
             holder.besView.setText("Antal billeder: 1");
         }
         else if (position == 1) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Emnegruppe");
-            holder.besView.setText("");
+            holder.besView.setText(this.item.getEmnegruppe());
         }
         else if (position == 2) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Modtagelsesdato");
-            holder.besView.setText(this.genstand.getModtaget());
+            holder.besView.setText(this.item.getModtaget());
         }
         else if (position == 3) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Betegnelse");
-            holder.besView.setText("");
+
+            String bet = this.item.getBetegnelse();
+
+            if (bet.length() > 97)
+            {
+                bet = bet.substring(0,97) + "...";
+            }
+
+            holder.besView.setText(bet);
         }
         else if (position == 4) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Datering");
-            holder.besView.setText("Fra: " + this.genstand.getDateringFra() + " Til: " + this.genstand.getDateringTil());
+            holder.besView.setText("Fra: " + this.item.getDateringFra() + "\n" + "Til: " + this.item.getDateringTil());
         }
         else if (position == 5) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Beskrivelse");
-            holder.besView.setText(this.genstand.getBeskrivelse());
+
+            String bes = this.item.getBeskrivelse();
+
+            if (bes.length() > 97)
+            {
+                bes = bes.substring(0,97) + "...";
+            }
+
+            holder.besView.setText(bes);
         }
         else if (position == 6) {
             //holder.imgView.setImageResource();
             holder.titleView.setText("Referencer");
-            holder.besView.setText("Donator: " + this.genstand.getDonator() + " Producent: " + this.genstand.getProducer());
+            holder.besView.setText("Donator: " + this.item.getDonator() + "\n" + "Producent: " + this.item.getProducer());
         }
 
         return row;

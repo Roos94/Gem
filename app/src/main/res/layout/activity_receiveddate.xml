@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.dtu.smmac.gem.Hovedskaerm"
+    tools:context=".Activity.ItemView"
     android:background="#ffffff"
     android:gravity="center">
 
@@ -52,6 +52,16 @@
         android:layout_marginBottom="57dp"
         android:layout_alignLeft="@+id/numpDagMD1"
         android:layout_alignStart="@+id/numpDagMD1"
-        android:textSize="40dp" />
+        android:textSize="24dp"
+        android:textStyle="italic" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/proRD"
+        android:layout_above="@+id/numpMDMD1"
+        android:layout_toLeftOf="@+id/numpAarMD1"
+        android:layout_toStartOf="@+id/numpAarMD1" />
 
 </RelativeLayout>

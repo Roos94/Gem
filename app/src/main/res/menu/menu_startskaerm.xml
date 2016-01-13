@@ -5,7 +5,7 @@
         android:id="@+id/search_item"
         android:title="Search"
         android:showAsAction="ifRoom|collapseActionView"
-        android:actionLayout="@layout/search_layout"
+        android:actionLayout="@layout/search_main"
         android:icon="@drawable/search"
         />
 

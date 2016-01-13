@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,15 +6,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.ProgressBar;
+
+import com.dtu.smmac.gem.R;
 
 import java.util.Calendar;
 
-public class Modtagelsesdato extends Activity {
+public class ReceivedDate extends Activity {
 
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
+    private ProgressBar progress;
 
     final Calendar cal = Calendar.getInstance();
 
@@ -29,12 +34,19 @@ public class Modtagelsesdato extends Activity {
 
     private String modtaget;
 
+    private boolean done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modtagelsesdato);
+        setContentView(R.layout.activity_receiveddate);
 
         this.getActionBar().setTitle("    " + "Modtagelsesdato");
+
+        this.done = true;
+
+        this.progress = (ProgressBar) findViewById(R.id.proRD);
+        this.progress.setVisibility(View.INVISIBLE);
 
         dag = cal.get(Calendar.DAY_OF_MONTH);
         md = cal.get(Calendar.MONTH) + 1;
@@ -46,9 +58,9 @@ public class Modtagelsesdato extends Activity {
 
         setGenstand(this.ID);
 
-        this.modtaget = Splash.genstand.getGenstandList().get(this.genstandID).getModtaget();
+        this.modtaget = Splash.DB.getGenstandList().get(this.genstandID).getModtaget();
 
-        if (this.modtaget.length() == 10)// != "null" || !this.modtaget.isEmpty())
+        if (this.modtaget.length() == 10 && !this.modtaget.equals("0000-00-00"))
         {
             String mod[] = this.modtaget.split("-");
 
@@ -58,7 +70,7 @@ public class Modtagelsesdato extends Activity {
         }
 
         //Sætter HS
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.h = new Intent(this, ItemView.class);
 
         // NumberPicker Dag:
 
@@ -99,32 +111,36 @@ public class Modtagelsesdato extends Activity {
 
     public void done(MenuItem item)
     {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    Splash.genstand.setModtaget(ID, getDato());
-                    Splash.genstand.setGenstandList();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
+        if(this.done == true) {
+            this.progress.setVisibility(View.VISIBLE);
 
-            @Override
-            protected void onPostExecute(Object resultat)
-            {
-                Startskaerm.adap.notifyDataSetChanged();
-                startHS();
-                finish();
-            }
-        }.execute();
+            this.done = false;
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try {
+                        Splash.DB.setModtaget(ID, getDato());
+                        Splash.DB.setGenstandList();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object resultat) {
+                    Main.adap.notifyDataSetChanged();
+                    startHS();
+                }
+            }.execute();
+        }
     }
 
     public void setGenstand(int ID)
     {
-        for (this.genstandID = 0; this.genstandID < Splash.genstand.getGenstandList().size(); this.genstandID++) {
-            if (Splash.genstand.getGenstandList().get(this.genstandID).getID() == ID)
+        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
+            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
             {
                 return;
             }
@@ -133,17 +149,20 @@ public class Modtagelsesdato extends Activity {
 
     public void startHS()
     {
-        //Genstand skal køres over på h
+        //Item skal køres over på h
         h.putExtra("ID", this.ID);
 
         startActivity(h);
+
+        finish();
     }
 
     @Override
     public void onBackPressed()
     {
-        startHS();
-        finish();
+        if (this.done == true) {
+            startHS();
+        }
     }
 
 }

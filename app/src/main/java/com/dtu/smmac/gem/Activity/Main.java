@@ -1,41 +1,46 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
+
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Startskaerm extends Activity implements AdapterView.OnItemClickListener, TextWatcher {
+import com.dtu.smmac.gem.Adapter.Main_adapter;
+import com.dtu.smmac.gem.Items.Item;
+import com.dtu.smmac.gem.R;
+
+public class Main extends Activity implements AdapterView.OnItemClickListener, TextWatcher {
 
     private EditText search;
     private ListView list;
     private TextView t;
     private Intent i, h;
-    public static Adapter adap;
-    private Genstand gen;
+    public static Main_adapter adap;
+    private Item gen;
+
+    private boolean done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_startskaerm);
+        setContentView(R.layout.activity_main);
+
         this.getActionBar().setTitle("");
 
+        this.done = true;
+
         this.list = (ListView) findViewById(R.id.list);
-        this.i = new Intent(this, NyReg.class);
-        this.h = new Intent(this, Hovedskaerm.class);
+        this.i = new Intent(this, NewItem.class);
+        this.h = new Intent(this, ItemView.class);
 
         setList();
     }
@@ -54,11 +59,16 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
     }
 
     public void openNew(MenuItem item) {
-        startActivity(i);
+        if(done == true)
+        {
+            this.done = false;
+            startActivity(i);
+            this.done = true;
+        }
     }
 
     public void setList() {
-        this.adap = new Adapter(this, Splash.genstand.getGenstandList());
+        this.adap = new Main_adapter(this, Splash.DB.getGenstandList());
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
@@ -67,20 +77,26 @@ public class Startskaerm extends Activity implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(this.done == true)
+        {
+            this.done = false;
 
-        this.t = (TextView) view.findViewById(R.id.id);
+            this.t = (TextView) view.findViewById(R.id.id);
 
-        for (int j = 0; j < Splash.genstand.getGenstandList().size(); j++) {
-            if (Splash.genstand.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
-            {
-                this.gen = Splash.genstand.getGenstandList().get(j);
+            for (int j = 0; j < Splash.DB.getGenstandList().size(); j++) {
+                if (Splash.DB.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
+                {
+                    this.gen = Splash.DB.getGenstandList().get(j);
+                }
             }
+
+            //Item skal køres over på h
+            h.putExtra("ID", gen.getID());
+
+            startActivity(h);
+
+            this.done = true;
         }
-
-        //Genstand skal køres over på h
-        h.putExtra("ID", gen.getID());
-
-        startActivity(h);
     }
 
     @Override

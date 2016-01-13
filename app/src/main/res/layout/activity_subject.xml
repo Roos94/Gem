@@ -8,26 +8,37 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#FFFFFF"
-    tools:context="com.dtu.smmac.gem.Hovedskaerm">
+    tools:context=".Activity.Subject">
 
-
-    <Button
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tag billede"
-        android:id="@+id/bbillede"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_billede"
-        android:layout_alignParentTop="true"
+        android:id="@+id/lv"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/bbillede"
+        android:layout_below="@+id/editText2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignLeft="@id/lv"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        android:text="Valgt emne: "
+        android:textSize="20dp"
+        android:inputType="textNoSuggestions"
+        android:id="@+id/editText2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/prosub" />
 
 </RelativeLayout>

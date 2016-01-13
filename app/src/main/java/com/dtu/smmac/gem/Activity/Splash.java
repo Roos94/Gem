@@ -1,4 +1,4 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +7,12 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.dtu.smmac.gem.Items.DAO;
+import com.dtu.smmac.gem.R;
 
 public class Splash extends Activity {
 
@@ -19,14 +21,14 @@ public class Splash extends Activity {
     private Intent i;
     private Thread timer;
     private Runnable r, l1, l2, l3, l4, l5;
-    public static GenstandList genstand;
+    public static DAO DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        this.i = new Intent(this, Startskaerm.class);
+        this.i = new Intent(this, Main.class);
 
         this.img = (ImageView) findViewById(R.id.imageSplash);
         this.img.setImageResource(R.drawable.logo);
@@ -50,7 +52,7 @@ public class Splash extends Activity {
 
     public void setInfo()
     {
-        this.genstand = new GenstandList();
+        this.DB = new DAO();
 
         setRunable();
 
@@ -60,7 +62,7 @@ public class Splash extends Activity {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    genstand.setGenstandList();
+                    DB.setGenstandList();
                     timer.start();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -71,7 +73,7 @@ public class Splash extends Activity {
     }
 
     public void setTimer() {
-        SystemClock.sleep(1000);
+        //SystemClock.sleep(1000);
 
         runOnUiThread(this.l1);
         SystemClock.sleep(400);

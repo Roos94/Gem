@@ -1,11 +1,11 @@
-package com.dtu.smmac.gem;
+package com.dtu.smmac.gem.Items;
 
 import java.util.Date;
 
 /**
  * Created by Roooooooos on 09/11/15.
  */
-public class Genstand {
+public class Item {
 // test test test
     private String title;
     private int ID;
@@ -17,10 +17,21 @@ public class Genstand {
     private String donator;
     private String producer;
     private String postCode;
+    private String emnegruppe;
+    private String betegnelse;
 
-    public Genstand(int itemId, String itemHeadline, String itemDescription, String itemRecieved,
-                    String itemDatingFrom, String itemDatingTo, String donator, String producer,
-                    String postalCode, int image)
+    public Item(int itemId,
+                String itemHeadline,
+                String itemDescription,
+                String itemRecieved,
+                String itemDatingFrom,
+                String itemDatingTo,
+                String donator,
+                String producer,
+                String postalCode,
+                String emnegruppe,
+                String betegnelse,
+                int image)
     {
         this.ID = itemId;
         this.title = itemHeadline;
@@ -31,6 +42,8 @@ public class Genstand {
         this.donator = donator;
         this.producer = producer;
         this.postCode = postalCode;
+        this.emnegruppe = emnegruppe;
+        this.betegnelse = betegnelse;
         this.image = image;
     }
 
@@ -70,4 +83,8 @@ public class Genstand {
     public String getProducer() {return this.producer;}
 
     public String getPostCode() {return this.postCode;}
+
+    public String getEmnegruppe() {return this.emnegruppe;}
+
+    public String getBetegnelse() {return this.betegnelse;}
 }
