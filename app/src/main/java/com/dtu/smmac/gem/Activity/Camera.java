@@ -78,7 +78,7 @@ public class Camera extends Activity implements View.OnClickListener {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.postFile(Camera.this, ID, Uri.fromFile(iv), "jpg");
+                        //Splash.DB.postFile(Camera.this, ID, Uri.fromFile(iv), "jpg");
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -98,9 +98,9 @@ public class Camera extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Uri u = ;
+        //Uri u = ;
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        i.putExtra(MediaStore.EXTRA_OUTPUT, u);
+        //i.putExtra(MediaStore.EXTRA_OUTPUT, u);
         if(i.resolveActivity(getPackageManager()) != null)
         {
             startActivityForResult(i, REQUEST_CODE);
