@@ -72,7 +72,7 @@ public class Dating extends Activity {
         // *** Pulls from mainscreen ***
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-        this.itemID = Splash.DB.getGenstandID(this.ID);
+        this.itemID = Splash.DB.getItemID(this.ID);
 
         this.fra = Splash.DB.getItemList().get(this.itemID).getDateringFra();
         this.til = Splash.DB.getItemList().get(this.itemID).getDateringTil();
@@ -166,7 +166,7 @@ public class Dating extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setDatering(ID, getDateFrom(), getDateTo());
+                        Splash.DB.setDating(ID, getDateFrom(), getDateTo());
                         Splash.DB.setItemList();
                         Splash.DB.setItem(ID);
                     } catch (Exception e) {

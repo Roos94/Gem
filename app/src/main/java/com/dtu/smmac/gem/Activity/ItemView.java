@@ -28,7 +28,7 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
 
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.genstandID = Splash.DB.getItemID(this.ID);
 
         this.getActionBar().setTitle("    " + Splash.DB.getItemList().get(this.genstandID).getTitle());
 

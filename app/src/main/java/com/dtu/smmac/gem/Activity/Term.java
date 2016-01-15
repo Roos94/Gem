@@ -48,7 +48,7 @@ public class Term extends Activity {
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.genstandID = Splash.DB.getItemID(this.ID);
 
         this.bet = Splash.DB.getItemList().get(this.genstandID).getBetegnelse();
 
@@ -81,7 +81,7 @@ public class Term extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setBetegnelse(ID, bet);
+                        Splash.DB.setTerm(ID, bet);
                         Splash.DB.setItemList();
                         Splash.DB.setItem(ID);
                     } catch (Exception e) {

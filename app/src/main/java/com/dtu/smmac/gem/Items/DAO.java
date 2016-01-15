@@ -1,10 +1,8 @@
 package com.dtu.smmac.gem.Items;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 
-import com.dtu.smmac.gem.Activity.Splash;
 import com.dtu.smmac.gem.R;
 
 import org.json.JSONArray;
@@ -74,7 +72,7 @@ public class DAO {
             if (this.obj.optString("itemheadline").isEmpty())
             {
                 //Hvis app'en kun bruges af 1 person er det muligt at slette items uden titel
-                //deleteGenstand(this.obj.optInt("itemid"));
+                //deleteItem(this.obj.optInt("itemid"));
             }
             else {
                 //Opretter et item inde i itemlisten
@@ -100,7 +98,7 @@ public class DAO {
             this.obj = new JSONObject(this.data);
 
             //Sætter id som item har i item listen
-            int listID = getGenstandID(ID);
+            int listID = getItemID(ID);
 
             //Sætter de resterende informationer
             this.item.get(listID).setBeskrivelse(this.obj.optString("itemdescription"));
@@ -120,19 +118,25 @@ public class DAO {
         }
     }
 
-    //Finder det næste id i API'et
+    //Finder det sidste id i API'en
+    //              ^ Da man opretter et tomt item, når man klikker på ny registrering
     public int getNextID() throws Exception
     {
         int nextID = 0;
 
+        //Sætter datastrengen fra API'en
         this.data = getUrl(this.API + this.userID);
+
+        //Opsætter JSON Array med data fra API'en
         this.json = new JSONArray(data);
 
+        //Looper alle items igennem
         for (int i = 0; i < this.json.length(); i++) {
+
+            //Sætter JSON objekt fra JSON Array
             this.obj = this.json.getJSONObject(i);
 
-            System.out.println(this.obj.optInt("itemid"));
-
+            //Checker om id er det sidste
             if (this.obj.optInt("itemid") >= nextID) {
                 nextID = this.obj.optInt("itemid");
             }
@@ -141,18 +145,20 @@ public class DAO {
         return nextID;
     }
 
-    public int getGenstandID(int ID)
+    //Finder id som item har i item listen
+    public int getItemID(int ID)
     {
-        for (int genstandID = 0; genstandID < this.item.size(); genstandID++) {
-            if (this.item.get(genstandID).getID() == ID)
+        for (int itemID = 0; itemID < this.item.size(); itemID++) {
+            if (this.item.get(itemID).getID() == ID)
             {
-                return genstandID;
+                return itemID;
             }
         }
 
         return 0;
     }
 
+    //Henter indholdet fra en url og omskriver det til en string
     public String getUrl(String url) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
         StringBuilder sb = new StringBuilder();
@@ -164,7 +170,8 @@ public class DAO {
         return sb.toString();
     }
 
-    public void addGenstand() throws IOException {
+    //Tilføjer et tomt item til API'en - Dog med modtagelsesdato som dagsdato
+    public void addItem() throws IOException {
         this.obj = new JSONObject();
 
         Calendar cal = Calendar.getInstance();
@@ -190,10 +197,11 @@ public class DAO {
 
         this.url = new URL(this.API + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setTitel(int ID, String title) throws IOException
+    //Skriver item title til API'en
+    public void setTitle(int ID, String title) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -205,10 +213,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setModtaget(int ID, String modtaget) throws IOException
+    //Skriver item modtagelsesdato til API'en
+    public void setReceivedDate(int ID, String modtaget) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -220,10 +229,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setDatering(int ID, String fra, String til) throws IOException
+    //Skriver item datering (til og fra) til API'en
+    public void setDating(int ID, String fra, String til) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -236,10 +246,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setBeskrivelse(int ID, String beskrivelse) throws IOException
+    //Skriver item beskrivelse til API'en
+    public void setDescription(int ID, String beskrivelse) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -251,10 +262,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setBetegnelse(int ID, String betegnelse) throws IOException
+    //Skriver item betegnelse til API'en
+    public void setTerm(int ID, String betegnelse) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -266,10 +278,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setEmnegruppe(int ID, String emne) throws IOException
+    //Skriver item emnegruppe til API'en
+    public void setSubject(int ID, String emne) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -281,10 +294,11 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void setRef(int ID, String donator, String producent) throws IOException
+    //Skriver item referencer (donator og producer) til API'en
+    public void setReferences(int ID, String donator, String producent) throws IOException
     {
         this.obj = new JSONObject();
 
@@ -297,10 +311,33 @@ public class DAO {
 
         this.url = new URL(this.API + "/" + ID + this.userID);
 
-        postGenstand(this.obj, this.url);
+        postItem(this.obj, this.url);
     }
 
-    public void postGenstand(JSONObject ob, URL url) throws IOException {
+    //Sletter et item fra API'en
+    public void deleteItem(int ID) throws IOException
+    {
+        this.url = new URL(this.API + "/" + ID + this.userID);
+
+        InputStream is = null;
+
+        try
+        {
+            HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("DELETE");
+            conn.setDoInput(true);
+
+            is = conn.getInputStream();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Poster et JSON objekt til API'en
+    public void postItem(JSONObject ob, URL url) throws IOException {
         InputStream is = null;
 
         try
@@ -327,27 +364,7 @@ public class DAO {
 
     }
 
-    public void deleteGenstand(int ID) throws IOException
-    {
-        this.url = new URL(this.API + "/" + ID + this.userID);
-
-        InputStream is = null;
-
-        try
-        {
-        HttpURLConnection conn = (HttpURLConnection) this.url.openConnection();
-        conn.setReadTimeout(10000);
-        conn.setConnectTimeout(15000);
-        conn.setRequestMethod("DELETE");
-        conn.setDoInput(true);
-
-        is = conn.getInputStream();
-
-        } catch (Exception e) {
-        e.printStackTrace();
-        }
-    }
-
+    //Poster enten en mp4 eller jpg fil til API'en
     public void postFile(Context c, int ID, Uri filePath, String ext)
     {
         InputStream is;

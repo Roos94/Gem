@@ -53,7 +53,7 @@ public class NewItem extends Activity {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.DB.addGenstand();
+                    Splash.DB.addItem();
                     ID = Splash.DB.getNextID();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -94,7 +94,7 @@ public class NewItem extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setTitel(ID, titel);
+                        Splash.DB.setTitle(ID, titel);
                         Splash.DB.setItemList();
                         Splash.DB.setItem(ID);
                     } catch (Exception e) {
@@ -126,7 +126,7 @@ public class NewItem extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.deleteGenstand(ID);
+                        Splash.DB.deleteItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
