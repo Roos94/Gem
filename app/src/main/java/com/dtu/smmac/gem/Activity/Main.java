@@ -75,6 +75,11 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         }
     }
 
+    public void search(MenuItem item)
+    {
+        this.search.requestFocus();
+    }
+
     public void setList() {
         this.adap = new Main_adapter(this, Splash.DB.getItemList());
         this.list.setAdapter(adap);
