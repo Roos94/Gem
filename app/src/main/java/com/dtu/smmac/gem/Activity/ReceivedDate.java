@@ -9,30 +9,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
-
 import com.dtu.smmac.gem.R;
-
 import java.util.Calendar;
+
+/*
+ *  *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
+ */
 
 public class ReceivedDate extends Activity {
 
+    // *** Creates number pickers ***
     private NumberPicker num1 = null;
     private NumberPicker num2 = null;
     private NumberPicker num3 = null;
     private ProgressBar progress;
 
+    // *** Creates Calendar (used to get todays date) ***
     final Calendar cal = Calendar.getInstance();
 
-    private int dag;
-    private int md;
-    private int aar;
+    // *** Creating varibles ***
+    private int day;
+    private int month;
+    private int year;
 
     private Intent h;
     private int ID;
     private Intent lastUsed;
-    private int genstandID;
+    private int itemID;
 
-    private String modtaget;
+    private String recieved;
 
     private boolean done;
 
@@ -48,56 +53,54 @@ public class ReceivedDate extends Activity {
         this.progress = (ProgressBar) findViewById(R.id.proRD);
         this.progress.setVisibility(View.INVISIBLE);
 
-        dag = cal.get(Calendar.DAY_OF_MONTH);
-        md = cal.get(Calendar.MONTH) + 1;
-        aar = cal.get(Calendar.YEAR);
+        // *** Display todays date in number picker ***
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        month = cal.get(Calendar.MONTH) + 1;
+        year = cal.get(Calendar.YEAR);
 
-        //Trækker fra HS
+        // *** Pulls from mainscreen ***
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.itemID = Splash.DB.getGenstandID(this.ID);
 
-        this.modtaget = Splash.DB.getGenstandList().get(this.genstandID).getModtaget();
+        this.recieved = Splash.DB.getGenstandList().get(this.itemID).getModtaget();
 
-        if (this.modtaget.length() == 10 && !this.modtaget.equals("0000-00-00"))
+        if (this.recieved.length() == 10 && !this.recieved.equals("0000-00-00"))
         {
-            String mod[] = this.modtaget.split("-");
+            String mod[] = this.recieved.split("-");
 
-            this.aar = Integer.parseInt(mod[0]);
-            this.md = Integer.parseInt(mod[1]);
-            this.dag = Integer.parseInt(mod[2]);
+            this.year = Integer.parseInt(mod[0]);
+            this.month = Integer.parseInt(mod[1]);
+            this.day = Integer.parseInt(mod[2]);
         }
 
-        //Sætter HS
+        // *** Show content in mainscreen ***
         this.h = new Intent(this, ItemView.class);
 
-        // NumberPicker Dag:
-
+        // *** NumberPicker Day: ***
         num1 = (NumberPicker) findViewById(R.id.numpDagMD1);
         num1.setMaxValue(31);
         num1.setMinValue(1);
         num1.setWrapSelectorWheel(false);
-        num1.setValue(dag);
+        num1.setValue(day);
 
-        // NumberPicker Måned:
-
+        // *** NumberPicker Month: ***
         num2 = (NumberPicker) findViewById(R.id.numpMDMD1);
         num2.setMaxValue(12);
         num2.setMinValue(1);
         num2.setWrapSelectorWheel(false);
-        num2.setValue(md);
+        num2.setValue(month);
 
-        // Number Picker Årstal:
-
+        // *** Number Picker year: ***
         num3 = (NumberPicker) findViewById(R.id.numpAarMD1);
         num3.setMaxValue(2100);
         num3.setMinValue(1990);
         num3.setWrapSelectorWheel(false);
-        num3.setValue(aar);
+        num3.setValue(year);
     }
 
-    public String getDato()
+    public String getDate()
     {
         return num3.getValue() + "-" + num2.getValue() + "-" + num1.getValue();
     }
@@ -120,7 +123,7 @@ public class ReceivedDate extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setModtaget(ID, getDato());
+                        Splash.DB.setModtaget(ID, getDate());
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -139,7 +142,7 @@ public class ReceivedDate extends Activity {
 
     public void startHS()
     {
-        //Item skal køres over på h
+        // *** transfer the item to mainscreen ***
         h.putExtra("ID", this.ID);
 
         startActivity(h);

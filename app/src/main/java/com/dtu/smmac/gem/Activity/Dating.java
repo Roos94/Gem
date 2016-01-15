@@ -9,9 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
-
 import com.dtu.smmac.gem.R;
 
+/*
+ *  *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
+ */
 
 public class Dating extends Activity {
 
@@ -23,18 +25,18 @@ public class Dating extends Activity {
     private NumberPicker num6 = null;
     private ProgressBar progress;
 
-    private int fdag;
-    private int fmd;
-    private int faar;
+    private int fromDay;
+    private int fromMonth;
+    private int fromYear;
 
-    private int tdag;
-    private int tmd;
-    private int taar;
+    private int toDay;
+    private int toMonth;
+    private int toYear;
 
     private Intent h;
     private int ID;
     private Intent lastUsed;
-    private int genstandID;
+    private int itemID;
 
     private String fra;
     private String til;
@@ -54,99 +56,94 @@ public class Dating extends Activity {
         this.progress = (ProgressBar) findViewById(R.id.proD);
         this.progress.setVisibility(View.INVISIBLE);
 
-        //Sætter default dag, måned, år
-        this.faar = 1957;
-        this.fmd = 1;
-        this.fdag = 1;
+        // *** Sets default "from"-date ***
+        this.fromYear = 1957;
+        this.fromMonth = 1;
+        this.fromDay = 1;
 
-        this.taar = 1990;
-        this.tmd = 1;
-        this.tdag = 1;
+        // *** Sets default "to"-date ***
+        this.toYear = 1990;
+        this.toMonth = 1;
+        this.toDay = 1;
 
-        //Sætter HS
+        // *** Makes correct mainscreen ***
         this.h = new Intent(this, ItemView.class);
 
-        //Trækker fra HS
+        // *** Pulls from mainscreen ***
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.itemID = Splash.DB.getGenstandID(this.ID);
 
-        this.fra = Splash.DB.getGenstandList().get(this.genstandID).getDateringFra();
-        this.til = Splash.DB.getGenstandList().get(this.genstandID).getDateringTil();
+        this.fra = Splash.DB.getGenstandList().get(this.itemID).getDateringFra();
+        this.til = Splash.DB.getGenstandList().get(this.itemID).getDateringTil();
 
         if (this.fra.length() == 10 && !this.fra.equals("0000-00-00"))
         {
             String f[] = this.fra.split("-");
 
-            this.faar = Integer.parseInt(f[0]);
-            this.fmd = Integer.parseInt(f[1]);
-            this.fdag = Integer.parseInt(f[2]);
+            this.fromYear = Integer.parseInt(f[0]);
+            this.fromMonth = Integer.parseInt(f[1]);
+            this.fromDay = Integer.parseInt(f[2]);
         }
 
         if (this.til.length() == 10  && !this.til.equals("0000-00-00"))
         {
             String t[] = this.til.split("-");
 
-            this.taar = Integer.parseInt(t[0]);
-            this.tmd = Integer.parseInt(t[1]);
-            this.tdag = Integer.parseInt(t[2]);
+            this.toYear = Integer.parseInt(t[0]);
+            this.toMonth = Integer.parseInt(t[1]);
+            this.toDay = Integer.parseInt(t[2]);
         }
 
-        // NumberPicker (fra) Dag:
-
+        // *** NumberPicker "from"-day ***
         num1 = (NumberPicker) findViewById(R.id.numpDagD1);
         num1.setMaxValue(31);
         num1.setMinValue(1);
         num1.setWrapSelectorWheel(false);
-        num1.setValue(this.fdag);
+        num1.setValue(this.fromDay);
 
-        // NumberPicker (fra) Måned:
-
+        // *** NumberPicker "from"-month ***
         num2 = (NumberPicker) findViewById(R.id.numpMDD1);
         num2.setMaxValue(12);
         num2.setMinValue(1);
         num2.setWrapSelectorWheel(false);
-        num2.setValue(this.fmd);
+        num2.setValue(this.fromMonth);
 
-        // Number Picker (fra) Årstal:
-
+        // *** Number Picker "from"-year ***
         num3 = (NumberPicker) findViewById(R.id.numpAarD1);
         num3.setMaxValue(2100);
         num3.setMinValue(1940);
         num3.setWrapSelectorWheel(false);
-        num3.setValue(this.faar);
+        num3.setValue(this.fromYear);
 
-        // NumberPicker (til) Dag:
-
+        // *** NumberPicker "to"-day ***
         num4 = (NumberPicker) findViewById(R.id.numpDagD2);
         num4.setMaxValue(31);
         num4.setMinValue(1);
         num4.setWrapSelectorWheel(false);
-        num4.setValue(this.tdag);
+        num4.setValue(this.toDay);
 
-        // NumberPicker (til) Måned:
-
+        // *** NumberPicker "to"-month ***
         num5 = (NumberPicker) findViewById(R.id.numpMDD2);
         num5.setMaxValue(12);
         num5.setMinValue(1);
         num5.setWrapSelectorWheel(false);
-        num5.setValue(this.tmd);
+        num5.setValue(this.toMonth);
 
-        // Number Picker (til) Årstal:
-
+        // *** Number Picker "to"-month ***
         num6 = (NumberPicker) findViewById(R.id.numpAarD2);
         num6.setMaxValue(2100);
         num6.setMinValue(1940);
         num6.setWrapSelectorWheel(false);
-        num6.setValue(this.taar);
+        num6.setValue(this.toYear);
     }
 
-    public String getDatoTil()
+    public String getDateTo()
     {
         return num6.getValue() + "-" + num5.getValue() + "-" + num4.getValue();
     }
 
-    public String getDatoFra()
+    public String getDateFrom()
     {
         return num3.getValue() + "-" + num2.getValue() + "-" + num1.getValue();
     }
@@ -169,7 +166,7 @@ public class Dating extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setDatering(ID, getDatoFra(), getDatoTil());
+                        Splash.DB.setDatering(ID, getDateFrom(), getDateTo());
                         Splash.DB.setGenstandList();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -188,7 +185,7 @@ public class Dating extends Activity {
 
     public void startHS()
     {
-        //Item skal køres over på h
+        // *** show Item correct on mainscreen ***
         h.putExtra("ID", this.ID);
 
         startActivity(h);
