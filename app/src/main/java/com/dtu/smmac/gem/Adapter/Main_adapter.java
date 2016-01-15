@@ -23,14 +23,14 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
     private Context context;
     private List<Item> item;
-    private Filter genstandFilter;
-    private List<Item> orggenstand;
+    private Filter itemFilter;
+    private List<Item> orgItem;
 
     public Main_adapter(Context c, List<Item> item) {
         super(c, R.layout.row_main, item);
         this.context = c;
         this.item = item;
-        this.orggenstand = item;
+        this.orgItem = item;
     }
 
     public int getCount() {
@@ -41,7 +41,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
 
-        GenstandHolder holder = new GenstandHolder();
+        ItemHolder holder = new ItemHolder();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,7 +60,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         }
         else
         {
-            holder = (GenstandHolder) row.getTag();
+            holder = (ItemHolder) row.getTag();
         }
 
         Item n = this.item.get(position);
@@ -72,27 +72,27 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         return row;
     }
 
-    private static class GenstandHolder {
+    private static class ItemHolder {
         public TextView titleView;
         public TextView idView;
         public ImageView imgView;
     }
 
     public void resetData() {
-        this.item = this.orggenstand;
+        this.item = this.orgItem;
     }
 
     @Override
     public Filter getFilter() {
-        if (this.genstandFilter == null)
+        if (this.itemFilter == null)
         {
-            this.genstandFilter = new genstandFilter();
+            this.itemFilter = new ItemFilter();
         }
 
-        return genstandFilter;
+        return itemFilter;
     }
 
-    private class genstandFilter extends Filter {
+    private class ItemFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -100,8 +100,8 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
             if (constraint == null || constraint.length() == 0) {
 
-                results.values = orggenstand;
-                results.count = orggenstand.size();
+                results.values = orgItem;
+                results.count = orgItem.size();
             }
             else {
                 List<Item> nItem = new ArrayList<Item>();
