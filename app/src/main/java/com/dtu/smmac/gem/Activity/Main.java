@@ -26,6 +26,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     private TextView t;
     private Intent i, h;
     public static Main_adapter adap;
+    public static TextView txt;
 
     private ProgressBar progress;
     private boolean done;
@@ -39,6 +40,9 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
 
         this.progress = (ProgressBar) findViewById(R.id.proMain);
         this.progress.setVisibility(View.INVISIBLE);
+
+        this.txt = ( TextView ) findViewById(R.id.txt_Main);
+        this.txt.setVisibility(View.INVISIBLE);
 
         this.done = true;
 

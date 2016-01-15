@@ -10,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dtu.smmac.gem.Activity.Main;
 import com.dtu.smmac.gem.Items.Item;
 import com.dtu.smmac.gem.R;
 
@@ -114,7 +115,6 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
                 results.values = nItem;
                 results.count = nItem.size();
-
             }
             return results;
         }
@@ -122,6 +122,16 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             item = (List<Item>) results.values;
+
+            if(item.size() == 0)
+            {
+                Main.txt.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                Main.txt.setVisibility(View.INVISIBLE);
+            }
+
             notifyDataSetChanged();
         }
 
