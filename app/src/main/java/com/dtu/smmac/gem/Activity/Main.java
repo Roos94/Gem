@@ -88,11 +88,10 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         this.search.setOnKeyListener(new View.OnKeyListener() {
 
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
+
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER))
                 {
-                    // Perform action on Enter key press
                     search.clearFocus();
                     return true;
                 }
