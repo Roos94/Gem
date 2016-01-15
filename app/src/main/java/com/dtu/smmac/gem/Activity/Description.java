@@ -76,8 +76,7 @@ public class Description extends Activity implements View.OnClickListener {
         //Trækker fra HS
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-
-        setGenstand(this.ID);
+        this.genstandID = Splash.DB.getGenstandID(this.ID);
 
         this.bes = Splash.DB.getGenstandList().get(this.genstandID).getBeskrivelse();
 
@@ -227,16 +226,6 @@ public class Description extends Activity implements View.OnClickListener {
             }catch (Exception e)
             {
                 e.printStackTrace();
-            }
-        }
-    }
-
-    public void setGenstand(int ID)
-    {
-        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
-            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
-            {
-                return;
             }
         }
     }
