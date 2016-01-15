@@ -88,7 +88,6 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
             this.done = false;
 
             this.progress.setVisibility(View.VISIBLE);
-            this.list.setOnItemClickListener(null);
 
             this.t = (TextView) view.findViewById(R.id.id);
 
@@ -114,7 +113,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
                 {
                     startActivity(h);
                     done = true;
-                    setList();
+                    progress.setVisibility(View.INVISIBLE);
                 }
             }.execute();
         }
