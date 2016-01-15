@@ -84,20 +84,6 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         //Viser tastaturet
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-        this.search.setOnKeyListener(new View.OnKeyListener() {
-
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER))
-                {
-                    search.clearFocus();
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     public void setList() {
