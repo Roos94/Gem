@@ -46,7 +46,7 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }

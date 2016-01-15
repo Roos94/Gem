@@ -56,7 +56,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_startskaerm, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
         View v = (View) menu.findItem(R.id.search_item).getActionView();
 
