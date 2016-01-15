@@ -1,12 +1,12 @@
 package com.dtu.smmac.gem.Items;
 
-import java.util.Date;
-
 /**
- * Created by Roooooooos on 09/11/15.
+ * Denne klasse bruges som objekt for hver af de registrede items
+ *
+ * Created by Roos on 09/11/15.
  */
 public class Item {
-// test test test
+
     private String title;
     private int ID;
     private int image;
@@ -20,6 +20,7 @@ public class Item {
     private String emnegruppe;
     private String betegnelse;
 
+    // Konstruktøren for et item
     public Item(int itemId,
                 String itemHeadline,
                 String itemDescription,

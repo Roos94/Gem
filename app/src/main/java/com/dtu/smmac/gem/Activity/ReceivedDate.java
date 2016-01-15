@@ -56,7 +56,7 @@ public class ReceivedDate extends Activity {
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        setGenstand(this.ID);
+        this.genstandID = Splash.DB.getGenstandID(this.ID);
 
         this.modtaget = Splash.DB.getGenstandList().get(this.genstandID).getModtaget();
 
@@ -134,16 +134,6 @@ public class ReceivedDate extends Activity {
                     startHS();
                 }
             }.execute();
-        }
-    }
-
-    public void setGenstand(int ID)
-    {
-        for (this.genstandID = 0; this.genstandID < Splash.DB.getGenstandList().size(); this.genstandID++) {
-            if (Splash.DB.getGenstandList().get(this.genstandID).getID() == ID)
-            {
-                return;
-            }
         }
     }
 

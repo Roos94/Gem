@@ -1,8 +1,10 @@
 package com.dtu.smmac.gem.Items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 
+import com.dtu.smmac.gem.Activity.Splash;
 import com.dtu.smmac.gem.R;
 
 import org.json.JSONArray;
@@ -24,6 +26,8 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
+ * Denne klasse
+ *
  * Created by Roos on 23/11/15.
  */
 public class DAO {
@@ -41,6 +45,7 @@ public class DAO {
     private int aar;
     private final Calendar cal = Calendar.getInstance();
 
+    //Konstruktøren
     public DAO()
     {
         this.item = new ArrayList<Item>();
@@ -128,6 +133,18 @@ public class DAO {
         }
 
         return 1;
+    }
+
+    public int getGenstandID(int ID)
+    {
+        for (int genstandID = 0; genstandID < this.item.size(); genstandID++) {
+            if (this.item.get(genstandID).getID() == ID)
+            {
+                return genstandID;
+            }
+        }
+
+        return 0;
     }
 
     public String getUrl(String url) throws IOException {
