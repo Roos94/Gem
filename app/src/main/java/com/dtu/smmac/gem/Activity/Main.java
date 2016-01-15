@@ -3,6 +3,7 @@ package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,7 +26,6 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     private TextView t;
     private Intent i, h;
     public static Main_adapter adap;
-    private Item gen;
 
     private boolean done;
 
@@ -83,19 +83,30 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
 
             this.t = (TextView) view.findViewById(R.id.id);
 
-            for (int j = 0; j < Splash.DB.getGenstandList().size(); j++) {
-                if (Splash.DB.getGenstandList().get(j).getIDtoString().equals(t.getText().toString()))
-                {
-                    this.gen = Splash.DB.getGenstandList().get(j);
-                }
-            }
+            final int ID = Integer.parseInt(this.t.getText().toString());
 
             //Item skal køres over på h
-            h.putExtra("ID", gen.getID());
+            h.putExtra("ID", ID);
 
-            startActivity(h);
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    try
+                    {
+                        Splash.DB.setGenstand(ID);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
 
-            this.done = true;
+                @Override
+                protected void onPostExecute(Object resultat)
+                {
+                    startActivity(h);
+                    done = true;
+                }
+            }.execute();
         }
     }
 

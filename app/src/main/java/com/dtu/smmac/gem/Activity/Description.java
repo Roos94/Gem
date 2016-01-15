@@ -110,6 +110,7 @@ public class Description extends Activity implements View.OnClickListener {
                         Splash.DB.setBeskrivelse(ID, bes);
                         Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "mp4");
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

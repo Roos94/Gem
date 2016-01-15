@@ -84,6 +84,7 @@ public class References extends Activity {
                     try {
                         Splash.DB.setRef(ID, donator, producent);
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

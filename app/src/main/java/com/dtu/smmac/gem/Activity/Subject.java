@@ -99,6 +99,7 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
                     try {
                         Splash.DB.setEmnegruppe(ID, emne);
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

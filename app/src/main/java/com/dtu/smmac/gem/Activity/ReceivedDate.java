@@ -125,6 +125,7 @@ public class ReceivedDate extends Activity {
                     try {
                         Splash.DB.setModtaget(ID, getDate());
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

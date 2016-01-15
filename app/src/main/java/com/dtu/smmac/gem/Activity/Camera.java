@@ -77,6 +77,7 @@ public class Camera extends Activity implements View.OnClickListener {
                     try {
                         //Splash.DB.postFile(Camera.this, ID, Uri.fromFile(iv), "jpg");
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

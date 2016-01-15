@@ -96,6 +96,7 @@ public class NewItem extends Activity {
                     try {
                         Splash.DB.setTitel(ID, titel);
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

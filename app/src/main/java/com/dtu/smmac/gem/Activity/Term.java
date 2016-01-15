@@ -83,6 +83,7 @@ public class Term extends Activity {
                     try {
                         Splash.DB.setBetegnelse(ID, bet);
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

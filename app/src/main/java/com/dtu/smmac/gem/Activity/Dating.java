@@ -168,6 +168,7 @@ public class Dating extends Activity {
                     try {
                         Splash.DB.setDatering(ID, getDateFrom(), getDateTo());
                         Splash.DB.setGenstandList();
+                        Splash.DB.setGenstand(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

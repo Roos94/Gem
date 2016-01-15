@@ -33,17 +33,12 @@ import java.util.List;
 public class DAO {
 
     private List<Item> item;
-    private int nextID;
     private String data;
     private JSONArray json;
-    private JSONObject obj, fobj;
+    private JSONObject obj;
     private final String API = "http://msondrup.dk/api/v1/items"; //"http://78.46.187.172:4019";
     private final String userID = "?userID=56837dedd2d76438906140"; //""
     private URL url;
-    private int dag;
-    private int md;
-    private int aar;
-    private final Calendar cal = Calendar.getInstance();
 
     //Konstruktøren
     public DAO()
@@ -51,88 +46,92 @@ public class DAO {
         this.item = new ArrayList<Item>();
     }
 
+    //Returnere listen med items
     public List<Item> getGenstandList()
     {
         return item;
     }
 
+    //Sætter listen med items fra API'en
     public void setGenstandList() throws Exception
     {
+        //Ryder item listen
         this.item.clear();
 
+        //Sætter datastrengen fra API'en
         this.data = getUrl(this.API + this.userID);
+
+        //Opsætter JSON Array med data fra API'en
         this.json = new JSONArray(data);
 
-        int j = 0;
+        //Looper alle items igennem i JSON Array
         for (int i = 0; i < this.json.length(); i++) {
-            this.fobj = this.json.getJSONObject(i);
-            j = j + setGenstand(j, this.fobj.optInt("itemid"));
-        }
-    }
 
-    public int getNextID() throws Exception
-    {
-        this.nextID = 0;
+            //Sætter JSON objekt fra JSON Array
+            this.obj = this.json.getJSONObject(i);
 
-        this.data = getUrl(this.API + this.userID);
-        this.json = new JSONArray(data);
-
-        for (int i = 0; i < this.json.length(); i++) {
-            this.fobj = this.json.getJSONObject(i);
-
-            System.out.println(this.fobj.optInt("itemid"));
-
-            if (this.fobj.optInt("itemid") >= this.nextID) {
-                this.nextID = this.fobj.optInt("itemid");
+            //Gør at den ikke viser de items, der ikke har nogen titel
+            if (this.obj.optString("itemheadline").isEmpty())
+            {
+                //Hvis app'en kun bruges af 1 person er det muligt at slette items uden titel
+                //deleteGenstand(this.obj.optInt("itemid"));
+            }
+            else {
+                //Opretter et item inde i itemlisten
+                this.item.add(new Item(
+                        this.obj.optInt("itemid"),
+                        this.obj.optString("itemheadline"),
+                        R.drawable.ddf
+                ));
             }
         }
-
-        return this.nextID;
     }
 
-    public int setGenstand(int listID, int ID) throws JSONException
+
+    public void setGenstand(int ID) throws JSONException
     {
         try
         {
             this.data = getUrl(this.API + "/" + ID + this.userID);
             this.obj = new JSONObject(this.data);
 
-            //System.out.println(this.data);
+            int genstandID = getGenstandID(ID);
 
-            //Gør at den ikke viser de items, der ikke har nogen titel?
-            if (this.obj.optString("itemheadline").isEmpty())
-            {
-                System.out.println("Viser ikke item med ID: " + this.obj.optInt("itemid"));
+            this.item.get(genstandID).setBeskrivelse(this.obj.optString("itemdescription"));
+            this.item.get(genstandID).setModtaget(this.obj.optString("itemreceived"));
+            this.item.get(genstandID).setBetegnelse(this.obj.optString("betegnelse"));
+            this.item.get(genstandID).setDateringFra(this.obj.optString("itemdatingfrom"));
+            this.item.get(genstandID).setDateringTil(this.obj.optString("itemdatingto"));
+            this.item.get(genstandID).setDonator(this.obj.optString("donator"));
+            this.item.get(genstandID).setProducer(this.obj.optString("producer"));
+            this.item.get(genstandID).setPostCode(this.obj.optString("postnummer"));
+            this.item.get(genstandID).setEmnegruppe(this.obj.optString("emnegruppe"));
 
-                //Det er et spørgsmål, om den skal slette de items, der ikke har nogen titel?
-                //deleteGenstand(this.obj.optInt("itemid"));
-                return 0;
-            }
-            else
-            {
-                this.item.add(listID, new Item(
-                        this.obj.optInt("itemid"),
-                        this.obj.optString("itemheadline"),
-                        this.obj.optString("itemdescription"),
-                        this.obj.optString("itemreceived"),
-                        this.obj.optString("itemdatingfrom"),
-                        this.obj.optString("itemdatingto"),
-                        this.obj.optString("donator"),
-                        this.obj.optString("producer"),
-                        this.obj.optString("postnummer"),
-                        this.obj.optString("emnegruppe"),
-                        this.obj.optString("betegnelse"),
-                        R.drawable.ddf
-                ));
-                return 1;
-            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
-        return 1;
+    public int getNextID() throws Exception
+    {
+        int nextID = 0;
+
+        this.data = getUrl(this.API + this.userID);
+        this.json = new JSONArray(data);
+
+        for (int i = 0; i < this.json.length(); i++) {
+            this.obj = this.json.getJSONObject(i);
+
+            System.out.println(this.obj.optInt("itemid"));
+
+            if (this.obj.optInt("itemid") >= nextID) {
+                nextID = this.obj.optInt("itemid");
+            }
+        }
+
+        return nextID;
     }
 
     public int getGenstandID(int ID)
@@ -161,12 +160,13 @@ public class DAO {
     public void addGenstand() throws IOException {
         this.obj = new JSONObject();
 
-        dag = cal.get(Calendar.DAY_OF_MONTH);
-        md = cal.get(Calendar.MONTH) + 1;
-        aar = cal.get(Calendar.YEAR);
+        Calendar cal = Calendar.getInstance();
+
+        int dag = cal.get(Calendar.DAY_OF_MONTH);
+        int md = cal.get(Calendar.MONTH) + 1;
+        int aar = cal.get(Calendar.YEAR);
 
         try {
-            //this.obj.put("itemid", "" + Splash.item.getNextID());
             this.obj.put("itemheadline", "");
             this.obj.put("itemdescription", "");
             this.obj.put("itemreceived", aar + "-" + md + "-" + dag);
