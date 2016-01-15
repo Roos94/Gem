@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dtu.smmac.gem.Adapter.Main_adapter;
@@ -27,6 +28,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     private Intent i, h;
     public static Main_adapter adap;
 
+    private ProgressBar progress;
     private boolean done;
 
     @Override
@@ -35,6 +37,9 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         setContentView(R.layout.activity_main);
 
         this.getActionBar().setTitle("");
+
+        this.progress = (ProgressBar) findViewById(R.id.proMain);
+        this.progress.setVisibility(View.INVISIBLE);
 
         this.done = true;
 
@@ -73,6 +78,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         this.list.setTextFilterEnabled(true);
 
         this.list.setOnItemClickListener(this);
+        this.progress.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -80,6 +86,9 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
         if(this.done == true)
         {
             this.done = false;
+
+            this.progress.setVisibility(View.VISIBLE);
+            this.list.setOnItemClickListener(null);
 
             this.t = (TextView) view.findViewById(R.id.id);
 
@@ -105,6 +114,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
                 {
                     startActivity(h);
                     done = true;
+                    setList();
                 }
             }.execute();
         }
@@ -128,6 +138,4 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     public void afterTextChanged(Editable s) {
 
     }
-
-
 }

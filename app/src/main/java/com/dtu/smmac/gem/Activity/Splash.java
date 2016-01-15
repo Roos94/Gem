@@ -73,7 +73,7 @@ public class Splash extends Activity {
     }
 
     public void setTimer() {
-        //SystemClock.sleep(1000);
+        SystemClock.sleep(1000);
 
         runOnUiThread(this.l1);
         SystemClock.sleep(400);
