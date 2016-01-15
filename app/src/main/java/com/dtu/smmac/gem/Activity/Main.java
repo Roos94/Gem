@@ -80,6 +80,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     public void search(MenuItem item)
     {
         this.search.requestFocus();
+        //Viser tastaturet
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
@@ -87,10 +88,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     public void setList() {
         this.adap = new Main_adapter(this, Splash.DB.getItemList());
         this.list.setAdapter(adap);
-        this.list.setTextFilterEnabled(true);
-
         this.list.setOnItemClickListener(this);
-        this.progress.setVisibility(View.INVISIBLE);
     }
 
     @Override
