@@ -46,8 +46,8 @@ public class References extends Activity {
 
         this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.donator = Splash.DB.getGenstandList().get(this.genstandID).getDonator();
-        this.producent = Splash.DB.getGenstandList().get(this.genstandID).getProducer();
+        this.donator = Splash.DB.getItemList().get(this.genstandID).getDonator();
+        this.producent = Splash.DB.getItemList().get(this.genstandID).getProducer();
 
         //Sætter HS
         this.h = new Intent(this, ItemView.class);
@@ -83,8 +83,8 @@ public class References extends Activity {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setRef(ID, donator, producent);
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

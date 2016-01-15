@@ -78,7 +78,7 @@ public class Description extends Activity implements View.OnClickListener {
         this.ID = this.lastUsed.getIntExtra("ID", 0);
         this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.bes = Splash.DB.getGenstandList().get(this.genstandID).getBeskrivelse();
+        this.bes = Splash.DB.getItemList().get(this.genstandID).getBeskrivelse();
 
         this.beskrivelse.setText(this.bes);
 
@@ -109,8 +109,8 @@ public class Description extends Activity implements View.OnClickListener {
                     try {
                         Splash.DB.setBeskrivelse(ID, bes);
                         Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "mp4");
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

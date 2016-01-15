@@ -62,7 +62,7 @@ public class Splash extends Activity {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    DB.setGenstandList();
+                    DB.setItemList();
                     timer.start();
                 } catch (Exception e) {
                     e.printStackTrace();

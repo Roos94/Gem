@@ -1,7 +1,6 @@
 package com.dtu.smmac.gem.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,7 +30,7 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
         this.ID = this.lastUsed.getIntExtra("ID", 0);
         this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.getActionBar().setTitle("    " + Splash.DB.getGenstandList().get(this.genstandID).getTitle());
+        this.getActionBar().setTitle("    " + Splash.DB.getItemList().get(this.genstandID).getTitle());
 
         this.liste = (ListView) findViewById(R.id.listView);
 
@@ -39,7 +38,7 @@ public class ItemView extends Activity implements AdapterView.OnItemClickListene
     }
 
     public void setList() {
-        this.adap = new ItemView_adapter(this, Splash.DB.getGenstandList().get(this.genstandID));
+        this.adap = new ItemView_adapter(this, Splash.DB.getItemList().get(this.genstandID));
         this.liste.setAdapter(adap);
 
         this.liste.setOnItemClickListener(this);

@@ -3,7 +3,6 @@ package com.dtu.smmac.gem.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.dtu.smmac.gem.R;
-
-import java.io.File;
 
 public class Camera extends Activity implements View.OnClickListener {
 
@@ -76,8 +73,8 @@ public class Camera extends Activity implements View.OnClickListener {
                 protected Object doInBackground(Object[] params) {
                     try {
                         //Splash.DB.postFile(Camera.this, ID, Uri.fromFile(iv), "jpg");
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

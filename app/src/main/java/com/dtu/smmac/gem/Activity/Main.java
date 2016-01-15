@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dtu.smmac.gem.Adapter.Main_adapter;
-import com.dtu.smmac.gem.Items.Item;
 import com.dtu.smmac.gem.R;
 
 public class Main extends Activity implements AdapterView.OnItemClickListener, TextWatcher {
@@ -73,7 +72,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
     }
 
     public void setList() {
-        this.adap = new Main_adapter(this, Splash.DB.getGenstandList());
+        this.adap = new Main_adapter(this, Splash.DB.getItemList());
         this.list.setAdapter(adap);
         this.list.setTextFilterEnabled(true);
 
@@ -101,7 +100,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
                 protected Object doInBackground(Object[] params) {
                     try
                     {
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

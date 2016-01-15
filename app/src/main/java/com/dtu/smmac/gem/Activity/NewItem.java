@@ -95,8 +95,8 @@ public class NewItem extends Activity {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setTitel(ID, titel);
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

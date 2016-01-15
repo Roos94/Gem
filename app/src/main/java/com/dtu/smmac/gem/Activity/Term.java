@@ -50,7 +50,7 @@ public class Term extends Activity {
 
         this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.bet = Splash.DB.getGenstandList().get(this.genstandID).getBetegnelse();
+        this.bet = Splash.DB.getItemList().get(this.genstandID).getBetegnelse();
 
         this.et.setText(this.bet);
 
@@ -82,8 +82,8 @@ public class Term extends Activity {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setBetegnelse(ID, bet);
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

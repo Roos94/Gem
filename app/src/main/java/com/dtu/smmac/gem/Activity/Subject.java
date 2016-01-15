@@ -74,7 +74,7 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
 
         this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.emne = Splash.DB.getGenstandList().get(this.genstandID).getEmnegruppe();
+        this.emne = Splash.DB.getItemList().get(this.genstandID).getEmnegruppe();
 
         this.emnet.setText("Valgt emne: " + this.emne);
     }
@@ -98,8 +98,8 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setEmnegruppe(ID, emne);
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

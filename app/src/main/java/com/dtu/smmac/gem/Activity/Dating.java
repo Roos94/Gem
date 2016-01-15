@@ -74,8 +74,8 @@ public class Dating extends Activity {
         this.ID = this.lastUsed.getIntExtra("ID", 0);
         this.itemID = Splash.DB.getGenstandID(this.ID);
 
-        this.fra = Splash.DB.getGenstandList().get(this.itemID).getDateringFra();
-        this.til = Splash.DB.getGenstandList().get(this.itemID).getDateringTil();
+        this.fra = Splash.DB.getItemList().get(this.itemID).getDateringFra();
+        this.til = Splash.DB.getItemList().get(this.itemID).getDateringTil();
 
         if (this.fra.length() == 10 && !this.fra.equals("0000-00-00"))
         {
@@ -167,8 +167,8 @@ public class Dating extends Activity {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setDatering(ID, getDateFrom(), getDateTo());
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

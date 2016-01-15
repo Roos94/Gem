@@ -64,7 +64,7 @@ public class ReceivedDate extends Activity {
 
         this.itemID = Splash.DB.getGenstandID(this.ID);
 
-        this.recieved = Splash.DB.getGenstandList().get(this.itemID).getModtaget();
+        this.recieved = Splash.DB.getItemList().get(this.itemID).getModtaget();
 
         if (this.recieved.length() == 10 && !this.recieved.equals("0000-00-00"))
         {
@@ -124,8 +124,8 @@ public class ReceivedDate extends Activity {
                 protected Object doInBackground(Object[] params) {
                     try {
                         Splash.DB.setModtaget(ID, getDate());
-                        Splash.DB.setGenstandList();
-                        Splash.DB.setGenstand(ID);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

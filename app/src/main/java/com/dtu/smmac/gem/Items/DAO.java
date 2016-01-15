@@ -47,13 +47,13 @@ public class DAO {
     }
 
     //Returnere listen med items
-    public List<Item> getGenstandList()
+    public List<Item> getItemList()
     {
         return item;
     }
 
     //Sætter listen med items fra API'en
-    public void setGenstandList() throws Exception
+    public void setItemList() throws Exception
     {
         //Ryder item listen
         this.item.clear();
@@ -88,24 +88,30 @@ public class DAO {
     }
 
 
-    public void setGenstand(int ID) throws JSONException
+    //Sætter de resterende informationer til et item
+    public void setItem(int ID) throws JSONException
     {
         try
         {
+            //Sætter datastrengen fra API'en
             this.data = getUrl(this.API + "/" + ID + this.userID);
+
+            //Sætter JSON objekt fra item fra API'en
             this.obj = new JSONObject(this.data);
 
-            int genstandID = getGenstandID(ID);
+            //Sætter id som item har i item listen
+            int listID = getGenstandID(ID);
 
-            this.item.get(genstandID).setBeskrivelse(this.obj.optString("itemdescription"));
-            this.item.get(genstandID).setModtaget(this.obj.optString("itemreceived"));
-            this.item.get(genstandID).setBetegnelse(this.obj.optString("betegnelse"));
-            this.item.get(genstandID).setDateringFra(this.obj.optString("itemdatingfrom"));
-            this.item.get(genstandID).setDateringTil(this.obj.optString("itemdatingto"));
-            this.item.get(genstandID).setDonator(this.obj.optString("donator"));
-            this.item.get(genstandID).setProducer(this.obj.optString("producer"));
-            this.item.get(genstandID).setPostCode(this.obj.optString("postnummer"));
-            this.item.get(genstandID).setEmnegruppe(this.obj.optString("emnegruppe"));
+            //Sætter de resterende informationer
+            this.item.get(listID).setBeskrivelse(this.obj.optString("itemdescription"));
+            this.item.get(listID).setModtaget(this.obj.optString("itemreceived"));
+            this.item.get(listID).setBetegnelse(this.obj.optString("betegnelse"));
+            this.item.get(listID).setDateringFra(this.obj.optString("itemdatingfrom"));
+            this.item.get(listID).setDateringTil(this.obj.optString("itemdatingto"));
+            this.item.get(listID).setDonator(this.obj.optString("donator"));
+            this.item.get(listID).setProducer(this.obj.optString("producer"));
+            this.item.get(listID).setPostCode(this.obj.optString("postnummer"));
+            this.item.get(listID).setEmnegruppe(this.obj.optString("emnegruppe"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -114,6 +120,7 @@ public class DAO {
         }
     }
 
+    //Finder det næste id i API'et
     public int getNextID() throws Exception
     {
         int nextID = 0;
