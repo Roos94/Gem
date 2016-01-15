@@ -13,7 +13,7 @@ import com.dtu.smmac.gem.R;
 import java.util.Calendar;
 
 /*
- *  *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
+ *   *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
  */
 
 public class ReceivedDate extends Activity {

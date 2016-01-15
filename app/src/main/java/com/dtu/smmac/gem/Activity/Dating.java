@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import com.dtu.smmac.gem.R;
 
 /*
- *  *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
+ *   *** Created by Anders Thostrup Thomsen (S140996) and Christoffer John Svendsen (S145089) ***
  */
 
 public class Dating extends Activity {
