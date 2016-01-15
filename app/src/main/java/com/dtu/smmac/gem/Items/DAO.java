@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Denne klasse
+ * Denne klasse har sammenspillet mellem app'en og API'et
  *
  * Created by Roos on 23/11/15.
  */
@@ -50,16 +50,16 @@ public class DAO {
         return item;
     }
 
-    //Sætter listen med items fra API'en
+    //Sætter listen med items fra API'et
     public void setItemList() throws Exception
     {
         //Ryder item listen
         this.item.clear();
 
-        //Sætter datastrengen fra API'en
+        //Sætter datastrengen fra API'et
         this.data = getUrl(this.API + this.userID);
 
-        //Opsætter JSON Array med data fra API'en
+        //Opsætter JSON Array med data fra API'et
         this.json = new JSONArray(data);
 
         //Looper alle items igennem i JSON Array
@@ -91,10 +91,10 @@ public class DAO {
     {
         try
         {
-            //Sætter datastrengen fra API'en
+            //Sætter datastrengen fra API'et
             this.data = getUrl(this.API + "/" + ID + this.userID);
 
-            //Sætter JSON objekt fra item fra API'en
+            //Sætter JSON objekt fra item fra API'et
             this.obj = new JSONObject(this.data);
 
             //Sætter id som item har i item listen
@@ -118,16 +118,16 @@ public class DAO {
         }
     }
 
-    //Finder det sidste id i API'en
+    //Finder det sidste id i API'et
     //              ^ Da man opretter et tomt item, når man klikker på ny registrering
     public int getNextID() throws Exception
     {
         int nextID = 0;
 
-        //Sætter datastrengen fra API'en
+        //Sætter datastrengen fra API'et
         this.data = getUrl(this.API + this.userID);
 
-        //Opsætter JSON Array med data fra API'en
+        //Opsætter JSON Array med data fra API'et
         this.json = new JSONArray(data);
 
         //Looper alle items igennem
@@ -170,7 +170,7 @@ public class DAO {
         return sb.toString();
     }
 
-    //Tilføjer et tomt item til API'en - Dog med modtagelsesdato som dagsdato
+    //Tilføjer et tomt item til API'et - Dog med modtagelsesdato som dagsdato
     public void addItem() throws IOException {
         this.obj = new JSONObject();
 
@@ -200,7 +200,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item title til API'en
+    //Skriver item title til API'et
     public void setTitle(int ID, String title) throws IOException
     {
         this.obj = new JSONObject();
@@ -216,7 +216,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item modtagelsesdato til API'en
+    //Skriver item modtagelsesdato til API'et
     public void setReceivedDate(int ID, String modtaget) throws IOException
     {
         this.obj = new JSONObject();
@@ -232,7 +232,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item datering (til og fra) til API'en
+    //Skriver item datering (til og fra) til API'et
     public void setDating(int ID, String fra, String til) throws IOException
     {
         this.obj = new JSONObject();
@@ -249,7 +249,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item beskrivelse til API'en
+    //Skriver item beskrivelse til API'et
     public void setDescription(int ID, String beskrivelse) throws IOException
     {
         this.obj = new JSONObject();
@@ -265,7 +265,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item betegnelse til API'en
+    //Skriver item betegnelse til API'et
     public void setTerm(int ID, String betegnelse) throws IOException
     {
         this.obj = new JSONObject();
@@ -281,7 +281,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item emnegruppe til API'en
+    //Skriver item emnegruppe til API'et
     public void setSubject(int ID, String emne) throws IOException
     {
         this.obj = new JSONObject();
@@ -297,7 +297,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Skriver item referencer (donator og producer) til API'en
+    //Skriver item referencer (donator og producer) til API'et
     public void setReferences(int ID, String donator, String producent) throws IOException
     {
         this.obj = new JSONObject();
@@ -314,7 +314,7 @@ public class DAO {
         postItem(this.obj, this.url);
     }
 
-    //Sletter et item fra API'en
+    //Sletter et item fra API'et
     public void deleteItem(int ID) throws IOException
     {
         this.url = new URL(this.API + "/" + ID + this.userID);
@@ -336,7 +336,7 @@ public class DAO {
         }
     }
 
-    //Poster et JSON objekt til API'en
+    //Poster et JSON objekt til API'et
     public void postItem(JSONObject ob, URL url) throws IOException {
         InputStream is = null;
 
@@ -364,7 +364,7 @@ public class DAO {
 
     }
 
-    //Poster enten en mp4 eller jpg fil til API'en
+    //Poster enten en mp4 eller jpg fil til API'et
     public void postFile(Context c, int ID, Uri filePath, String ext)
     {
         InputStream is;
