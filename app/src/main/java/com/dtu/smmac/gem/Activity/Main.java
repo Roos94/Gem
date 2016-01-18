@@ -162,6 +162,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener, T
             this.adap.resetData();
         }
 
+        //Sætter filter på adapteren
         this.adap.getFilter().filter(s.toString());
     }
 
