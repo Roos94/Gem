@@ -27,6 +27,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
     private Filter itemFilter;
     private List<Item> orgItem;
 
+    //Konstruktøren
     public Main_adapter(Context c, List<Item> item) {
         super(c, R.layout.row_main, item);
         this.context = c;
@@ -34,16 +35,19 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         this.orgItem = item;
     }
 
+    //Returnerer antallet af rækker i listen
     public int getCount() {
         return this.item.size();
     }
 
+    //Sætter view'et for hver række i listen
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
 
         ItemHolder holder = new ItemHolder();
 
+        //Hvis der ikke eksisterer minimum en række
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -66,23 +70,31 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
         Item n = this.item.get(position);
 
+        //Sætter billede på item
         holder.imgView.setImageResource(n.getImage());
+
+        //Sætter title på item
         holder.titleView.setText(n.getTitle());
+
+        //Sætter id på item
         holder.idView.setText(n.getIDtoString());
 
         return row;
     }
 
+    //Klassen der håndterer hver række
     private static class ItemHolder {
         public TextView titleView;
         public TextView idView;
         public ImageView imgView;
     }
 
+    //Resetter filteret til den oprindelige itemliste
     public void resetData() {
         this.item = this.orgItem;
     }
 
+    //Sætter filteret
     @Override
     public Filter getFilter() {
         if (this.itemFilter == null)
@@ -93,8 +105,10 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
         return itemFilter;
     }
 
+    //Filter klassen
     private class ItemFilter extends Filter {
 
+        //Sætter filteret i forhold til, hvad der skrives som filter
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -119,6 +133,7 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
             return results;
         }
 
+        //Notificerer listen på Main
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             item = (List<Item>) results.values;

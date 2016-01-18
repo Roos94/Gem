@@ -40,6 +40,7 @@ public class ItemView_adapter extends ArrayAdapter<Item> {
 
         Holder holder = new Holder();
 
+        //Hvis der ikke eksisterer minimum en række
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
