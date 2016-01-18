@@ -140,13 +140,16 @@ public class Main_adapter extends ArrayAdapter<Item> implements Filterable {
 
             if(item.size() == 0)
             {
+                //Viser "Intet resultat"-teksten
                 Main.txt.setVisibility(View.VISIBLE);
             }
             else
             {
+                //Skjuler "Intet resultat"-teksten
                 Main.txt.setVisibility(View.INVISIBLE);
             }
 
+            //Notificerer ændringer på adapteren
             notifyDataSetChanged();
         }
 
