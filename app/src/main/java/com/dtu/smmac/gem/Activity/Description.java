@@ -68,6 +68,7 @@ public class Description extends Activity implements View.OnClickListener {
 
         beskrivelse = (EditText) findViewById(R.id.beskrivelse);
 
+        // Sætter hvor filen skal gemmes
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audio.mp4";
 
         //Sætter HS
@@ -168,6 +169,7 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
+    // Starter en recording
     private void beginRecording() throws IOException {
         ditchRecord();
         File outFile = new File(OUTPUT_FILE);
@@ -185,6 +187,7 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
+    // Stopper recording
     private void stopRecording() {
         if(recorder != null)
             recorder.stop();
@@ -208,11 +211,13 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
+    // Stopper afspilning
     private void stopPlayback() {
         if(player != null)
             player.stop();
     }
 
+    // Fjerner recording
     private void ditchRecord() {
         if(recorder != null)
             recorder.release();
@@ -254,6 +259,7 @@ public class Description extends Activity implements View.OnClickListener {
         if (rec == 1) {
             record.setImageResource(R.drawable.rcircle);
 
+            // Starter lydoptagelse
             try {
                 beginRecording();
             }catch (Exception e){
@@ -261,13 +267,14 @@ public class Description extends Activity implements View.OnClickListener {
             }
 
             this.rec = 2;
-            // Starter lydoptagelse
         }
 
         else
         {
             record.setImageResource(R.drawable.mic);
-            play.setVisibility(View.VISIBLE);
+            play.setVisibility(View.VISIBLE); // Gør play-knap synlig
+
+            // Stopper lydoptagelsen
             try {
                 stopRecording();
             }catch (Exception e){
@@ -275,7 +282,6 @@ public class Description extends Activity implements View.OnClickListener {
             }
 
             this.rec = 1;
-            // Stopper lydoptagelsen
         }
     }
 
