@@ -29,8 +29,8 @@ public class Description extends Activity implements View.OnClickListener {
     private ImageButton record, play;
     private EditText beskrivelse;
     private int rec, pl; // Bruges til at holde styr på hvilket billede der vises
-    private MediaRecorder recorder;
-    private MediaPlayer player;
+    private MediaRecorder recorder; // bruges til recording af lydfil
+    private MediaPlayer player; // Bruges til at afspille en lydfil
     private String OUTPUT_FILE;
     private ProgressBar progress;
 
@@ -61,6 +61,7 @@ public class Description extends Activity implements View.OnClickListener {
         pl = 1;
         play.setVisibility(View.INVISIBLE);
 
+        // Sætter hvor filen skal gemmes
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audio.mp4";
 
         //Sætter actionbar-teksten
@@ -163,6 +164,7 @@ public class Description extends Activity implements View.OnClickListener {
                 play.setImageResource(R.drawable.stop);
                 this.pl = 2;
 
+                // Afspiller recording
                 try {
                     playRecording();
                 }catch (Exception e){
@@ -173,6 +175,7 @@ public class Description extends Activity implements View.OnClickListener {
             else {
                 play.setImageResource(R.drawable.play);
 
+                // Stopper afspilningen
                 try {
                     stopPlayback();
                 }catch (Exception e){
@@ -180,12 +183,12 @@ public class Description extends Activity implements View.OnClickListener {
                 }
 
                 this.pl = 1;
-                // Stopper afspilningen
             }
         }
 
     }
 
+    // Metoden man bruger til at starte en recording
     private void beginRecording() throws IOException {
         ditchRecord();
         File outFile = new File(OUTPUT_FILE);
@@ -208,6 +211,7 @@ public class Description extends Activity implements View.OnClickListener {
             recorder.stop();
     }
 
+    // Metoden til at afspille en recording
     private void playRecording() throws IOException {
         ditchPlayer();
 
@@ -231,6 +235,7 @@ public class Description extends Activity implements View.OnClickListener {
             player.stop();
     }
 
+    // Bruges til at slette en recording
     private void ditchRecord() {
         if(recorder != null)
             recorder.release();
