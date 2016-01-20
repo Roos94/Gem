@@ -44,10 +44,10 @@ public class References extends Activity {
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.genstandID = Splash.DB.getItemID(this.ID);
 
-        this.donator = Splash.DB.getGenstandList().get(this.genstandID).getDonator();
-        this.producent = Splash.DB.getGenstandList().get(this.genstandID).getProducer();
+        this.donator = Splash.DB.getItemList().get(this.genstandID).getDonator();
+        this.producent = Splash.DB.getItemList().get(this.genstandID).getProducer();
 
         //Sætter HS
         this.h = new Intent(this, ItemView.class);
@@ -63,7 +63,7 @@ public class References extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -82,8 +82,9 @@ public class References extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setRef(ID, donator, producent);
-                        Splash.DB.setGenstandList();
+                        Splash.DB.setReferences(ID, donator, producent);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -20,7 +20,17 @@ public class Item {
     private String emnegruppe;
     private String betegnelse;
 
-    // Konstruktøren for et item
+    //Kontruktøren med minimumskravene for et item
+    public Item(int itemId,
+                String itemHeadline,
+                int image)
+    {
+        this.ID = itemId;
+        this.title = itemHeadline;
+        this.image = image;
+    }
+
+    //Den fulde konstruktøren for et item
     public Item(int itemId,
                 String itemHeadline,
                 String itemDescription,
@@ -73,19 +83,93 @@ public class Item {
         return this.beskrivelse;
     }
 
-    public String getModtaget() { return this.modtaget; }
+    public String getModtaget()
+    {
+        return this.modtaget;
+    }
 
-    public String getDateringFra() {return this.dateringFra;}
+    public String getDateringFra()
+    {
+        return this.dateringFra;
+    }
 
-    public String getDateringTil() {return this.dateringTil;}
+    public String getDateringTil()
+    {
+        return this.dateringTil;
+    }
 
-    public String getDonator() {return this.donator;}
+    public String getDonator()
+    {
+        return this.donator;
+    }
 
-    public String getProducer() {return this.producer;}
+    public String getProducer()
+    {
+        return this.producer;
+    }
 
-    public String getPostCode() {return this.postCode;}
+    public String getPostCode()
+    {
+        return this.postCode;
+    }
 
-    public String getEmnegruppe() {return this.emnegruppe;}
+    public String getEmnegruppe()
+    {
+        return this.emnegruppe;
+    }
 
-    public String getBetegnelse() {return this.betegnelse;}
+    public String getBetegnelse()
+    {
+        return this.betegnelse;
+    }
+
+    public void setBeskrivelse(String beskrivelse)
+    {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public void setModtaget(String itemRecieved)
+    {
+        this.modtaget = itemRecieved;
+    }
+
+    public void setDateringFra(String itemDatingFrom)
+    {
+        this.dateringFra = itemDatingFrom;
+    }
+
+    public void setDateringTil(String itemDatingTo)
+    {
+        this.dateringTil = itemDatingTo;
+    }
+
+    public void setDonator(String donator)
+    {
+        this.donator = donator;
+    }
+
+    public void setProducer(String producer)
+    {
+        this.producer = producer;
+    }
+
+    public void setPostCode(String postalCode)
+    {
+        this.postCode = postalCode;
+    }
+
+    public void setEmnegruppe(String emnegruppe)
+    {
+        this.emnegruppe = emnegruppe;
+    }
+
+    public void setBetegnelse(String betegnelse)
+    {
+        this.betegnelse = betegnelse;
+    }
+
+    public void setImage(int image)
+    {
+        this.image = image;
+    }
 }

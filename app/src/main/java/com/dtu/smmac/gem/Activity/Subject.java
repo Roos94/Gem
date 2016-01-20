@@ -72,16 +72,16 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
+        this.genstandID = Splash.DB.getItemID(this.ID);
 
-        this.emne = Splash.DB.getGenstandList().get(this.genstandID).getEmnegruppe();
+        this.emne = Splash.DB.getItemList().get(this.genstandID).getEmnegruppe();
 
         this.emnet.setText("Valgt emne: " + this.emne);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -97,8 +97,9 @@ public class Subject extends Activity implements AdapterView.OnItemClickListener
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setEmnegruppe(ID, emne);
-                        Splash.DB.setGenstandList();
+                        Splash.DB.setSubject(ID, emne);
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

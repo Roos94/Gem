@@ -48,12 +48,7 @@ public class Description extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
-        this.getActionBar().setTitle("    " + "Beskrivelse");
-
         this.done = true;
-
-        this.progress = (ProgressBar) findViewById(R.id.proDE);
-        this.progress.setVisibility(View.INVISIBLE);
 
         record = (ImageButton) findViewById(R.id.Record);
         record.setOnClickListener(this);
@@ -66,21 +61,30 @@ public class Description extends Activity implements View.OnClickListener {
         pl = 1;
         play.setVisibility(View.INVISIBLE);
 
-        beskrivelse = (EditText) findViewById(R.id.beskrivelse);
-
-        // Sætter hvor filen skal gemmes
         OUTPUT_FILE = Environment.getExternalStorageDirectory() + "/audio.mp4";
 
-        //Sætter HS
+        //Sætter actionbar-teksten
+        this.getActionBar().setTitle("    " + "Beskrivelse");
+
+        //Sætter loadingbaren
+        this.progress = (ProgressBar) findViewById(R.id.proDE);
+        this.progress.setVisibility(View.INVISIBLE);
+
+        //Sætter intent h - ItemView
         this.h = new Intent(this, ItemView.class);
 
-        //Trækker fra HS
+        //Henter den sidste brugte intent - ItemView
         this.lastUsed = getIntent();
+
+        //Sætter item id, fra den sidste brugte intent
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-        this.genstandID = Splash.DB.getGenstandID(this.ID);
 
-        this.bes = Splash.DB.getGenstandList().get(this.genstandID).getBeskrivelse();
+        //Sætter item id, som den har i Array listen
+        this.genstandID = Splash.DB.getItemID(this.ID);
 
+        //Sætter beskrivelsen fra item
+        this.beskrivelse = (EditText) findViewById(R.id.beskrivelse);
+        this.bes = Splash.DB.getItemList().get(this.genstandID).getBeskrivelse();
         this.beskrivelse.setText(this.bes);
 
         //Sætter cursor ved slutningen af teksten
@@ -89,7 +93,7 @@ public class Description extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -98,19 +102,29 @@ public class Description extends Activity implements View.OnClickListener {
     {
         if(this.done == true)
         {
-            this.progress.setVisibility(View.VISIBLE);
-
             this.done = false;
 
+            //Viser loadingbaren
+            this.progress.setVisibility(View.VISIBLE);
+
+            //Finder beskrivelsen, der er indtastet
             this.bes = beskrivelse.getText().toString();
 
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setBeskrivelse(ID, bes);
+                        //Skriver beskrivelsen til API'en
+                        Splash.DB.setDescription(ID, bes);
+
+                        //Skriver lydfilen til API'en
                         Splash.DB.postFile(Description.this, ID, Uri.fromFile(new File(OUTPUT_FILE)), "mp4");
-                        Splash.DB.setGenstandList();
+
+                        //Opdaterer item listen
+                        Splash.DB.setItemList();
+
+                        //Henter oplysnigerne fra item
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -120,7 +134,10 @@ public class Description extends Activity implements View.OnClickListener {
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
+                    //Notificerer adapteren på Main
                     Main.adap.notifyDataSetChanged();
+
+                    //Starter ItemView
                     startHS();
                 }
             }.execute();
@@ -169,7 +186,6 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
-    // Starter en recording
     private void beginRecording() throws IOException {
         ditchRecord();
         File outFile = new File(OUTPUT_FILE);
@@ -187,7 +203,6 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
-    // Stopper recording
     private void stopRecording() {
         if(recorder != null)
             recorder.stop();
@@ -211,13 +226,11 @@ public class Description extends Activity implements View.OnClickListener {
 
     }
 
-    // Stopper afspilning
     private void stopPlayback() {
         if(player != null)
             player.stop();
     }
 
-    // Fjerner recording
     private void ditchRecord() {
         if(recorder != null)
             recorder.release();
@@ -237,14 +250,13 @@ public class Description extends Activity implements View.OnClickListener {
 
     public void startHS()
     {
-        //Item skal køres over på h
+        //Item id køres videre på intent h - ItemView
         h.putExtra("ID", this.ID);
-
         startActivity(h);
-
         finish();
     }
 
+    //Når man klikker på tilbageknappen på telefonen
     @Override
     public void onBackPressed()
     {
@@ -255,12 +267,14 @@ public class Description extends Activity implements View.OnClickListener {
 
     public void recording()
     {
-        // Skifter mellem de to billeder (mic og stop)
+        //Skifter mellem de to billeder (mic og stop)
+
         if (rec == 1) {
+            //Sætter billede stop
             record.setImageResource(R.drawable.rcircle);
 
-            // Starter lydoptagelse
             try {
+                //Starter lydoptagelse
                 beginRecording();
             }catch (Exception e){
                 e.printStackTrace();
@@ -271,11 +285,13 @@ public class Description extends Activity implements View.OnClickListener {
 
         else
         {
+            //Sætter billede mic
             record.setImageResource(R.drawable.mic);
-            play.setVisibility(View.VISIBLE); // Gør play-knap synlig
 
-            // Stopper lydoptagelsen
+            //Viser afspilningsknappen
+            play.setVisibility(View.VISIBLE);
             try {
+                //Stopper lydoptagelsen
                 stopRecording();
             }catch (Exception e){
                 e.printStackTrace();
@@ -285,6 +301,7 @@ public class Description extends Activity implements View.OnClickListener {
         }
     }
 
+    //Viser advarslen, om man vil overskrive den allerede optaget lydfil
     public void showAlert()
     {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

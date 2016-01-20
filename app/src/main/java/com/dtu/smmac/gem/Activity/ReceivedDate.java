@@ -62,9 +62,9 @@ public class ReceivedDate extends Activity {
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
 
-        this.itemID = Splash.DB.getGenstandID(this.ID);
+        this.itemID = Splash.DB.getItemID(this.ID);
 
-        this.recieved = Splash.DB.getGenstandList().get(this.itemID).getModtaget();
+        this.recieved = Splash.DB.getItemList().get(this.itemID).getModtaget();
 
         if (this.recieved.length() == 10 && !this.recieved.equals("0000-00-00"))
         {
@@ -107,7 +107,7 @@ public class ReceivedDate extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -123,8 +123,9 @@ public class ReceivedDate extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setModtaget(ID, getDate());
-                        Splash.DB.setGenstandList();
+                        Splash.DB.setReceivedDate(ID, getDate());
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

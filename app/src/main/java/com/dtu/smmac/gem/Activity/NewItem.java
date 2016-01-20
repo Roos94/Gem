@@ -27,7 +27,6 @@ public class NewItem extends Activity {
     private TextView regNo;
     private Intent i;
     private int ID;
-    private String titel;
     private ProgressBar progress;
 
     private boolean done;
@@ -37,23 +36,31 @@ public class NewItem extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newitem);
 
-        this.getActionBar().setTitle("    " + "Ny registrering");
-
         this.done = true;
 
+        //Sætter actionbar-teksten
+        this.getActionBar().setTitle("    " + "Ny registrering");
+
+        //Sætter loadingbaren
         this.progress = (ProgressBar) findViewById(R.id.pronew);
         this.progress.setVisibility(View.INVISIBLE);
 
+        //Sætter steder, hvor man skal skrive titel
         this.title = (EditText) findViewById(R.id.createTitle);
-        this.regNo = (TextView) findViewById(R.id.regNr);
 
+        //Sætter intent - Camera klassen
         this.i = new Intent(this, Camera.class);
 
+        //Sætter id
+        this.regNo = (TextView) findViewById(R.id.regNr);
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
                 try {
-                    Splash.DB.addGenstand();
+                    //Opretter en tom genstand
+                    Splash.DB.addItem();
+
+                    //Finder id på den tomme genstand
                     ID = Splash.DB.getNextID();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -63,39 +70,55 @@ public class NewItem extends Activity {
 
             @Override
             protected void onPostExecute(Object resultat) {
+                //Sætter id på aktiviteten
                 setRegNo(ID);
             }
         }.execute();
     }
 
+    //Sætter actionbaren
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Når man klikker på done
     public void done(MenuItem item)
     {
+        //Hvis titel feltet er tomt
         if (this.title.getText().toString() == null || this.title.getText().toString().isEmpty())
         {
+            //Alert
             Toast.makeText(this, "Der er ikke angivet nogen titel!", Toast.LENGTH_LONG).show();
+
+            //Afslutter metoden
             return;
         }
 
         if(this.done == true)
         {
+            this.done = false;
+
+            //Viser loadingbaren
             this.progress.setVisibility(View.VISIBLE);
 
-            this.done = false;
-            this.titel = this.title.getText().toString();
+            //Finder titlen, man har indtastet
+            final String titel = this.title.getText().toString();
 
             new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setTitel(ID, titel);
-                        Splash.DB.setGenstandList();
+                        //Sætter titlen på det tomme item
+                        Splash.DB.setTitle(ID, titel);
+
+                        //Opdaterer item listen
+                        Splash.DB.setItemList();
+
+                        //Henter de resterende oplysninger om item (modtagelsesdato bliver sat i det tomme item)
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -105,8 +128,10 @@ public class NewItem extends Activity {
                 @Override
                 protected void onPostExecute(Object resultat)
                 {
+                    //Notificerer adapteren på Main
                     Main.adap.notifyDataSetChanged();
 
+                    //Item id køres videre på intent h - Camera
                     i.putExtra("ID", ID);
                     startActivity(i);
                     finish();
@@ -115,7 +140,7 @@ public class NewItem extends Activity {
         }
     }
 
-
+    //Det der sker, når man klikker på tilbage knappen på telefonen
     @Override
     public void onBackPressed()
     {
@@ -125,7 +150,8 @@ public class NewItem extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.deleteGenstand(ID);
+                        //Sletter den tomme genstand
+                        Splash.DB.deleteItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -138,6 +164,7 @@ public class NewItem extends Activity {
         }
     }
 
+    //Sætter id på aktiviteten
     public void setRegNo(int no)
     {
         this.regNo.setText("" + no);

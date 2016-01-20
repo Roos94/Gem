@@ -72,10 +72,10 @@ public class Dating extends Activity {
         // *** Pulls from mainscreen ***
         this.lastUsed = getIntent();
         this.ID = this.lastUsed.getIntExtra("ID", 0);
-        this.itemID = Splash.DB.getGenstandID(this.ID);
+        this.itemID = Splash.DB.getItemID(this.ID);
 
-        this.fra = Splash.DB.getGenstandList().get(this.itemID).getDateringFra();
-        this.til = Splash.DB.getGenstandList().get(this.itemID).getDateringTil();
+        this.fra = Splash.DB.getItemList().get(this.itemID).getDateringFra();
+        this.til = Splash.DB.getItemList().get(this.itemID).getDateringTil();
 
         if (this.fra.length() == 10 && !this.fra.equals("0000-00-00"))
         {
@@ -150,7 +150,7 @@ public class Dating extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_top_bar, menu);
+        getMenuInflater().inflate(R.menu.menu_topbar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -166,8 +166,9 @@ public class Dating extends Activity {
                 @Override
                 protected Object doInBackground(Object[] params) {
                     try {
-                        Splash.DB.setDatering(ID, getDateFrom(), getDateTo());
-                        Splash.DB.setGenstandList();
+                        Splash.DB.setDating(ID, getDateFrom(), getDateTo());
+                        Splash.DB.setItemList();
+                        Splash.DB.setItem(ID);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
